@@ -1,39 +1,61 @@
-// Concept 1 JavaScript - No Animations Version
-class Concept1Controller {
-    constructor() {
-        this.init();
+// Sunnyside Vines JavaScript
+// Add any interactive functionality here
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Sunnyside Vines loaded');
+    
+    // Navbar scroll functionality
+    const navbar = document.getElementById('navbar');
+    const hero = document.getElementById('hero');
+    
+    if (navbar && hero) {
+        const heroHeight = hero.offsetHeight;
+        
+        window.addEventListener('scroll', () => {
+            // Show navbar at 50% of hero height
+            if (window.scrollY > heroHeight * 0.5) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+        });
     }
     
-    init() {
-        this.setupButtonInteraction();
-    }
+    // Hamburger menu functionality
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
     
-    setupButtonInteraction() {
-        const ctaButton = document.querySelector('.cta-button');
-        if (ctaButton) {
-            ctaButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Scroll to image section
-                const imageSection = document.querySelector('.image-section');
-                if (imageSection) {
-                    imageSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                }
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
             });
-        }
+        });
     }
+});
+
+// Copy email function
+function copyEmail() {
+    const email = 'info@sunnysidevines.com';
+    navigator.clipboard.writeText(email).then(() => {
+        const button = document.querySelector('.copy-button');
+        const svg = button.querySelector('svg');
+        const originalHTML = button.innerHTML;
+        
+        // Show checkmark
+        button.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8L6 11L13 4" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+        }, 2000);
+    });
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new Concept1Controller();
-});
-
-// Handle window resize for responsive adjustments
-window.addEventListener('resize', () => {
-    // Refresh any size-dependent calculations if needed
-    console.log('Window resized - concept 1');
-});

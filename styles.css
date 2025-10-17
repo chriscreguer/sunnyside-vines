@@ -1,1 +1,1352 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Geist Mono', monospace;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    background-color: #F5F1EE;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Navigation Bar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 2rem;
+    z-index: 1000;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.navbar.visible {
+    transform: translateY(0);
+}
+
+.navbar-container {
+    max-width: 1460px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-logo-img {
+    width: 28px;
+    height: 28px;
+}
+
+.navbar-brand {
+    font-family: 'NuGELO', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: black;
+    margin-bottom: -4px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: white;
+    padding: 8px;
+    border-radius: 50px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.nav-link {
+    font-family: 'Geist Mono', monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 50px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.hamburger-menu span {
+    width: 24px;
+    height: 2px;
+    background-color: black;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 90px;
+    right: 2rem;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.12);
+}
+
+.mobile-menu.active {
+    display: flex;
+}
+
+.mobile-nav-link {
+    font-family: 'Geist Mono', monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    background-color: #F5F1EE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Left Image Group */
+.image-group-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+}
+
+.left-img-1 {
+    position: absolute;
+    width: 492px;
+    height: 270px;
+    object-fit: cover;
+    top: 180px;
+    left: calc(-492px / 3);
+    z-index: 1;
+    border-radius: 10px;
+    border: 5px solid black;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.3s forwards;
+}
+
+.left-img-2 {
+    position: absolute;
+    width: 741px;
+    height: 383px;
+    object-fit: cover;
+    top: calc(66.67vh - 191.5px - 20px);
+    left: calc(-741px / 3);
+    z-index: 2;
+    border-radius: 10px;
+    border: 5px solid black;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.5s forwards;
+}
+
+.left-img-3 {
+    position: absolute;
+    width: 275px;
+    height: 338px;
+    object-fit: cover;
+    top: 50%;
+    transform: translateY(calc(-50% - 20px));
+    left: calc(-275px / 2);
+    z-index: 3;
+    border-radius: 10px;
+    border: 5px solid black;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.4s forwards;
+}
+
+/* Right Image Group */
+.image-group-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+}
+
+.right-img-1 {
+    position: absolute;
+    width: 446px;
+    height: 347px;
+    object-fit: cover;
+    top: 100px;
+    right: calc(-446px / 4);
+    z-index: 1;
+    border-radius: 10px;
+    border: 5px solid black;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.4s forwards;
+}
+
+.right-img-2 {
+    position: absolute;
+    width: 370px;
+    height: 191px;
+    object-fit: cover;
+    top: 250px;
+    right: 80px;
+    z-index: 2;
+    border-radius: 10px;
+    border: 5px solid black;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.6s forwards;
+}
+
+.right-img-3 {
+    position: absolute;
+    width: 519px;
+    height: 403px;
+    object-fit: cover;
+    top: calc(66.67vh - 201.5px);
+    right: calc(-519px / 4);
+    z-index: 3;
+    border-radius: 10px;
+    border: 5px solid black;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.5s forwards;
+}
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 180px;
+    height: 190px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.1s forwards;
+}
+
+.brand-name {
+    font-family: 'NuGELO', sans-serif;
+    font-size: 90px;
+    font-weight: 400;
+    line-height: 89%;
+    letter-spacing: -2.75px;
+    max-width: 500px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.wine-imports {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: 0.39em;
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 100px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
+.tagline {
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 145%;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+    text-align: center;
+    color: #000000;
+    max-width: 500px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+/* Combined Mission & Producer Section */
+.combined-section {
+    position: relative;
+    background-color: #B15321;
+    padding: 180px 2rem 200px 2rem;
+    overflow: hidden;
+}
+
+.mission-statement {
+    font-family: 'Fraunces', serif;
+    font-size: 108px;
+    font-weight: 400;
+    line-height: 97%;
+    letter-spacing: 0%;
+    color: #FCE8DE;
+    max-width: 1620px;
+    margin: 0 auto 60px auto;
+    text-align: center;
+    position: relative;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.highlight-word {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 600;
+    font-style: italic;
+}
+
+.combined-content {
+    max-width: 1620px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Image Stack */
+.image-stack {
+    position: relative;
+    width: 690px;
+    margin: 0 auto;
+    z-index: 2;
+    margin-top: -210px;
+    margin-bottom: 250px;
+}
+
+.main-large-photo {
+    width: 690px;
+    height: 1010px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 5px solid black;
+    display: block;
+    margin: 0 auto;
+}
+
+.bottom-landscape-photo {
+    position: absolute;
+    width: 567px;
+    height: 337px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 5px solid black;
+    bottom: -200px;
+    right: -300px;
+    z-index: 3;
+}
+
+.bottom-portrait-photo {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 5px solid black;
+    bottom: -100px;
+    left: -280px;
+    z-index: 3;
+}
+
+/* Map and Text Container */
+.map-text-container {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+    margin-top: -174px;
+}
+
+/* Map Overlay */
+.map-overlay {
+    width: 750px;
+    height: 600px;
+    flex-shrink: 0;
+    z-index: 5;
+    margin-left: -150px;
+}
+
+.spain-map {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Producer Text */
+.producer-text {
+    flex: 1;
+    width: 670px;
+    max-width: 670px;
+    z-index: 4;
+    margin-top: 180px;
+}
+
+.producer-subtitle {
+    font-family: 'Geist Mono', monospace;
+    font-size: 20px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 12px 0;
+    text-align: left;
+}
+
+.producer-title {
+    font-family: 'Fraunces', serif;
+    font-size: 70px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: white;
+    margin: 0 0 45px 0;
+    line-height: 1;
+    text-align: left;
+}
+
+.producer-description {
+    font-family: 'Geist Mono', monospace;
+    font-size: 20px;
+    line-height: 1.6;
+    color: white;
+    margin: 0;
+    text-align: left;
+}
+
+/* Wines Section */
+.wines-section {
+    background-color: white;
+    padding: 200px 2rem 200px 2rem;
+}
+
+.wines-container {
+    max-width: 1460px;
+    margin: 0 auto;
+    display: flex;
+    gap: 120px;
+}
+
+.wines-title-container {
+    flex: 1;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+}
+
+.wines-title {
+    font-family: 'Fraunces', serif;
+    font-size: 96px;
+    font-weight: 700;
+    color: black;
+    margin: 0;
+}
+
+.wines-list {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+}
+
+.wine-item {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+}
+
+.wine-image-placeholder {
+    width: 34px;
+    height: 130px;
+    background-color: #D0D0D0;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.wine-details {
+    flex: 1;
+}
+
+.wine-name {
+    font-family: 'Fraunces', serif;
+    font-size: 40px;
+    font-weight: 400;
+    color: #AC4B1F;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+}
+
+.wine-name-bold {
+    font-weight: 700;
+}
+
+.wine-year {
+    font-style: italic;
+}
+
+.wine-description {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 124%;
+    letter-spacing: -1px;
+    color: black;
+    margin: 0;
+}
+
+/* Story Section */
+.story-section {
+    background-color: #F5F1EE;
+    padding: 160px 2rem;
+}
+
+.story-content {
+    max-width: 1460px;
+    margin: 0 auto;
+    display: flex;
+    gap: 100px;
+}
+
+.story-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.story-title {
+    font-family: 'Fraunces', serif;
+    font-size: 54px;
+    font-weight: 400;
+    letter-spacing: -3px;
+    line-height: 105%;
+    color: black;
+    max-width: 542px;
+    margin: 0 0 40px 0;
+}
+
+.story-icon {
+    width: 120px;
+    height: 120px;
+    opacity: 0.4;
+    margin-left: 60px;
+    filter: brightness(0) saturate(100%) invert(40%) sepia(43%) saturate(1234%) hue-rotate(353deg) brightness(91%) contrast(88%);
+}
+
+.story-right {
+    flex: 1;
+}
+
+.story-paragraph {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 133%;
+    color: black;
+    margin: 0;
+}
+
+.story-paragraph .highlight {
+    font-weight: 700;
+    font-style: italic;
+    color: #AC4B1F;
+}
+
+.drop-cap {
+    font-family: 'Fraunces', serif;
+    font-size: 96px;
+    font-weight: 700;
+    line-height: 0.8;
+    float: left;
+    margin-right: 12px;
+    margin-top: 8px;
+    color: #AC4B1F;
+}
+
+/* Contact Section */
+.contact-section {
+    background-color: white;
+    padding: 220px 2rem;
+}
+
+.contact-container {
+    max-width: 1460px;
+    margin: 0 auto;
+    display: flex;
+    gap: 100px;
+}
+
+.contact-left {
+    flex: 1;
+}
+
+.contact-title {
+    font-family: 'Fraunces', serif;
+    font-size: 96px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    color: black;
+    margin: 0 0 12px 0;
+}
+
+.contact-email {
+    font-family: 'Geist Mono', monospace;
+    font-size: 20px;
+    color: black;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.copy-button {
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 6px 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.copy-button:hover {
+    background-color: black;
+}
+
+.copy-button:hover svg {
+    stroke: white;
+}
+
+.contact-phone {
+    font-family: 'Geist Mono', monospace;
+    font-size: 20px;
+    color: black;
+    margin: 0;
+}
+
+.contact-right {
+    flex: 1;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.form-group label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 14px;
+    letter-spacing: -1px;
+    color: black;
+    margin-bottom: 2px;
+}
+
+.form-group input,
+.form-group textarea {
+    font-family: 'Geist', sans-serif;
+    font-size: 16px;
+    padding: 12px 16px;
+    border: 1px solid black;
+    border-radius: 10px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #AC4B1F;
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-group textarea::placeholder {
+    font-family: 'Geist', sans-serif;
+}
+
+.submit-button {
+    background-color: #AC4B1F;
+    color: white;
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    letter-spacing: -1px;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #8D3512;
+}
+
+/* Footer */
+.footer {
+    background-color: #1F1F20;
+    padding: 100px 2rem;
+}
+
+.footer-content {
+    max-width: 1460px;
+    margin: 0 auto;
+}
+
+.footer-location {
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    letter-spacing: 0;
+    color: white;
+    margin: 0 0 4px 0;
+}
+
+.footer-brand {
+    font-family: 'NuGELO', sans-serif;
+    font-size: 40px;
+    letter-spacing: 0;
+    color: white;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.footer-divider {
+    width: 300px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 0 8px 0;
+}
+
+.footer-email {
+    font-family: 'Geist Mono', monospace;
+    font-size: 14px;
+    color: white;
+    margin: 0 0 2px 0;
+}
+
+.footer-phone {
+    font-family: 'Geist Mono', monospace;
+    font-size: 14px;
+    color: white;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1560px) {
+    .left-img-1 {
+        width: 420px;
+        height: 232px;
+        left: calc(-520px / 2.8);
+        top: 100px;
+    }
+    
+    .left-img-2 {
+        width: 630px;
+        height: 326px;
+        left: calc(-830px / 2.8);
+    }
+    
+    .left-img-3 {
+        width: 235px;
+        height: 288px;
+        left: calc(-235px / 2);
+    }
+    
+    .right-img-1 {
+        width: 380px;
+        height: 296px;
+        right: calc(-580px / 4);
+    }
+    
+    .right-img-2 {
+        width: 315px;
+        height: 163px;
+        right: 50px;
+        top: 200px;
+    }
+    
+    .right-img-3 {
+        width: 442px;
+        height: 343px;
+        right: calc(-542px / 4);
+    }
+    .brand-name {
+        font-size: 64px;
+    }
+    .wine-imports {
+        font-size: 20px;
+    }
+    .tagline {
+        font-size: 14px;
+    }
+    .mission-statement {
+        font-size: 90px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .left-img-1 {
+        width: 360px;
+        height: 199px;
+        left: calc(-360px / 2.4);
+    }
+    
+    .left-img-2 {
+        width: 540px;
+        height: 279px;
+        left: calc(-540px / 2.4);
+    }
+    
+    .left-img-3 {
+        width: 200px;
+        height: 246px;
+        left: calc(-200px / 1.7);
+    }
+    
+    .right-img-1 {
+        width: 320px;
+        height: 250px;
+        right: calc(-320px / 3.2);
+    }
+    
+    .right-img-2 {
+        width: 265px;
+        height: 137px;
+        right: 55px;
+    }
+    
+    .right-img-3 {
+        width: 370px;
+        height: 287px;
+        right: calc(-370px / 3.2);
+    }
+    
+    .mission-statement {
+        font-size: 80px;
+    }
+}
+
+@media (max-width: 1260px) {
+    .left-img-1 {
+        width: 320px;
+        height: 177px;
+        left: calc(-320px / 2.1);
+    }
+    
+    .left-img-2 {
+        width: 480px;
+        height: 248px;
+        left: calc(-480px / 2.1);
+    }
+    
+    .left-img-3 {
+        width: 175px;
+        height: 215px;
+        left: calc(-175px / 1.5);
+    }
+    
+    .right-img-1 {
+        width: 280px;
+        height: 218px;
+        right: calc(-280px / 2.8);
+    }
+    
+    .right-img-2 {
+        width: 235px;
+        height: 121px;
+        right: 45px;
+    }
+    
+    .right-img-3 {
+        width: 330px;
+        height: 256px;
+        right: calc(-330px / 2.8);
+    }
+    
+    .mission-statement {
+        font-size: 70px;
+    }
+}
+
+@media (max-width: 980px) {
+    .left-img-1 {
+        width: 280px;
+        height: 155px;
+        left: calc(-280px / 1.9);
+    }
+    
+    .left-img-2 {
+        width: 420px;
+        height: 217px;
+        left: calc(-420px / 1.9);
+    }
+    
+    .left-img-3 {
+        width: 155px;
+        height: 190px;
+        left: calc(-155px / 1.4);
+    }
+    
+    .right-img-1 {
+        width: 245px;
+        height: 191px;
+        right: calc(-245px / 2.5);
+    }
+    
+    .right-img-2 {
+        width: 205px;
+        height: 106px;
+        right: 35px;
+    }
+    
+    .right-img-3 {
+        width: 290px;
+        height: 225px;
+        right: calc(-290px / 2.5);
+    }
+}
+
+@media (max-width: 1024px) {
+    .brand-name {
+        font-size: 70px;
+    }
+    
+    .wine-imports {
+        font-size: 20px;
+    }
+    
+    .tagline {
+        font-size: 14px;
+        max-width: 400px;
+    }
+    
+    .mission-statement {
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navbar Mobile */
+    .navbar-brand {
+        display: none;
+    }
+    
+    .navbar-links {
+        display: none;
+    }
+    
+    .hamburger-menu {
+        display: flex;
+    }
+    
+    /* Hero Section - Mobile */
+    .image-group-left,
+    .image-group-right {
+        display: none;
+    }
+    
+    /* TOP CLUSTER - 3 images at top of hero */
+    .left-img-1 {
+        position: absolute;
+        width: 200px;
+        height: 110px;
+        top: -30px;
+        left: -60px;
+        z-index: 1;
+    }
+    
+    .left-img-2 {
+        position: absolute;
+        width: 240px;
+        height: 124px;
+        top: -10px;
+        left: 80px;
+        z-index: 2;
+    }
+    
+    .left-img-3 {
+        position: absolute;
+        width: 180px;
+        height: 221px;
+        left: calc(395px / 1.4);
+        top: 10px;
+        right: -50px;
+        z-index: 3;
+    }
+    
+    /* BOTTOM CLUSTER - 3 images at bottom of hero */
+    .right-img-1 {
+        position: absolute;
+        width: 220px;
+        height: 172px;
+        bottom: -30px;
+        top: unset;
+        left: -70px;
+        z-index: 1;
+    }
+    
+    .right-img-2 {
+        position: absolute;
+        width: 200px;
+        height: 103px;
+        bottom: -20px;
+        top: unset;
+        left: 90px;
+        z-index: 2;
+    }
+    
+    .right-img-3 {
+        position: absolute;
+        width: 190px;
+        height: 147px;
+        bottom: -10px;
+        top: unset;
+        right: -20px;
+        z-index: 3;
+    }
+    
+    .brand-name {
+        font-size: 54px;
+    }
+    
+    .wine-imports {
+        font-size: 18px;
+        margin-bottom: 60px;
+    }
+    
+    .tagline {
+        font-size: 12px;
+        max-width: 90%;
+    }
+    
+    .logo {
+        width: 140px;
+        height: 150px;
+        margin-bottom: 30px;
+    }
+    
+    /* Mission Section */
+    .mission-statement {
+        font-size: 48px;
+    }
+    
+    .mission-section {
+        padding: 100px 2rem 120px 2rem;
+    }
+    
+    /* Combined Section Mobile */
+    .combined-section {
+        padding: 100px 2rem 120px 2rem;
+    }
+    
+    .image-stack {
+        width: 100%;
+        max-width: 400px;
+        margin-top: -100px;
+        margin-bottom: 120px;
+    }
+    
+    .main-large-photo {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 690 / 1010;
+    }
+    
+    .bottom-landscape-photo {
+        width: 200px;
+        height: auto;
+        bottom: -80px;
+        right: -40px;
+    }
+    
+    .bottom-portrait-photo {
+        width: 160px;
+        height: auto;
+        bottom: -60px;
+        left: -40px;
+    }
+    
+    .map-text-container {
+        flex-direction: column-reverse;
+        margin-top: 0;
+        gap: 40px;
+        align-items: flex-start;
+    }
+    
+    .map-overlay {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin-left: 0;
+    }
+    
+    .producer-text {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 0;
+        text-align: left;
+    }
+    
+    .producer-subtitle {
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    .producer-title {
+        font-size: 40px;
+        margin-bottom: 24px;
+        text-align: left;
+    }
+    
+    .producer-description {
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: left;
+    }
+    
+    /* Producer Section Mobile */
+    .producer-section {
+        padding: 120px 0 140px 0;
+    }
+    
+    .producer-heading {
+        font-size: 32px;
+    }
+    
+    .producer-content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .producer-photos {
+        width: 100%;
+        margin-bottom: 0;
+        height: auto;
+    }
+    
+    .main-photo-container {
+        width: 100%;
+    }
+    
+    .main-photo {
+        height: 250px;
+    }
+    
+    .overlay-photo-1 {
+        width: 150px;
+        height: 130px;
+        bottom: -50px;
+        left: 68px;
+        z-index: 3;
+    }
+    
+    .overlay-photo-2 {
+        width: 280px;
+        height: 145px;
+        top: 186px;
+        left: calc(100% - 260px);
+        z-index: 2;
+    }
+    
+    .map-container {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        right: 0;
+        top: 0;
+        order: 2;
+        margin-top: 60px;
+    }
+    
+    .producer-info {
+        order: 3;
+        max-width: 100%;
+    }
+    
+    /* Wines Section Mobile */
+    .wines-section {
+        padding: 100px 2rem;
+    }
+    
+    .wines-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .wines-title-container {
+        position: static;
+    }
+    
+    .wines-title {
+        font-size: 60px;
+    }
+    
+    .wine-name {
+        font-size: 28px;
+    }
+    
+    .wine-description {
+        font-size: 16px;
+    }
+    
+    /* Story Section Mobile */
+    .story-section {
+        padding: 100px 2rem;
+    }
+    
+    .story-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .story-title {
+        font-size: 36px;
+        max-width: 100%;
+    }
+    
+    .story-paragraph {
+        font-size: 20px;
+    }
+    
+    .drop-cap {
+        font-size: 60px;
+    }
+    
+    /* Contact Section Mobile */
+    .contact-section {
+        padding: 100px 2rem;
+    }
+    
+    .contact-container {
+        flex-direction: column;
+        gap: 50px;
+    }
+    
+    .contact-title {
+        font-size: 60px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 24px;
+    }
+    
+    .form-group {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-name {
+        font-size: 48px;
+    }
+    
+    .wine-imports {
+        font-size: 16px;
+        margin-bottom: 50px;
+    }
+    
+    .mission-statement {
+        font-size: 36px;
+    }
+}
 

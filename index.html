@@ -3,61 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunnyside Vines - Concept 5</title>
+    <title>Sunnyside Vines</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/hello-bride-script" rel="stylesheet">
-    <link rel="stylesheet" href="concepts/concept-5/styles.css?v=10">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/nugelo" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Page Border Frame -->
-    <div class="page-frame">
-        <!-- Hero Section with Video Background -->
-        <section class="hero">
-            <!-- Video Background -->
-            <div class="video-background">
-                <video id="background-video" muted autoplay>
-                    <source src="img/roseto_family_vineyard_talking_video.mp4" type="video/mp4">
-                    <source src="img/roseto_family_vineyard_wine_pour_video.mp4" type="video/mp4">
-                    <source src="img/roseto_family_vineyard_family_dinner_video.mp4" type="video/mp4">
-                    <source src="img/roseto_family_vineyard_family_video.mp4" type="video/mp4">
-                </video>
-                <div class="video-overlay"></div>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="img/logo_hero.svg" alt="Sunnyside Vines" class="navbar-logo-img">
+                <span class="navbar-brand">Sunnyside Vines</span>
             </div>
-            
-            <!-- Hero Content -->
-            <div class="hero-content">
-                <!-- Main Brand Name -->
-                <h1 class="brand-name">Sunnyside Vines</h1>
-                
-                <!-- Subheading -->
-                <p class="hero-subheading">
-                    We source exquisite wines from family-run vineyards across Europe, connecting their legacies to yours.
-                </p>
+            <div class="navbar-links">
+                <a href="#producer" class="nav-link">Featured Producer</a>
+                <a href="#wines" class="nav-link">Wines</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
-        </section>
-        
-        <!-- Bottom Section -->
-        <section class="bottom-section">
-            <p class="belief-statement">
-                We believe the most <span class="highlight-word">memorable</span> wines come from small, <span class="highlight-word">family-run</span> vineyards where <span class="highlight-word">heritage</span> is honored and every bottle tells a story.
-            </p>
-        </section>
-        
-        <!-- Frame Elements -->
-        <div class="frame-corner frame-bottom-left">Peñafalcón Vineyard</div>
-        <div class="frame-corner frame-bottom-right">Peñafiel, España</div>
-        <div class="frame-bottom-center">
-            <button class="frame-cta-button">
-                <span>View Wines</span>
-                <svg class="arrow-icon" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M6 1L6 11M6 11L1 6M6 11L11 6" stroke="white" stroke-width="1"/>
-                </svg>
+            <button class="hamburger-menu" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
         </div>
-    </div>
-    
-    <script src="concepts/concept-5/script.js?v=1"></script>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#producer" class="mobile-nav-link">Featured Producer</a>
+            <a href="#wines" class="mobile-nav-link">Wines</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <!-- Left Image Group -->
+        <div class="image-group-left">
+            <img src="img/roseto_family_vineyard_landscape.jpeg" alt="Vineyard" class="left-img-1">
+            <img src="img/roseto_family_vineyard_family_photo.png" alt="Family" class="left-img-2">
+            <img src="img/roseto_family_vineyard_two_talking.png" alt="Talking" class="left-img-3">
+        </div>
+
+        <!-- Center Content -->
+        <div class="hero-content">
+            <img src="img/logo_hero.svg" alt="Sunnyside Vines" class="logo">
+            <h1 class="brand-name">Sunnyside Vines</h1>
+            <p class="wine-imports">WINE IMPORTS</p>
+            <p class="tagline">We source exquisite wines from family-run vineyards across Europe, connecting their legacy to yours.</p>
+        </div>
+
+        <!-- Right Image Group -->
+        <div class="image-group-right">
+            <img src="img/roseto_family_vineyard_family_photo.png" alt="Vineyard scene" class="right-img-1">
+            <img src="img/roseto_family_vineyard_landscape.jpeg" alt="Landscape" class="right-img-2">
+            <img src="img/roseto_family_vineyard_two_talking.png" alt="Wine tasting" class="right-img-3">
+        </div>
+    </section>
+
+    <!-- Combined Mission & Producer Section -->
+    <section class="combined-section" id="producer">
+        <p class="mission-statement">
+            We believe the most <span class="highlight-word">memorable</span> wines come from small, <span class="highlight-word">family-run</span> vineyards where <span class="highlight-word">heritage</span> is honored and every bottle tells a story.
+        </p>
+        
+        <div class="combined-content">
+            <!-- Image Stack -->
+            <div class="image-stack">
+                <img src="img/spanish-city.png" alt="Main Vineyard" class="main-large-photo">
+                <img src="img/roseto_family_vineyard_family_photo.png" alt="Landscape" class="bottom-landscape-photo">
+                <img src="img/roseto_family_vineyard_two_talking.png" alt="Portrait" class="bottom-portrait-photo">
+            </div>
+            
+            <!-- Map and Text Container -->
+            <div class="map-text-container">
+                <!-- Map -->
+                <div class="map-overlay">
+                    <img src="img/spain.svg" alt="Map of Spain" class="spain-map">
+                </div>
+                
+                <!-- Text Content -->
+                <div class="producer-text">
+                    <p class="producer-subtitle">Featured Producer</p>
+                    <h2 class="producer-title">Bodega Peñafalcón</h2>
+                    <p class="producer-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae justo nec nunc facilisis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wines Section -->
+    <section class="wines-section" id="wines">
+        <div class="wines-container">
+            <div class="wines-title-container">
+                <h2 class="wines-title">Wines</h2>
+            </div>
+            
+            <div class="wines-list">
+                <div class="wine-item">
+                    <div class="wine-image-placeholder"></div>
+                    <div class="wine-details">
+                        <h3 class="wine-name"><span class="wine-name-bold">Tempranillo Reserve</span> Red Wine <span class="wine-year">2019</span></h3>
+                        <p class="wine-description">A full-bodied red wine with notes of dark cherry, vanilla, and tobacco. Aged 18 months in French oak barrels.</p>
+                    </div>
+                </div>
+                
+                <div class="wine-item">
+                    <div class="wine-image-placeholder"></div>
+                    <div class="wine-details">
+                        <h3 class="wine-name"><span class="wine-name-bold">Verdejo Blanco</span> White Wine <span class="wine-year">2021</span></h3>
+                        <p class="wine-description">Crisp and refreshing white wine with citrus and tropical fruit flavors. Perfect for warm summer evenings.</p>
+                    </div>
+                </div>
+                
+                <div class="wine-item">
+                    <div class="wine-image-placeholder"></div>
+                    <div class="wine-details">
+                        <h3 class="wine-name"><span class="wine-name-bold">Garnacha Rosado</span> Rosé Wine <span class="wine-year">2022</span></h3>
+                        <p class="wine-description">Elegant rosé with delicate strawberry and rose petal aromas. Light and balanced on the palate.</p>
+                    </div>
+                </div>
+                
+                <div class="wine-item">
+                    <div class="wine-image-placeholder"></div>
+                    <div class="wine-details">
+                        <h3 class="wine-name"><span class="wine-name-bold">Albariño Clásico</span> White Wine <span class="wine-year">2022</span></h3>
+                        <p class="wine-description">Bright and mineral-driven white with notes of peach and apricot. Perfect companion to seafood.</p>
+                    </div>
+                </div>
+                
+                <div class="wine-item">
+                    <div class="wine-image-placeholder"></div>
+                    <div class="wine-details">
+                        <h3 class="wine-name"><span class="wine-name-bold">Rioja Gran Reserva</span> Red Wine <span class="wine-year">2016</span></h3>
+                        <p class="wine-description">Complex and elegant red with layers of leather, spice, and red fruit. Aged 5 years before release.</p>
+                    </div>
+                </div>
+                
+                <div class="wine-item">
+                    <div class="wine-image-placeholder"></div>
+                    <div class="wine-details">
+                        <h3 class="wine-name"><span class="wine-name-bold">Monastrell Tinto</span> Red Wine <span class="wine-year">2020</span></h3>
+                        <p class="wine-description">Bold and powerful red with dark fruit flavors and hints of Mediterranean herbs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="story-content">
+            <div class="story-left">
+                <h2 class="story-title">We bring authentic estate-grown wines to New York</h2>
+                <img src="img/wine_barrel.svg" alt="" class="story-icon">
+            </div>
+            
+            <div class="story-right">
+                <p class="story-paragraph"><span class="drop-cap">W</span>e are dedicated to sourcing the finest wines from <span class="highlight">small, family-owned vineyards</span> across Europe. Our mission is to connect authentic, <span class="highlight">estate-grown wines</span> with discerning palates in New York. Every bottle we import tells a story of <span class="highlight">tradition, terroir, and craftsmanship</span>—values that have been passed down through generations. We believe that wine should be more than just a beverage; it should be an <span class="highlight">experience that honors heritage</span> while celebrating the present moment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-left">
+                <h2 class="contact-title">Get In Touch</h2>
+                <div class="contact-email">
+                    <span>info@sunnysidevines.com</span>
+                    <button class="copy-button" onclick="copyEmail()" aria-label="Copy email">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="5" width="9" height="9" rx="1" stroke="black" stroke-width="1.5"/>
+                            <path d="M3 11V3C3 2.44772 3.44772 2 4 2H10" stroke="black" stroke-width="1.5"/>
+                        </svg>
+                    </button>
+                </div>
+                <p class="contact-phone">+1 555.123.4567</p>
+            </div>
+            
+            <div class="contact-right">
+                <form class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="How can we help?"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-location">New York City, New York</p>
+            <h3 class="footer-brand">Sunnyside Vines</h3>
+            <div class="footer-divider"></div>
+            <p class="footer-email">info@sunnysidevines.com</p>
+            <p class="footer-phone">+1 555.123.4567</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
+
