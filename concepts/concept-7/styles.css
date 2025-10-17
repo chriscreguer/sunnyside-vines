@@ -63,6 +63,10 @@ html {
     font-weight: 700;
     text-transform: uppercase;
     color: black;
+    margin-bottom: -4px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 .navbar-links {
@@ -265,7 +269,7 @@ html {
     width: 370px;
     height: 191px;
     object-fit: cover;
-    top: 150px;
+    top: 250px;
     right: 80px;
     z-index: 2;
     border-radius: 10px;
@@ -799,6 +803,9 @@ html {
     color: white;
     margin: 0 0 8px 0;
     text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 .footer-divider {
@@ -1033,11 +1040,7 @@ html {
     /* Hero Section - Mobile */
     .image-group-left,
     .image-group-right {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        bottom: 0;
-        top: unset;
+        display: none;
     }
     
     /* TOP CLUSTER - 3 images at top of hero */
@@ -1127,6 +1130,76 @@ html {
     
     .mission-section {
         padding: 100px 2rem 120px 2rem;
+    }
+    
+    /* Combined Section Mobile */
+    .combined-section {
+        padding: 100px 2rem 120px 2rem;
+    }
+    
+    .image-stack {
+        width: 100%;
+        max-width: 400px;
+        margin-top: -100px;
+        margin-bottom: 120px;
+    }
+    
+    .main-large-photo {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 690 / 1010;
+    }
+    
+    .bottom-landscape-photo {
+        width: 200px;
+        height: auto;
+        bottom: -80px;
+        right: -40px;
+    }
+    
+    .bottom-portrait-photo {
+        width: 160px;
+        height: auto;
+        bottom: -60px;
+        left: -40px;
+    }
+    
+    .map-text-container {
+        flex-direction: column-reverse;
+        margin-top: 0;
+        gap: 40px;
+        align-items: flex-start;
+    }
+    
+    .map-overlay {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin-left: 0;
+    }
+    
+    .producer-text {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 0;
+        text-align: left;
+    }
+    
+    .producer-subtitle {
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    .producer-title {
+        font-size: 40px;
+        margin-bottom: 24px;
+        text-align: left;
+    }
+    
+    .producer-description {
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: left;
     }
     
     /* Producer Section Mobile */
