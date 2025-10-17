@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunnyside Vines - Parallax Hero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://assets.codepen.io/16327/ScrollSmoother.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar (outside ScrollSmoother wrapper) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="../../img/logo.svg" alt="Logo" class="nav-logo">
+                <span class="nav-wordmark">Sunnyside Vines</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#map" class="nav-link">Map</a></li>
+                <li class="nav-item"><a href="#products" class="nav-link">Products</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <!-- Hero Section -->
+            <section class="hero">
+        <!-- Parallax Layers -->
+        <div class="parallax-layer" id="bg-layer">
+            <img src="../../img/bg.png" alt="Background Sky" class="parallax-img">
+        </div>
+        
+        <div class="parallax-layer" id="haze-layer">
+            <img src="../../img/haze.png" alt="Mid-ground Skyline" class="parallax-img">
+        </div>
+        
+        <div class="parallax-layer" id="hill1-layer">
+            <img src="../../img/hill 1.png" alt="Hill 1" class="parallax-img">
+        </div>
+        
+        <div class="parallax-layer" id="hill2-layer">
+            <img src="../../img/hill2.png" alt="Hill 2" class="parallax-img">
+            <!-- Bottom Text Overlay - anchored to hill2 -->
+            <div class="bottom-text-overlay">
+                <p class="mission-text">
+                    <span class="word">We</span> <span class="word">bring</span> <span class="word">authentic,</span> <span class="word">estate-grown</span> <span class="word">wines</span> <span class="word">to</span> <span class="word">New</span> <span class="word">York.</span> <span class="word">By</span> <span class="word">forging</span> <span class="word">lasting</span> <span class="word">partnerships</span> <span class="word">with</span> <span class="word">producers,</span> <span class="word">we</span> <span class="word">ensure</span> <span class="word">every</span> <span class="word">bottle</span> <span class="word">we</span> <span class="word">represent</span> <span class="word">carries</span> <span class="word">a</span> <span class="word highlight-text">unique</span> <span class="word highlight-text">story</span> <span class="word">and</span> <span class="word">a</span> <span class="word">distinct</span> <span class="word">sense</span> <span class="word">of</span> <span class="word">place.</span>
+                </p>
+            </div>
+        </div>
+    
+        
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <div class="headline">
+                <h2>We connect New York with the world's premiere winemakers</h2>
+            </div>
+            <div class="cta">
+                <button class="hero-button">View Wines</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-left">
+                <h2>Sourcing the finest vines</h2>
+                <div class="content-text">
+                    <p>We bring authentic, estate-grown wines to New York. By forging lasting partnerships with producers, we ensure every bottle we represent carries a unique story and a distinct sense of place.</p>
+                    
+                    <p>We bring authentic, estate-grown wines to New York. By forging lasting partnerships with producers, we ensure every bottle we represent carries a unique story and a distinct sense of place.</p>
+                </div>
+            </div>
+            
+            <div class="content-right">
+                <div class="spain-map">
+                    <div class="map-container">
+                        <img src="../../img/spain.svg" alt="Spain Map" class="spain-base-map">
+                        
+                        <!-- Winery dots and labels overlay -->
+                        <div class="city-overlay">
+                            <!-- Madrid region -->
+                            <div class="city-marker" style="left: 50%; top: 55%;" data-winery="vinos-del-centro">
+                                <div class="city-dot"></div>
+                                <div class="city-label">VINOS DEL CENTRO</div>
+                            </div>
+                            
+                            <!-- Barcelona region -->
+                            <div class="city-marker" style="left: 78%; top: 35%;" data-winery="celler-montblanc">
+                                <div class="city-dot"></div>
+                                <div class="city-label">CELLER MONTBLANC</div>
+                            </div>
+                            
+                            <!-- Seville region -->
+                            <div class="city-marker" style="left: 22%; top: 75%;" data-winery="bodega-andaluza">
+                                <div class="city-dot"></div>
+                                <div class="city-label">BODEGA ANDALUZA</div>
+                            </div>
+                            
+                            <!-- Valencia region -->
+                            <div class="city-marker" style="left: 68%; top: 52%;" data-winery="levante-wines">
+                                <div class="city-dot"></div>
+                                <div class="city-label">LEVANTE WINES</div>
+                            </div>
+                            
+                            <!-- Bilbao region -->
+                            <div class="city-marker" style="left: 35%; top: 18%;" data-winery="txakoli-etxe">
+                                <div class="city-dot"></div>
+                                <div class="city-label">TXAKOLI ETXE</div>
+                            </div>
+                            
+                            <!-- Granada region -->
+                            <div class="city-marker" style="left: 32%; top: 82%;" data-winery="sierra-nevada">
+                                <div class="city-dot"></div>
+                                <div class="city-label">SIERRA NEVADA</div>
+                            </div>
+                            
+                            <!-- Zaragoza region -->
+                            <div class="city-marker" style="left: 58%; top: 32%;" data-winery="campo-de-borja">
+                                <div class="city-dot"></div>
+                                <div class="city-label">CAMPO DE BORJA</div>
+                            </div>
+                            
+                            <!-- Málaga region -->
+                            <div class="city-marker" style="left: 26%; top: 88%;" data-winery="dulce-malaga">
+                                <div class="city-dot"></div>
+                                <div class="city-label">DULCE MÁLAGA</div>
+                            </div>
+                            
+                            <!-- Santander region -->
+                            <div class="city-marker" style="left: 28%; top: 15%;" data-winery="costa-verde">
+                                <div class="city-dot"></div>
+                                <div class="city-label">COSTA VERDE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+            <script src="script.js"></script>
+        </div>
+    </div>
+</body>
+</html>

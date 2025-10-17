@@ -1,0 +1,578 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Geist Mono', monospace;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    background-color: #F0EAE6;
+}
+
+html {
+    scroll-behavior: auto;
+}
+
+html, body {
+    overflow-anchor: none;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 1064px;
+    background-color: rgb(163, 81, 44);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 0;
+    overflow: hidden;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 54px;
+    margin-bottom: 112px;
+}
+
+.logo-mark {
+    width: 24px;
+    height: 24px;
+    margin-right: 11px;
+    filter: brightness(0) invert(1);
+}
+
+.logo-text {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.04em;
+    color: white;
+    text-transform: uppercase;
+}
+
+/* Main Heading */
+.main-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 80px;
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    color: white;
+    text-align: center;
+    max-width: 660px;
+    margin-bottom: 47px;
+}
+
+.wine-text {
+    color: #FFC4A9;
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* Subheading */
+.subheading {
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.45;
+    letter-spacing: 0;
+    color: white;
+    text-align: center;
+    max-width: 600px;
+    margin-bottom: 42px;
+    text-transform: uppercase;
+}
+
+/* CTA Button */
+.cta-button {
+    background-color: #8D3512;
+    color: white;
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 118px;
+}
+
+.cta-button:hover {
+    background-color: #6B2A0E;
+}
+
+/* SVG Illustrations */
+.illustration {
+    position: absolute;
+    opacity: 0.6;
+}
+
+.wine-bottle-left {
+    top: 45%;
+    right: 15%;
+    width: 100px;
+    height: 100px;
+}
+
+.wine-drinkers-right {
+    top: 20%;
+    left: 0px;
+    width: 315px;
+    height: 315px;
+}
+
+.wine-barrel-bottom {
+    top: 15%;
+    right: -25px;
+    width: 150px;
+    height: 150px;
+}
+
+.svg-illustration {
+    width: 100%;
+    height: 100%;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+}
+
+/* Image Section */
+.image-section {
+    position: relative;
+    z-index: 10;
+    margin-top: -400px; /* More overlap with hero section */
+    padding: 0 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.image-section .image-container {
+    max-width: 1460px;
+    width: 100%;
+}
+
+.image-container {
+    display: flex;
+    gap: 100px;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.image-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-caption {
+    margin-bottom: 8px;
+    text-align: left;
+    width: 100%;
+}
+
+.location-name {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 8px;
+}
+
+.location-place {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.image-wrapper {
+    width: 600px;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.square-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Bottom Section */
+.bottom-section {
+    background-color: #F0EAE6;
+    padding: 160px 2rem 200px 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.belief-statement {
+    font-family: 'Fraunces', serif;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1.11;
+    letter-spacing: 0;
+    color: #8D3512;
+    text-align: center;
+    max-width: 1460px;
+}
+
+.highlight-word {
+    color: #D76E3E;
+    font-weight: 600;
+    font-style: italic;
+}
+
+/* Subtle Animations */
+@keyframes svgFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatGentle {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Apply animations */
+.svg-illustration {
+    width: 100%;
+    height: 100%;
+    filter: brightness(0) invert(1);
+    opacity: 0;
+    animation: svgFadeIn 0.6s ease-out 0.2s forwards;
+}
+
+.wine-text {
+    color: #FFC4A9;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.main-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 80px;
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    color: white;
+    text-align: center;
+    max-width: 660px;
+    margin-bottom: 47px;
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.subheading {
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.45;
+    letter-spacing: 0;
+    color: white;
+    text-align: center;
+    max-width: 600px;
+    margin-bottom: 42px;
+    text-transform: uppercase;
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.cta-button {
+    background-color: #8D3512;
+    color: white;
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 118px;
+    animation: fadeInUp 0.6s ease-out 0.6s both;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #6B2A0E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(141, 53, 18, 0.3);
+}
+
+.image-item {
+    animation: fadeInUp 0.8s ease-out 0.8s both;
+}
+
+.image-item:nth-child(2) {
+    animation-delay: 0.9s;
+}
+
+.belief-statement {
+    font-family: 'Fraunces', serif;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1.11;
+    letter-spacing: 0;
+    color: #8D3512;
+    text-align: center;
+    max-width: 1460px;
+    animation: fadeInUp 0.8s ease-out 1s both;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 54px;
+    margin-bottom: 112px;
+    animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.illustration {
+    position: absolute;
+    opacity: 0.6;
+    animation: floatGentle 6s ease-in-out infinite;
+}
+
+.wine-bottle-left {
+    animation-delay: 1s;
+}
+
+.wine-drinkers-right {
+    animation-delay: 2s;
+}
+
+.wine-barrel-bottom {
+    animation-delay: 1.5s;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .main-heading {
+        font-size: 70px;
+        max-width: 800px;
+    }
+    
+    .belief-statement {
+        font-size: 45px;
+        max-width: 900px;
+    }
+    
+    .image-container {
+        gap: 80px;
+    }
+    
+    .image-wrapper {
+        width: 450px;
+        height: 450px;
+    }
+    
+    .logo {
+        margin-top: 50px;
+        margin-bottom: 100px;
+    }
+    
+    .subheading {
+        margin-bottom: 35px;
+    }
+    
+    .cta-button {
+        margin-bottom: 100px;
+    }
+    
+    .wine-drinkers-right {
+        width: 157px;
+        height: 157px;
+    }
+    
+    .wine-barrel-bottom {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: 950px;
+        padding: 20px;
+    }
+    
+    .logo {
+        margin-top: 30px;
+        margin-bottom: 60px;
+    }
+    
+    .logo-mark {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .logo-text {
+        font-size: 14px;
+    }
+    
+    .main-heading {
+        font-size: 48px;
+        margin-bottom: 30px;
+        max-width: 90%;
+    }
+    
+    .subheading {
+        font-size: 12px;
+        margin-bottom: 30px;
+        max-width: 90%;
+        line-height: 1.4;
+    }
+    
+    .cta-button {
+        font-size: 12px;
+        padding: 10px 20px;
+        margin-bottom: 48px;
+    }
+    
+    .image-container {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        max-width: 100%;
+    }
+    
+    .image-wrapper {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .belief-statement {
+        font-size: 24px;
+        max-width: 90%;
+        line-height: 1.2;
+    }
+    
+    .bottom-section {
+        padding: 80px 20px 100px 20px;
+    }
+    
+    .image-section {
+        margin-top: -500px;
+        padding: 0 20px;
+    }
+    
+    /* Make all SVGs 50% smaller on iPad/mobile */
+    .wine-barrel-bottom {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .wine-bottle-left {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .wine-drinkers-right {
+        width: 78px;
+        height: 78px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 900px;
+    }
+    
+    .logo-mark {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .logo-text {
+        font-size: 12px;
+    }
+    
+    .main-heading {
+        font-size: 36px;
+        max-width: 95%;
+    }
+    
+    .subheading {
+        font-size: 11px;
+        max-width: 95%;
+    }
+    
+    .belief-statement {
+        font-size: 20px;
+        max-width: 95%;
+    }
+    
+    .image-wrapper {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .image-section {
+        margin-top: -500px;
+    }
+    
+    .bottom-section {
+        padding: 60px 15px 80px 15px;
+    }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .wine-text {
+        animation: none;
+    }
+    
+    .illustration {
+        animation: none;
+    }
+    
+    .svg-illustration {
+        animation: none;
+        opacity: 0.7;
+    }
+}

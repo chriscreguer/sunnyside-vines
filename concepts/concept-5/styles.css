@@ -1,0 +1,347 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Geist Mono', monospace;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    background-color: black;
+    height: 100vh;
+}
+
+/* Page Frame */
+.page-frame {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.page-frame::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 28px;
+    right: 28px;
+    bottom: 28px;
+    border: 0.5px solid white;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Hero Section with Video Background */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse 800px 400px at center,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.53) 17%,
+        rgba(0, 0, 0, 0.45) 34%,
+        rgba(0, 0, 0, 0.35) 50%,
+        rgba(0, 0, 0, 0.28) 64%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+}
+
+.video-overlay::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 1200px;
+    padding: 0 20px;
+    margin-top: -24px;
+}
+
+/* Brand Name */
+.brand-name {
+    font-family: 'Hello Bride Script', cursive;
+    font-size: 186px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0%;
+    color: white;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+/* Hero Subheading */
+.hero-subheading {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 145%;
+    letter-spacing: 0%;
+    color: white;
+    text-transform: uppercase;
+    max-width: 400px;
+    margin: -50px 0 0 0;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+    position: relative;
+    left: 38%;
+    text-align: left;
+}
+
+/* Bottom Section */
+.bottom-section {
+    position: relative;
+    z-index: 4;
+    background-color: white;
+    padding: 160px 2rem 200px 2rem;
+    text-align: center;
+}
+
+.belief-statement {
+    font-family: 'Fraunces', serif;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 111%;
+    letter-spacing: 0%;
+    color: #8D3512;
+    max-width: 1460px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 1.0s forwards;
+}
+
+.highlight-word {
+    color: #D76E3E;
+    font-weight: 600;
+    font-style: italic;
+}
+
+/* Frame Elements */
+.frame-corner {
+    position: absolute;
+    bottom: 50px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+    z-index: 11;
+}
+
+.frame-bottom-left {
+    left: 58px;
+    text-transform: uppercase;
+}
+
+.frame-bottom-right {
+    right: 58px;
+    text-transform: uppercase;
+}
+
+.frame-bottom-center {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 11;
+}
+
+.frame-cta-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    border: 0.5px solid white;
+    border-bottom: none;
+    color: white;
+    padding: 16px 28px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.frame-cta-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.arrow-icon {
+    width: 12px;
+    height: 12px;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .brand-name {
+        font-size: 180px;
+    }
+    
+    .hero-subheading {
+        font-size: 20px;
+        max-width: 90%;
+    }
+    
+    .belief-statement {
+        font-size: 48px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-frame::before {
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+    }
+    
+    .brand-name {
+        font-size: 120px;
+    }
+    
+    .hero-subheading {
+        font-size: 16px;
+        max-width: 95%;
+    }
+    
+    .belief-statement {
+        font-size: 36px;
+        max-width: 95%;
+    }
+    
+    .bottom-section {
+        bottom: 60px;
+        padding: 0 20px;
+    }
+    
+    .frame-corner {
+        bottom: 42px;
+        font-size: 10px;
+    }
+    
+    .frame-bottom-left {
+        left: 38px;
+    }
+    
+    .frame-bottom-right {
+        right: 38px;
+    }
+    
+    .frame-bottom-center {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-frame::before {
+        top: 15px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+    }
+    
+    .brand-name {
+        font-size: 80px;
+    }
+    
+    .hero-subheading {
+        font-size: 14px;
+    }
+    
+    .belief-statement {
+        font-size: 28px;
+    }
+    
+    .frame-corner {
+        font-size: 9px;
+        bottom: 32px;
+    }
+    
+    .frame-bottom-left {
+        left: 28px;
+    }
+    
+    .frame-bottom-right {
+        right: 28px;
+    }
+    
+    .frame-bottom-center {
+        bottom: 15px;
+    }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .brand-name,
+    .hero-subheading,
+    .belief-statement {
+        animation: none;
+        opacity: 1;
+    }
+}

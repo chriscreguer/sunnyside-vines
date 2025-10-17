@@ -1,0 +1,315 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Geist Mono', monospace;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    background-color: white;
+}
+
+/* Hero Section with Video Background */
+.hero {
+    position: relative;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse 800px 400px at center,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.53) 17%,
+        rgba(0, 0, 0, 0.45) 34%,
+        rgba(0, 0, 0, 0.35) 50%,
+        rgba(0, 0, 0, 0.28) 64%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+}
+
+.video-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+/* Logo */
+.logo {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeInDown 0.8s ease-out 0.2s forwards;
+}
+
+
+.logo-text {
+    font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+}
+
+.logo-mark {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+/* Main Heading */
+.main-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 88%;
+    letter-spacing: -2%;
+    color: white;
+    margin-bottom: 36px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+.wine-text {
+    color: #FFC4A9;
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* Subheading */
+.subheading {
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 145%;
+    letter-spacing: 0%;
+    color: white;
+    margin-bottom: 36px;
+    text-transform: uppercase;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+
+/* CTA Button */
+.cta-button {
+    background-color: #8D3512;
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.8s forwards;
+}
+
+.cta-button:hover {
+    background-color: #6B2A0E;
+}
+
+/* Bottom Section */
+.bottom-section {
+    background-color: white;
+    padding: 160px 2rem 200px 2rem;
+    text-align: center;
+}
+
+.belief-statement {
+    font-family: 'Fraunces', serif;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 111%;
+    letter-spacing: 0%;
+    color: #8D3512;
+    max-width: 1460px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 1.0s forwards;
+}
+
+.highlight-word {
+    color: #D76E3E;
+    font-weight: 600;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .belief-statement {
+        font-size: 48px;
+        max-width: 90%;
+    }
+    
+    .main-heading {
+        font-size: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: 600px;
+    }
+    
+    .video-overlay {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .logo {
+        margin-bottom: 60px;
+    }
+    
+    .main-heading {
+        font-size: 48px;
+        margin-bottom: 30px;
+    }
+    
+    .subheading {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+    
+    .belief-statement {
+        font-size: 36px;
+        max-width: 95%;
+    }
+    
+    .bottom-section {
+        padding: 100px 20px 120px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 500px;
+    }
+    
+    .main-heading {
+        font-size: 36px;
+    }
+    
+    .belief-statement {
+        font-size: 28px;
+        max-width: 95%;
+    }
+    
+    .bottom-section {
+        padding: 80px 15px 100px 15px;
+    }
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .logo,
+    .main-heading,
+    .subheading,
+    .cta-button,
+    .belief-statement {
+        animation: none;
+        opacity: 1;
+    }
+}
