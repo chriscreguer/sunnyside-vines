@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunnyside Vines - Concept 7</title>
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../img/favicon/site.webmanifest">
+    <link rel="shortcut icon" href="../../img/favicon/favicon.ico">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" rel="stylesheet">
@@ -15,12 +23,13 @@
     <nav class="navbar" id="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
-                <img src="../../img/logo_hero.svg" alt="Sunnyside Vines" class="navbar-logo-img">
+                <img src="../../img/logo_hero.svg" alt="Sunnyside Vines" class="navbar-logo-img navbar-logo-desktop">
+                <img src="../../img/lettermark.svg" alt="Sunnyside Vines" class="navbar-logo-img navbar-logo-mobile">
                 <span class="navbar-brand">Sunnyside Vines</span>
             </div>
             <div class="navbar-links">
                 <a href="#producer" class="nav-link">Featured Producer</a>
-                <a href="#wines" class="nav-link">Wines</a>
+                <!-- <a href="#wines" class="nav-link">Wines</a> -->
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
             <button class="hamburger-menu" id="hamburger" aria-label="Toggle menu">
@@ -31,7 +40,7 @@
         </div>
         <div class="mobile-menu" id="mobileMenu">
             <a href="#producer" class="mobile-nav-link">Featured Producer</a>
-            <a href="#wines" class="mobile-nav-link">Wines</a>
+            <!-- <a href="#wines" class="mobile-nav-link">Wines</a> -->
             <a href="#contact" class="mobile-nav-link">Contact</a>
         </div>
     </nav>
@@ -86,14 +95,14 @@
                 <div class="producer-text">
                     <p class="producer-subtitle">Featured Producer</p>
                     <h2 class="producer-title">Bodega Peñafalcón</h2>
-                    <p class="producer-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae justo nec nunc facilisis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
+                    <p class="producer-description">Bodega Peñafalcón is a family winery in Peñafiel, the heart of Spain's Ribera del Duero region. Founded by Casimiro Marcos and María José Arranz, the estate is known for producing bold, expressive Tempranillo wines that balance power with finesse. Their approach combines organic vineyard practices, meticulous hand selection, and long barrel aging to bring out the depth and character of the region's limestone soils.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Wines Section -->
-    <section class="wines-section" id="wines">
+    <!-- <section class="wines-section" id="wines">
         <div class="wines-container">
             <div class="wines-title-container">
                 <h2 class="wines-title">Wines</h2>
@@ -149,18 +158,18 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Story Section -->
     <section class="story-section">
         <div class="story-content">
             <div class="story-left">
-                <h2 class="story-title">We bring authentic estate-grown wines to New York</h2>
+                <h2 class="story-title">We bring authentic estate-grown wines to <strong>New York</strong></h2>
                 <img src="../../img/wine_barrel.svg" alt="" class="story-icon">
             </div>
             
             <div class="story-right">
-                <p class="story-paragraph"><span class="drop-cap">W</span>e are dedicated to sourcing the finest wines from <span class="highlight">small, family-owned vineyards</span> across Europe. Our mission is to connect authentic, <span class="highlight">estate-grown wines</span> with discerning palates in New York. Every bottle we import tells a story of <span class="highlight">tradition, terroir, and craftsmanship</span>—values that have been passed down through generations. We believe that wine should be more than just a beverage; it should be an <span class="highlight">experience that honors heritage</span> while celebrating the present moment.</p>
+                <p class="story-paragraph"><span class="drop-cap">B</span>ased in the greater New York area, we serve a <span class="highlight">vibrant community</span> of wine lovers spanning the city, Nassau County, and upstate. Our proximity to one of the world's most dynamic food and wine markets allows us to bring <span class="highlight">distinctive European wines</span> directly to the restaurants, shops, and tables that value <span class="highlight">authenticity and craftsmanship</span>. From Manhattan to the Hudson Valley, we connect local retailers and sommeliers with small, family-run producers whose wines reflect a <span class="highlight">sense of place and tradition</span>.</p>
             </div>
         </div>
     </section>
@@ -179,24 +188,24 @@
                         </svg>
                     </button>
                 </div>
-                <p class="contact-phone">+1 555.123.4567</p>
+                <p class="contact-phone"><a href="tel:+15551234567">+1 555.123.4567</a></p>
             </div>
             
             <div class="contact-right">
-                <form class="contact-form">
+                <form class="contact-form" action="https://formspree.io/f/xjkalwan" method="POST">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name">
+                            <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email">
+                            <input type="email" id="email" name="email" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="How can we help?"></textarea>
+                        <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
                     </div>
                     <button type="submit" class="submit-button">Submit</button>
                 </form>
@@ -207,11 +216,16 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p class="footer-location">New York City, New York</p>
-            <h3 class="footer-brand">Sunnyside Vines</h3>
-            <div class="footer-divider"></div>
-            <p class="footer-email">info@sunnysidevines.com</p>
-            <p class="footer-phone">+1 555.123.4567</p>
+            <div class="footer-left">
+                <p class="footer-location">New York City, New York</p>
+                <h3 class="footer-brand">Sunnyside Vines</h3>
+                <div class="footer-divider"></div>
+                <p class="footer-email">info@sunnysidevines.com</p>
+                <p class="footer-phone"><a href="tel:+15551234567">+1 555.123.4567</a></p>
+            </div>
+            <div class="footer-right">
+                <img src="../../img/logomark_white.svg" alt="Sunnyside Vines" class="footer-logo">
+            </div>
         </div>
     </footer>
 

@@ -11,10 +11,24 @@ body {
     color: #333;
     overflow-x: hidden;
     background-color: #F5F1EE;
+    width: 100%;
+    max-width: 100vw;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
 }
 
 /* Navigation Bar */
@@ -55,6 +69,10 @@ html {
 .navbar-logo-img {
     width: 28px;
     height: 28px;
+}
+
+.navbar-logo-mobile {
+    display: none;
 }
 
 .navbar-brand {
@@ -700,7 +718,7 @@ html {
     font-family: 'Geist Mono', monospace;
     font-size: 20px;
     color: black;
-    margin: 0 0 8px 0;
+    margin: 20px 0 8px 0;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -721,11 +739,11 @@ html {
 }
 
 .copy-button:hover {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .copy-button:hover svg {
-    stroke: white;
+    stroke: black;
 }
 
 .contact-phone {
@@ -733,6 +751,11 @@ html {
     font-size: 20px;
     color: black;
     margin: 0;
+}
+
+.contact-phone a {
+    color: black;
+    text-decoration: none;
 }
 
 .contact-right {
@@ -815,6 +838,24 @@ html {
 .footer-content {
     max-width: 1460px;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-left {
+    flex: 1;
+}
+
+.footer-right {
+    display: flex;
+    align-items: flex-start;
+}
+
+.footer-logo {
+    width: 120px;
+    height: auto;
+    opacity: 0.2;
 }
 
 .footer-location {
@@ -822,7 +863,8 @@ html {
     font-size: 16px;
     letter-spacing: 0;
     color: white;
-    margin: 0 0 4px 0;
+    opacity: 0.7;
+    margin: 0 0 7px 0;
 }
 
 .footer-brand {
@@ -832,6 +874,7 @@ html {
     color: white;
     margin: 0 0 8px 0;
     text-transform: uppercase;
+    line-height: 38px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -856,6 +899,11 @@ html {
     font-size: 14px;
     color: white;
     margin: 0;
+}
+
+.footer-phone a {
+    color: white;
+    text-decoration: none;
 }
 
 /* Responsive Design */
@@ -1025,6 +1073,44 @@ html {
     }
 }
 
+@media (max-width: 1280px) {
+    /* Stack producer section */
+    .producer-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .producer-photos {
+        max-width: 100%;
+    }
+    
+    .producer-info {
+        max-width: 100%;
+        text-align: center;
+    }
+    
+    /* Stack story section */
+    .story-section {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .story-title {
+        max-width: 100%;
+        text-align: center;
+    }
+    
+    .story-paragraph {
+        max-width: 100%;
+    }
+    
+    /* Stack contact section */
+    .contact-section {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+
 @media (max-width: 1024px) {
     .brand-name {
         font-size: 70px;
@@ -1045,7 +1131,27 @@ html {
 }
 
 @media (max-width: 768px) {
+    /* Prevent horizontal scroll */
+    body, html {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+    }
+    
+    section {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
     /* Navbar Mobile */
+    .navbar-logo-desktop {
+        display: none;
+    }
+    
+    .navbar-logo-mobile {
+        display: block;
+    }
+    
     .navbar-brand {
         display: none;
     }
@@ -1056,6 +1162,11 @@ html {
     
     .hamburger-menu {
         display: flex;
+    }
+    
+    /* Footer Mobile */
+    .footer-logo {
+        display: none;
     }
     
     /* Hero Section - Mobile */
@@ -1276,6 +1387,10 @@ html {
         font-size: 60px;
     }
     
+    .contact-email {
+        margin: 0 0 12px 0;
+    }
+
     .form-row {
         flex-direction: column;
         gap: 24px;
