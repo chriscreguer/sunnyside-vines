@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunnyside Vines</title>
+    <title>Sunnyside Vines - Concept 6</title>
     
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
@@ -26,11 +26,11 @@
                 <img src="img/logo_hero.svg" alt="Sunnyside Vines" class="navbar-logo-img navbar-logo-desktop">
                 <img src="img/lettermark.svg" alt="Sunnyside Vines" class="navbar-logo-img navbar-logo-mobile">
                 <span class="navbar-brand">Sunnyside Vines</span>
-            </div>
-            <div class="navbar-links">
-                <a href="#producer" class="nav-link">Featured Producer</a>
-                <!-- <a href="#wines" class="nav-link">Wines</a> -->
-                <a href="#contact" class="nav-link">Contact</a>
+                <div class="navbar-links">
+                    <a href="#producer" class="nav-link">Featured Producer</a>
+                    <!-- <a href="#wines" class="nav-link">Wines</a> -->
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
             </div>
             <button class="hamburger-menu" id="hamburger" aria-label="Toggle menu">
                 <span></span>
@@ -70,33 +70,37 @@
         </div>
     </section>
 
-    <!-- Combined Mission & Producer Section -->
-    <section class="combined-section" id="producer">
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <!-- SVG Icons scattered throughout -->
+        <img src="img/wine_bottle.svg" alt="" class="icon-decor icon-1">
+        <img src="img/wine_barrel.svg" alt="" class="icon-decor icon-2">
+        <img src="img/wine_drinkers.svg" alt="" class="icon-decor icon-3">
+        
         <p class="mission-statement">
             We believe the most <span class="highlight-word">memorable</span> wines come from small, <span class="highlight-word">family-run</span> vineyards where <span class="highlight-word">heritage</span> is honored and every bottle tells a story.
         </p>
+    </section>
+
+    <!-- Featured Producer Section -->
+    <section class="producer-section" id="producer">
+        <h2 class="producer-heading"><span class="bold">Featured Producer:</span> Bodega Peñafalcón</h2>
         
-        <div class="combined-content">
-            <!-- Image Stack -->
-            <div class="image-stack">
-                <img src="img/framed_vineyard.png" alt="Main Vineyard" class="main-large-photo">
-                <img src="img/roseto_family_vineyard_landscape.jpeg" alt="Landscape" class="bottom-landscape-photo">
-                <img src="img/IMG_1605.png" alt="Portrait" class="bottom-portrait-photo">
+        <div class="producer-content">
+            <div class="producer-photos">
+                <div class="main-photo-container">
+                    <img src="img/roseto_family_vineyard_landscape.jpeg" alt="Featured Vineyard" class="main-photo">
+                </div>
+                <img src="img/roseto_family_vineyard_family_photo.png" alt="Vineyard Detail" class="overlay-photo-1">
+                <img src="img/roseto_family_vineyard_two_talking.png" alt="Vineyard Scene" class="overlay-photo-2">
             </div>
-            
-            <!-- Map and Text Container -->
-            <div class="map-text-container">
-                <!-- Map -->
-                <div class="map-overlay">
-                    <img src="img/spain.svg" alt="Map of Spain" class="spain-map">
-                </div>
-                
-                <!-- Text Content -->
-                <div class="producer-text">
-                    <p class="producer-subtitle">Featured Producer</p>
-                    <h2 class="producer-title">Bodega Peñafalcón</h2>
-                    <p class="producer-description">Bodega Peñafalcón is a family winery in Peñafiel, the heart of Spain's Ribera del Duero region. Founded by Casimiro Marcos and María José Arranz, the estate is known for producing bold, expressive Tempranillo wines that balance power with finesse. Their approach combines organic vineyard practices, meticulous hand selection, and long barrel aging to bring out the depth and character of the region's limestone soils.</p>
-                </div>
+
+            <div class="producer-info">
+                <p class="producer-description">Bodega Peñafalcón is a family winery in Peñafiel, the heart of Spain's Ribera del Duero region. Founded by Casimiro Marcos and María José Arranz, the estate is known for producing bold, expressive Tempranillo wines that balance power with finesse. Their approach combines organic vineyard practices, meticulous hand selection, and long barrel aging to bring out the depth and character of the region's limestone soils.</p>
+            </div>
+
+            <div class="map-container">
+                <img src="img/spain_dark.svg" alt="Map of Spain" class="spain-map">
             </div>
         </div>
     </section>
@@ -192,20 +196,20 @@
             </div>
             
             <div class="contact-right">
-                <form class="contact-form" action="https://formspree.io/f/xjkalwan" method="POST">
+                <form class="contact-form">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="name">
                         </div>
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
+                        <textarea id="message" name="message" placeholder="How can we help?"></textarea>
                     </div>
                     <button type="submit" class="submit-button">Submit</button>
                 </form>

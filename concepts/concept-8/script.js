@@ -1,8 +1,8 @@
-// Concept 6 JavaScript
+// Concept 7 JavaScript
 // Add any interactive functionality here
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Sunnyside Vines loaded');
+    console.log('Concept 8 loaded');
     
     // Navbar scroll functionality
     const navbar = document.getElementById('navbar');

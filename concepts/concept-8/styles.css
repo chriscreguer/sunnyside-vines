@@ -119,8 +119,6 @@ html {
     padding: 12px 16px;
     border-radius: 50px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    position: absolute;
-    right: 2rem;
 }
 
 .hamburger-menu span {
@@ -286,7 +284,7 @@ html {
     width: 370px;
     height: 191px;
     object-fit: cover;
-    top: 150px;
+    top: 250px;
     right: 80px;
     z-index: 2;
     border-radius: 10px;
@@ -320,25 +318,26 @@ html {
 }
 
 .logo {
-    width: 180px;
-    height: 190px;
-    margin-bottom: 40px;
+    width: 126px;
+    height: 133px;
+    margin-bottom: 30px;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 0.1s forwards;
 }
 
-.brand-name {
-    font-family: 'NuGELO', sans-serif;
-    font-size: 90px;
-    font-weight: 400;
-    line-height: 89%;
-    letter-spacing: -2.75px;
-    max-width: 500px;
-    text-transform: uppercase;
-    color: #000000;
+.brand-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 24px;
     margin-bottom: 12px;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.brand-wordmark {
+    height: 160px;
+    width: auto;
 }
 
 .wine-imports {
@@ -362,34 +361,31 @@ html {
     text-align: center;
     color: #000000;
     max-width: 500px;
+    margin-top: 80px;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 0.4s forwards;
 }
 
-/* Mission Section */
-.mission-section {
+/* Combined Mission & Producer Section */
+.combined-section {
     position: relative;
-    background-color: #B15321;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 2rem;
-    text-align: center;
+    background-color: #B12121;
+    padding: 180px 2rem 200px 2rem;
     overflow: hidden;
 }
 
 .mission-statement {
     font-family: 'Fraunces', serif;
-    font-size: 60px;
+    font-size: 108px;
     font-weight: 400;
-    line-height: 111%;
+    line-height: 97%;
     letter-spacing: 0%;
-    color: rgba(255, 255, 255, 0.7);
-    max-width: 1460px;
-    margin: 0 auto;
+    color: #FCE8DE;
+    max-width: 1620px;
+    margin: 0 auto 60px auto;
+    text-align: center;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
@@ -400,146 +396,121 @@ html {
     font-style: italic;
 }
 
-/* SVG Icon Decorations */
-@keyframes fadeInIcon {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 0.2;
-    }
-}
-
-.icon-decor {
-    position: absolute;
-    opacity: 0;
-    filter: brightness(0) invert(1);
-    z-index: 1;
-}
-
-.icon-1 {
-    width: 150px;
-    height: 150px;
-    top: 10%;
-    left: 8%;
-    transform: rotate(-15deg);
-    animation: fadeInIcon 1s ease-out 0.4s forwards;
-}
-
-.icon-2 {
-    width: 180px;
-    height: 180px;
-    top: 50%;
-    right: 12%;
-    transform: rotate(25deg);
-    animation: fadeInIcon 1s ease-out 0.5s forwards;
-}
-
-.icon-3 {
-    width: 140px;
-    height: 140px;
-    bottom: 15%;
-    left: 15%;
-    transform: rotate(10deg);
-    animation: fadeInIcon 1s ease-out 0.6s forwards;
-}
-
-/* Producer Section */
-.producer-section {
-    background-color: white;
-    padding: 200px 0 240px 0;
-    overflow: hidden;
-}
-
-.producer-heading {
-    font-family: 'Fraunces', serif;
-    font-size: 40px;
-    font-weight: 400;
-    letter-spacing: -1.5px;
-    color: black;
+.combined-content {
+    max-width: 1620px;
     margin: 0 auto;
-    max-width: 1460px;
-    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.producer-heading .bold {
-    font-weight: 700;
-}
-
-.producer-content {
+/* Image Stack */
+.image-stack {
     position: relative;
-    margin: 50px auto 0;
-    max-width: 1460px;
-    padding: 0 2rem;
+    width: 690px;
+    margin: 0 auto;
+    z-index: 2;
+    margin-top: -210px;
+    margin-bottom: 250px;
 }
 
-.producer-photos {
-    position: relative;
-    width: 620px;
-    margin-bottom: 120px;
-}
-
-.main-photo-container {
-    position: relative;
-    width: 620px;
-}
-
-.main-photo {
-    width: 100%;
-    height: 368px;
+.main-large-photo {
+    width: 690px;
+    height: 1010px;
     object-fit: cover;
     border-radius: 10px;
     border: 5px solid black;
+    display: block;
+    margin: 0 auto;
 }
 
-.overlay-photo-1 {
+.bottom-landscape-photo {
     position: absolute;
-    width: 205px;
-    height: 180px;
+    width: 567px;
+    height: 337px;
     object-fit: cover;
     border-radius: 10px;
     border: 5px solid black;
-    bottom: -70px;
-    left: -40px;
+    bottom: -200px;
+    right: -300px;
     z-index: 3;
 }
 
-.overlay-photo-2 {
+.bottom-portrait-photo {
     position: absolute;
-    width: 370px;
-    height: 191px;
+    width: 420px;
+    height: 420px;
     object-fit: cover;
     border-radius: 10px;
     border: 5px solid black;
-    top: 220px;
-    left: calc(620px - 185px);
-    z-index: 1;
+    bottom: -100px;
+    left: -280px;
+    z-index: 3;
 }
 
-.producer-info {
-    max-width: 490px;
+/* Map and Text Container */
+.map-text-container {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+    margin-top: -174px;
 }
 
-.producer-description {
-    font-family: 'Geist Mono', monospace;
-    font-size: 16px;
-    line-height: 1.6;
-    color: rgba(0, 0, 0, 0.7);
-    margin: 0;
-}
-
-.map-container {
-    position: absolute;
-    right: -100px;
-    top: 0;
-    width: 850px;
-    height: 679px;
+/* Map Overlay */
+.map-overlay {
+    width: 750px;
+    height: 600px;
+    flex-shrink: 0;
+    z-index: 5;
+    margin-left: -150px;
 }
 
 .spain-map {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+/* Producer Text */
+.producer-text {
+    flex: 1;
+    width: 670px;
+    max-width: 670px;
+    z-index: 4;
+    margin-top: 180px;
+}
+
+.producer-subtitle {
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 12px 0;
+    text-align: left;
+}
+
+.producer-title {
+    font-family: 'Fraunces', serif;
+    font-size: 70px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: white;
+    margin: 0 0 32px 0;
+    line-height: 1;
+    text-align: left;
+}
+
+.producer-description {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 2;
+    font-weight: 300;
+    color: white;
+    margin: 0;
+    text-align: left;
 }
 
 /* Wines Section */
@@ -599,7 +570,7 @@ html {
     font-family: 'Fraunces', serif;
     font-size: 40px;
     font-weight: 400;
-    color: #AC4B1F;
+    color: #B12121;
     margin: 0 0 8px 0;
     line-height: 1.2;
 }
@@ -674,7 +645,7 @@ html {
 .story-paragraph .highlight {
     font-weight: 700;
     font-style: italic;
-    color: #AC4B1F;
+    color: #B12121;
 }
 
 .drop-cap {
@@ -685,7 +656,7 @@ html {
     float: left;
     margin-right: 12px;
     margin-top: 8px;
-    color: #AC4B1F;
+    color: #B12121;
 }
 
 /* Contact Section */
@@ -712,6 +683,7 @@ html {
     letter-spacing: -2px;
     color: black;
     margin: 0 0 12px 0;
+    line-height: 100%
 }
 
 .contact-email {
@@ -799,7 +771,7 @@ html {
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #AC4B1F;
+    border-color: #B12121;
 }
 
 .form-group textarea {
@@ -812,7 +784,7 @@ html {
 }
 
 .submit-button {
-    background-color: #AC4B1F;
+    background-color: #B12121;
     color: white;
     font-family: 'Geist Mono', monospace;
     font-size: 16px;
@@ -945,8 +917,8 @@ html {
         height: 343px;
         right: calc(-542px / 4);
     }
-    .brand-name {
-        font-size: 64px;
+    .brand-wordmark {
+        height: 160px;
     }
     .wine-imports {
         font-size: 20px;
@@ -955,7 +927,7 @@ html {
         font-size: 14px;
     }
     .mission-statement {
-        font-size: 48px;
+        font-size: 90px;
     }
 }
 
@@ -995,6 +967,10 @@ html {
         height: 287px;
         right: calc(-370px / 3.2);
     }
+    
+    .mission-statement {
+        font-size: 80px;
+    }
 }
 
 @media (max-width: 1260px) {
@@ -1032,6 +1008,10 @@ html {
         width: 330px;
         height: 256px;
         right: calc(-330px / 2.8);
+    }
+    
+    .mission-statement {
+        font-size: 70px;
     }
 }
 
@@ -1074,17 +1054,18 @@ html {
 }
 
 @media (max-width: 1280px) {
-    /* Stack producer section */
-    .producer-content {
+    /* Stack map and producer text */
+    .map-text-container {
         flex-direction: column;
+        align-items: center;
         gap: 40px;
     }
     
-    .producer-photos {
-        max-width: 100%;
+    .map-overlay {
+        margin-left: 0;
     }
     
-    .producer-info {
+    .producer-text {
         max-width: 100%;
         text-align: center;
     }
@@ -1112,8 +1093,8 @@ html {
 }
 
 @media (max-width: 1024px) {
-    .brand-name {
-        font-size: 70px;
+    .brand-wordmark {
+        height: 130px;
     }
     
     .wine-imports {
@@ -1126,7 +1107,7 @@ html {
     }
     
     .mission-statement {
-        font-size: 48px;
+        font-size: 60px;
     }
 }
 
@@ -1235,8 +1216,8 @@ html {
         z-index: 3;
     }
     
-    .brand-name {
-        font-size: 54px;
+    .brand-wordmark {
+        height: 100px;
     }
     
     .wine-imports {
@@ -1250,18 +1231,88 @@ html {
     }
     
     .logo {
-        width: 140px;
-        height: 150px;
+        width: 98px;
+        height: 105px;
         margin-bottom: 30px;
     }
     
     /* Mission Section */
     .mission-statement {
-        font-size: 36px;
+        font-size: 48px;
     }
     
     .mission-section {
         padding: 100px 2rem 120px 2rem;
+    }
+    
+    /* Combined Section Mobile */
+    .combined-section {
+        padding: 100px 2rem 120px 2rem;
+    }
+    
+    .image-stack {
+        width: 100%;
+        max-width: 400px;
+        margin-top: -100px;
+        margin-bottom: 120px;
+    }
+    
+    .main-large-photo {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 690 / 1010;
+    }
+    
+    .bottom-landscape-photo {
+        width: 200px;
+        height: auto;
+        bottom: -80px;
+        right: -40px;
+    }
+    
+    .bottom-portrait-photo {
+        width: 160px;
+        height: auto;
+        bottom: -60px;
+        left: -40px;
+    }
+    
+    .map-text-container {
+        flex-direction: column-reverse;
+        margin-top: 0;
+        gap: 40px;
+        align-items: flex-start;
+    }
+    
+    .map-overlay {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin-left: 0;
+    }
+    
+    .producer-text {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 0;
+        text-align: left;
+    }
+    
+    .producer-subtitle {
+        font-size: 16px;
+        text-align: left;
+    }
+    
+    .producer-title {
+        font-size: 40px;
+        margin-bottom: 24px;
+        text-align: left;
+    }
+    
+    .producer-description {
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: left;
     }
     
     /* Producer Section Mobile */
@@ -1390,7 +1441,7 @@ html {
     .contact-email {
         margin: 0 0 12px 0;
     }
-
+    
     .form-row {
         flex-direction: column;
         gap: 24px;
@@ -1402,8 +1453,8 @@ html {
 }
 
 @media (max-width: 480px) {
-    .brand-name {
-        font-size: 48px;
+    .brand-wordmark {
+        height: 90px;
     }
     
     .wine-imports {
@@ -1412,7 +1463,7 @@ html {
     }
     
     .mission-statement {
-        font-size: 28px;
+        font-size: 36px;
     }
 }
 
