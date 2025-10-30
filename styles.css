@@ -1242,6 +1242,7 @@ html {
     .brand-name {
         font-size: 54px;
         max-width: 250px;
+        letter-spacing: -1.75px;
     }
     
     .wine-imports {
@@ -1251,7 +1252,7 @@ html {
     
     .tagline {
         font-size: 12px;
-        max-width: 90%;
+        max-width: calc(90% - 40px);
     }
     
     .logo {
@@ -1305,7 +1306,7 @@ html {
         width: 150px;
         height: 130px;
         bottom: -26px;
-        left: 48px;
+        left: 24px;
         z-index: 3;
     }
     
@@ -1324,15 +1325,15 @@ html {
         right: 0;
         top: 0;
         order: 3;
-        margin-top: 30px;
-        margin-bottom: -30px;
+        margin-top: 18px;
+        margin-bottom: -46px;
     }
     
     .producer-info {
         order: 2;
         max-width: 100%;
         text-align: left;
-        margin-top: 8px;
+        margin-top: 20px;
     }
     
     /* Wines Section Mobile */
@@ -1401,7 +1402,7 @@ html {
         font-size: 36px;
         font-weight: 700;
         letter-spacing: -1.5px;
-        margin-bottom: 20px;
+        margin-bottom: 4px;
     }
     
     .contact-email {
