@@ -80,14 +80,13 @@ html {
 
 .navbar-brand {
     font-family: 'NuGELO', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 400;
     text-transform: uppercase;
     color: black;
-    margin-bottom: -4px;
+    margin-bottom: -3px;
+    letter-spacing: 0;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
 }
 
 .navbar-links {
@@ -403,21 +402,23 @@ html {
     font-size: 90px;
     font-weight: 400;
     line-height: 89%;
-    letter-spacing: -2.75px;
+    letter-spacing: -1px;
     max-width: 500px;
     text-transform: uppercase;
-    color: #000000;
+    color: #1a1008;
     margin-bottom: 12px;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
 .wine-imports {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
     line-height: 1;
-    letter-spacing: 0.39em;
-    color: rgba(0, 0, 0, 0.7);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.45);
     margin-bottom: 16px;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 0.3s forwards;
@@ -449,7 +450,7 @@ html {
 /* Mission Section */
 .mission-section {
     position: relative;
-    background-color: #B15321;
+    background-color: #5C1D30;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -670,7 +671,7 @@ html {
     font-family: 'Fraunces', serif;
     font-size: 40px;
     font-weight: 400;
-    color: #AC4B1F;
+    color: #8B2845;
     margin: 0 0 8px 0;
     line-height: 1.2;
 }
@@ -727,7 +728,7 @@ html {
     height: 120px;
     opacity: 0.4;
     margin-left: 60px;
-    filter: brightness(0) saturate(100%) invert(40%) sepia(43%) saturate(1234%) hue-rotate(353deg) brightness(91%) contrast(88%);
+    filter: brightness(0) saturate(100%) invert(15%) sepia(60%) saturate(900%) hue-rotate(300deg) brightness(85%) contrast(95%);
 }
 
 .story-right {
@@ -745,7 +746,7 @@ html {
 .story-paragraph .highlight {
     font-weight: 700;
     font-style: italic;
-    color: #AC4B1F;
+    color: #8B2845;
 }
 
 .drop-cap {
@@ -756,7 +757,7 @@ html {
     float: left;
     margin-right: 12px;
     margin-top: 8px;
-    color: #AC4B1F;
+    color: #8B2845;
 }
 
 /* Contact Section */
@@ -873,8 +874,8 @@ html {
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #AC4B1F;
-    box-shadow: 0 0 0 3px rgba(172, 75, 31, 0.1);
+    border-color: #8B2845;
+    box-shadow: 0 0 0 3px rgba(139, 40, 69, 0.1);
 }
 
 .form-group textarea {
@@ -887,7 +888,7 @@ html {
 }
 
 .submit-button {
-    background-color: #AC4B1F;
+    background-color: #8B2845;
     color: white;
     font-family: 'Geist Mono', monospace;
     font-size: 16px;
@@ -901,7 +902,7 @@ html {
 }
 
 .submit-button:hover {
-    background-color: #8D3512;
+    background-color: #6B1F37;
 }
 
 /* Footer */
@@ -944,15 +945,14 @@ html {
 
 .footer-brand {
     font-family: 'NuGELO', sans-serif;
-    font-size: 40px;
+    font-size: 38px;
+    font-weight: 400;
+    text-transform: uppercase;
     letter-spacing: 0;
     color: white;
     margin: 4px 0 12px 0;
-    text-transform: uppercase;
     line-height: 38px;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
 }
 
 .footer-divider {
@@ -1022,9 +1022,6 @@ html {
     }
     .brand-name {
         font-size: 64px;
-    }
-    .wine-imports {
-        font-size: 20px;
     }
     .tagline {
         font-size: 14px;
@@ -1191,10 +1188,6 @@ html {
         font-size: 70px;
     }
     
-    .wine-imports {
-        font-size: 20px;
-    }
-    
     .tagline {
         font-size: 16px;
         max-width: 400px;
@@ -1315,13 +1308,12 @@ html {
     }
     
     .brand-name {
-        font-size: 54px;
-        max-width: 250px;
-        letter-spacing: -1.75px;
+        font-size: 56px;
+        max-width: 300px;
+        letter-spacing: -0.5px;
     }
     
     .wine-imports {
-        font-size: 18px;
         margin-bottom: 60px;
     }
     
@@ -1518,7 +1510,6 @@ html {
     }
     
     .wine-imports {
-        font-size: 16px;
         margin-bottom: 50px;
     }
     
