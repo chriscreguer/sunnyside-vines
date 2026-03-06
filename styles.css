@@ -60,10 +60,13 @@ html {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: white;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 12px 24px;
     border-radius: 50px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .navbar-logo-img {
@@ -195,6 +198,65 @@ html {
     }
 }
 
+@keyframes scrollDrop {
+    0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    40%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    60%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+/* Scroll Cue */
+.scroll-cue {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: fadeIn 0.6s ease-out 1.2s forwards;
+}
+
+.scroll-cue-text {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.scroll-cue-line {
+    width: 1px;
+    height: 36px;
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: scrollDrop 2s ease-in-out 1.8s infinite;
+}
+
+/* Scroll Reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-icon {
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.reveal-icon.revealed {
+    opacity: 0.2;
+}
+
 /* Hero Section */
 .hero {
     position: relative;
@@ -204,6 +266,15 @@ html {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 46% 65% at center, #F5F1EE 28%, rgba(245, 241, 238, 0.88) 50%, rgba(245, 241, 238, 0.35) 68%, transparent 84%);
+    z-index: 5;
+    pointer-events: none;
 }
 
 /* Left Image Group */
@@ -226,7 +297,7 @@ html {
     border-radius: 10px;
     border: 5px solid black;
     opacity: 0;
-    animation: fadeIn 0.8s ease-out 0.3s forwards;
+    animation: fadeIn 0.8s ease-out 0.15s forwards;
 }
 
 .left-img-2 {
@@ -255,7 +326,7 @@ html {
     border-radius: 10px;
     border: 5px solid black;
     opacity: 0;
-    animation: fadeIn 0.8s ease-out 0.4s forwards;
+    animation: fadeIn 0.8s ease-out 0.35s forwards;
 }
 
 /* Right Image Group */
@@ -278,7 +349,7 @@ html {
     border-radius: 10px;
     border: 5px solid black;
     opacity: 0;
-    animation: fadeIn 0.8s ease-out 0.4s forwards;
+    animation: fadeIn 0.8s ease-out 0.55s forwards;
 }
 
 .right-img-2 {
@@ -292,7 +363,7 @@ html {
     border-radius: 10px;
     border: 5px solid black;
     opacity: 0;
-    animation: fadeIn 0.8s ease-out 0.6s forwards;
+    animation: fadeIn 0.8s ease-out 0.75s forwards;
 }
 
 .right-img-3 {
@@ -320,9 +391,9 @@ html {
 }
 
 .logo {
-    width: 180px;
-    height: 190px;
-    margin-bottom: 40px;
+    width: 110px;
+    height: auto;
+    margin-bottom: 20px;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 0.1s forwards;
 }
@@ -347,21 +418,30 @@ html {
     line-height: 1;
     letter-spacing: 0.39em;
     color: rgba(0, 0, 0, 0.7);
-    margin-bottom: 100px;
+    margin-bottom: 16px;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 0.3s forwards;
 }
 
+.hero-divider {
+    width: 48px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 0 auto 24px;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.35s forwards;
+}
+
 .tagline {
-    font-family: 'Geist Mono', monospace;
-    font-size: 16px;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-style: italic;
     font-weight: 400;
     line-height: 145%;
-    letter-spacing: 0%;
-    text-transform: uppercase;
+    letter-spacing: 0;
     text-align: center;
-    color: #000000;
-    max-width: 500px;
+    color: rgba(0, 0, 0, 0.75);
+    max-width: 440px;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 0.4s forwards;
 }
@@ -385,13 +465,11 @@ html {
     font-weight: 400;
     line-height: 111%;
     letter-spacing: 0%;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.75);
     max-width: 1460px;
     margin: 0 auto;
     position: relative;
     z-index: 2;
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
 .highlight-word {
@@ -401,18 +479,8 @@ html {
 }
 
 /* SVG Icon Decorations */
-@keyframes fadeInIcon {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 0.2;
-    }
-}
-
 .icon-decor {
     position: absolute;
-    opacity: 0;
     filter: brightness(0) invert(1);
     z-index: 1;
 }
@@ -423,7 +491,6 @@ html {
     top: 10%;
     left: 8%;
     transform: rotate(-15deg);
-    animation: fadeInIcon 1s ease-out 0.4s forwards;
 }
 
 .icon-2 {
@@ -432,7 +499,6 @@ html {
     top: 50%;
     right: 12%;
     transform: rotate(25deg);
-    animation: fadeInIcon 1s ease-out 0.5s forwards;
 }
 
 .icon-3 {
@@ -441,7 +507,6 @@ html {
     bottom: 15%;
     left: 15%;
     transform: rotate(10deg);
-    animation: fadeInIcon 1s ease-out 0.6s forwards;
 }
 
 /* Producer Section */
@@ -490,6 +555,12 @@ html {
     object-fit: cover;
     border-radius: 10px;
     border: 5px solid black;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+}
+
+.main-photo:hover {
+    transform: scale(1.015);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
 }
 
 .overlay-photo-1 {
@@ -792,14 +863,18 @@ html {
     font-family: 'Geist', sans-serif;
     font-size: 16px;
     padding: 12px 16px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     outline: none;
+    background-color: #F5F1EE;
+    color: #333;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     border-color: #AC4B1F;
+    box-shadow: 0 0 0 3px rgba(172, 75, 31, 0.1);
 }
 
 .form-group textarea {
@@ -1121,7 +1196,7 @@ html {
     }
     
     .tagline {
-        font-size: 14px;
+        font-size: 16px;
         max-width: 400px;
     }
     
@@ -1251,14 +1326,18 @@ html {
     }
     
     .tagline {
-        font-size: 12px;
+        font-size: 15px;
         max-width: calc(90% - 40px);
+    }
+
+    .scroll-cue {
+        display: none;
     }
     
     .logo {
-        width: 140px;
-        height: 150px;
-        margin-bottom: 30px;
+        width: 90px;
+        height: auto;
+        margin-bottom: 16px;
     }
     
     /* Mission Section */
