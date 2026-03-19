@@ -96,13 +96,77 @@ function copyEmail() {
         const button = document.querySelector('.copy-button');
         const svg = button.querySelector('svg');
         const originalHTML = button.innerHTML;
-        
+
         // Show checkmark
         button.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8L6 11L13 4" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        
+
         setTimeout(() => {
             button.innerHTML = originalHTML;
         }, 2000);
+
+        // Track email copy
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'copy_email', { event_category: 'contact' });
+        }
     });
 }
+
+// ─── Analytics ───────────────────────────────────────────────────────────────
+
+function initAnalytics() {
+    if (typeof gtag === 'undefined') return;
+
+    // Scroll depth: fire at 25, 50, 75, 90%
+    const scrollMilestones = [25, 50, 75, 90];
+    const fired = new Set();
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight <= 0) return;
+        const pct = Math.round((scrolled / docHeight) * 100);
+
+        scrollMilestones.forEach(milestone => {
+            if (!fired.has(milestone) && pct >= milestone) {
+                fired.add(milestone);
+                gtag('event', 'scroll_depth', {
+                    event_category: 'engagement',
+                    percent_scrolled: milestone
+                });
+            }
+        });
+    }, { passive: true });
+
+    // Contact form submission
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', () => {
+            gtag('event', 'contact_form_submit', { event_category: 'contact' });
+        });
+    }
+
+    // Phone link clicks (contact + footer)
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', () => {
+            const location = link.closest('.footer') ? 'footer' : 'contact_section';
+            gtag('event', 'phone_click', { event_category: 'contact', click_location: location });
+        });
+    });
+
+    // Nav "Contact" link clicks — strong intent signal
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+        link.addEventListener('click', () => {
+            gtag('event', 'nav_contact_click', { event_category: 'navigation' });
+        });
+    });
+
+    // Nav "Featured Producer" link clicks
+    document.querySelectorAll('a[href="#producer"]').forEach(link => {
+        link.addEventListener('click', () => {
+            gtag('event', 'nav_producer_click', { event_category: 'navigation' });
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initAnalytics);
 
