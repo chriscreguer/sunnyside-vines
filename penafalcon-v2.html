@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunnyside Vines — Peñafalcón (aged-document study)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fraunces (display serif) · Pinyon Script (label script) · Geist Mono (technical) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Geist+Mono:wght@300..700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="penafalcon-v2.css">
+</head>
+<body>
+
+    <!-- Printed masthead (context only) -->
+    <header class="masthead">
+        <span class="masthead-mark">SV</span>
+        <span class="masthead-brand">Sunnyside&nbsp;Vines</span>
+        <span class="masthead-rule" aria-hidden="true"></span>
+        <span class="masthead-sub">Wine&nbsp;Imports · Est.</span>
+    </header>
+
+    <!-- ============ FEATURED PRODUCER — BODEGA PEÑAFALCÓN ============ -->
+    <section class="producer" id="producer" aria-labelledby="producer-title">
+
+        <!-- Section eyebrow -->
+        <div class="producer-eyebrow">
+            <span class="rule-seg" aria-hidden="true"></span>
+            <span class="eyebrow-text">Featured Producer · Ficha de Cata</span>
+            <span class="rule-seg" aria-hidden="true"></span>
+        </div>
+
+        <!-- The parchment document -->
+        <article class="ficha" data-reveal>
+
+            <!-- Gilded double-rule frame (draws itself in) -->
+            <svg class="ficha-frame" viewBox="0 0 800 1000" preserveAspectRatio="none" aria-hidden="true">
+                <rect class="frame-outer" x="10" y="10" width="780" height="980" />
+                <rect class="frame-inner" x="22" y="22" width="756" height="956" />
+            </svg>
+
+            <!-- corner fleurons -->
+            <span class="fleuron fleuron-tl" aria-hidden="true">❧</span>
+            <span class="fleuron fleuron-br" aria-hidden="true">❧</span>
+
+            <!-- Wax seal (entrance: presses, cracks, halves fall away) -->
+            <div class="wax-stage" aria-hidden="true">
+                <svg class="wax" viewBox="0 0 200 200">
+                    <defs>
+                        <radialGradient id="waxGrad" cx="38%" cy="34%" r="72%">
+                            <stop offset="0%" stop-color="#b8352c"/>
+                            <stop offset="45%" stop-color="#8f1f1c"/>
+                            <stop offset="100%" stop-color="#5c1210"/>
+                        </radialGradient>
+                        <filter id="waxRough">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+                            <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
+                        </filter>
+                        <clipPath id="clipL"><rect x="0" y="0" width="100" height="200"/></clipPath>
+                        <clipPath id="clipR"><rect x="100" y="0" width="100" height="200"/></clipPath>
+
+                        <!-- reusable seal artwork (defined once, drawn as two halves) -->
+                        <g id="sealArt" filter="url(#waxRough)">
+                            <path d="M100 14
+                                     C128 12 150 24 158 40 C176 44 188 60 184 82
+                                     C198 96 198 122 182 134 C186 158 168 178 146 176
+                                     C136 194 108 196 96 182 C72 192 46 180 46 156
+                                     C26 152 16 128 30 110 C14 96 18 70 40 62
+                                     C42 38 66 20 90 26 C92 18 96 15 100 14 Z"
+                                  fill="url(#waxGrad)"/>
+                            <circle cx="100" cy="100" r="62" fill="none" stroke="#4d0f0d" stroke-width="2" opacity="0.55"/>
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#c8574a" stroke-width="1" opacity="0.4"/>
+                            <!-- stamped falcon-on-crag, pressed relief -->
+                            <g class="seal-emblem" transform="translate(100 104) scale(0.9)">
+                                <use href="#falconEmblem"/>
+                            </g>
+                        </g>
+                    </defs>
+
+                    <!-- two clipped halves: together they read as one intact seal -->
+                    <g class="wax-half wax-left"  clip-path="url(#clipL)"><use href="#sealArt"/></g>
+                    <g class="wax-half wax-right" clip-path="url(#clipR)"><use href="#sealArt"/></g>
+                </svg>
+            </div>
+
+            <!-- Document body -->
+            <div class="ficha-grid">
+
+                <!-- LEFT: photo mat + medallion + map locator -->
+                <div class="ficha-left">
+                    <figure class="photo-mat">
+                        <img src="img/penafalcon_new_1.png" alt="Bodega Peñafalcón's estate vineyards in Peñafiel, Ribera del Duero">
+                        <figcaption>Pagos de Santa Cruz · Peñafiel</figcaption>
+                    </figure>
+
+                    <!-- Gold award medallion -->
+                    <svg class="medallion" viewBox="0 0 160 160" role="img" aria-label="Gold medal, International Wine Awards Spain 2024">
+                        <defs>
+                            <radialGradient id="goldGrad" cx="42%" cy="38%" r="70%">
+                                <stop offset="0%" stop-color="#f0d694"/>
+                                <stop offset="50%" stop-color="#c8a24e"/>
+                                <stop offset="100%" stop-color="#8a6a2a"/>
+                            </radialGradient>
+                            <path id="ringPath" d="M80 80 m-56 0 a56 56 0 1 1 112 0 a56 56 0 1 1 -112 0" fill="none"/>
+                        </defs>
+                        <g class="medallion-scallop">
+                            <circle cx="80" cy="80" r="74" fill="url(#goldGrad)"/>
+                        </g>
+                        <circle cx="80" cy="80" r="66" fill="none" stroke="#6f5320" stroke-width="1.5" opacity="0.6"/>
+                        <circle cx="80" cy="80" r="46" fill="#f6eccf"/>
+                        <circle cx="80" cy="80" r="46" fill="none" stroke="#8a6a2a" stroke-width="1.2"/>
+                        <text class="medallion-ring" font-size="10.5">
+                            <textPath href="#ringPath" startOffset="0%">· INTERNATIONAL WINE AWARDS · SPAIN 2024 ·</textPath>
+                        </text>
+                        <text class="medallion-word" x="80" y="74" text-anchor="middle">GOLD</text>
+                        <text class="medallion-grape" x="80" y="98" text-anchor="middle">❦</text>
+                    </svg>
+
+                    <!-- Spain locator, wax-stamped -->
+                    <div class="locator">
+                        <img class="locator-map" src="img/spain_dark.svg" alt="">
+                        <span class="locator-dot" aria-hidden="true"></span>
+                        <span class="locator-label">Ribera del Duero</span>
+                    </div>
+                </div>
+
+                <!-- RIGHT: title, DO, spec, prose -->
+                <div class="ficha-right">
+                    <p class="do-line">Ribera del Duero · Denominación de Origen</p>
+                    <h2 class="ficha-title" id="producer-title">Peñafalcón</h2>
+                    <p class="ficha-sub">Bodega · Peñafiel, Valladolid — <span>España</span></p>
+
+                    <!-- engraved falcon vignette -->
+                    <svg class="vignette" viewBox="0 0 220 200" role="img" aria-label="Engraved falcon perched on a ruined tower">
+                        <use href="#falconScene"/>
+                    </svg>
+
+                    <!-- Ficha-técnica spec block -->
+                    <dl class="spec">
+                        <div class="spec-row"><dt>Uva</dt><dd>Tempranillo 100% <span>· Tinta Fina</span></dd></div>
+                        <div class="spec-row"><dt>Viñedos</dt><dd>Pagos de Santa Cruz, Carraovejas y La Blanquera</dd></div>
+                        <div class="spec-row"><dt>Vinificación</dt><dd>Fermentación natural · levaduras autóctonas</dd></div>
+                        <div class="spec-row"><dt>Crianza</dt><dd>Roble americano y francés</dd></div>
+                        <div class="spec-row spec-figures">
+                            <div class="fig"><span class="fig-n">304</span><span class="fig-l">días en barrica</span></div>
+                            <div class="fig"><span class="fig-n">14%</span><span class="fig-l">grado · vol.</span></div>
+                            <div class="fig"><span class="fig-n">2021</span><span class="fig-l">añada</span></div>
+                        </div>
+                    </dl>
+
+                    <!-- Tasting prose -->
+                    <p class="prose"><span class="dropcap">B</span>odega Peñafalcón is a family winery in Peñafiel, the heart of Spain's <em>Ribera del Duero</em>. Founded by Casimiro Marcos and María José Arranz, the estate draws its Tempranillo from its own pagos of limestone soil, fermenting with native yeasts and resting the wine in American and French oak — bold, expressive reds that balance power with finesse.</p>
+
+                    <p class="signoff">Vendimia seleccionada · Embotellado en la propiedad</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- ===== Hidden SVG symbol defs (falcon emblem + engraved scene) ===== -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <!-- compact falcon silhouette used inside the wax seal -->
+            <g id="falconEmblem">
+                <g fill="#5c1210" opacity="0.9" transform="translate(-30 -34)">
+                    <!-- crag -->
+                    <path d="M4 58 L20 40 L30 46 L40 34 L52 44 L60 58 Z"/>
+                    <!-- broken column -->
+                    <path d="M26 44 h8 v-18 l-2 -3 -2 3 -2 -3 -2 3 Z"/>
+                    <!-- perched falcon -->
+                    <path d="M40 30 c5 -2 9 -1 10 3 c3 -1 5 1 4 4 c-2 2 -5 1 -6 -1 c0 4 -2 8 -5 10 l3 4 h-7 l1 -4 c-3 -2 -4 -7 -3 -12 c0 -3 1 -6 3 -8 Z"/>
+                    <!-- falcon in flight -->
+                    <path d="M56 14 c3 -3 5 -2 6 0 c2 -2 4 -1 4 1 c-2 1 -4 1 -5 0 c-1 1 -3 1 -5 0 Z"/>
+                </g>
+            </g>
+
+            <!-- full engraved scene: crag + ruined tower + falcon, hatched -->
+            <g id="falconScene">
+                <g class="eng" fill="none" stroke="#6c6252" stroke-width="1.1" stroke-linecap="round">
+                    <!-- sky hatch -->
+                    <g opacity="0.35" stroke-width="0.7">
+                        <path d="M10 40 h60"/><path d="M14 48 h52"/><path d="M20 56 h40"/>
+                        <path d="M150 34 h56"/><path d="M158 42 h48"/><path d="M166 50 h32"/>
+                    </g>
+                    <!-- distant falcon in flight -->
+                    <path d="M168 26 c6 -6 10 -4 12 0 c4 -4 8 -2 8 2 c-4 2 -8 2 -10 0 c-2 2 -6 2 -10 -2 Z" fill="#6c6252" stroke="none"/>
+                    <!-- crag base -->
+                    <path d="M18 176 C40 150 58 158 78 138 C96 120 118 128 138 150 C156 168 178 164 196 176 Z"
+                          fill="#efe4cd" stroke-width="1.3"/>
+                    <g opacity="0.5" stroke-width="0.7">
+                        <path d="M40 172 q60 -14 120 0"/>
+                        <path d="M52 164 q54 -12 100 0"/>
+                        <path d="M70 156 q40 -10 78 0"/>
+                    </g>
+                    <!-- ruined tower -->
+                    <path d="M92 138 L92 74 L96 66 L100 74 L104 64 L110 72 L116 62 L120 74 L120 138 Z"
+                          fill="#e7d9bd" stroke-width="1.3"/>
+                    <!-- tower doorway -->
+                    <path d="M100 138 L100 108 Q106 100 112 108 L112 138" fill="#6c6252" stroke="none" opacity="0.85"/>
+                    <!-- stone courses + vertical hatch -->
+                    <g opacity="0.55" stroke-width="0.7">
+                        <path d="M92 96 h28"/><path d="M92 112 h28"/><path d="M92 126 h28"/>
+                        <path d="M97 138 v-60"/><path d="M107 138 v-64"/><path d="M115 138 v-62"/>
+                    </g>
+                    <!-- perched falcon on tower rim -->
+                    <g fill="#3f3a30" stroke="none" transform="translate(112 60)">
+                        <path d="M0 0 c7 -3 13 -1 14 5 c5 -2 8 1 6 6 c-3 3 -8 1 -9 -2 c-1 6 -4 12 -9 15 l5 8 h-12 l3 -8 c-5 -3 -7 -11 -5 -18 c1 -4 3 -7 6 -9 Z"/>
+                        <!-- beak -->
+                        <path d="M14 5 l7 1 l-6 3 Z"/>
+                    </g>
+                </g>
+            </g>
+        </defs>
+    </svg>
+
+    <script src="penafalcon-v2.js"></script>
+</body>
+</html>
