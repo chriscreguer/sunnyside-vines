@@ -16,7 +16,7 @@
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.35 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
   targets.forEach((el) => io.observe(el));
 })();
