@@ -63,7 +63,7 @@ body::before {
   width: min(880px, 100%);
   padding: 66px clamp(30px, 6vw, 84px) 78px;
   /* the aged, deckle-edged paper */
-  background: url("img/motifs/paper-card.png?v=5") center/100% 100% no-repeat;
+  background: url("img/motifs/paper-card.png?v=6") center/100% 100% no-repeat;
   transform: rotate(-.5deg);
   filter: drop-shadow(0 34px 46px rgba(0,0,0,.62)) drop-shadow(0 8px 14px rgba(0,0,0,.5));
 }
