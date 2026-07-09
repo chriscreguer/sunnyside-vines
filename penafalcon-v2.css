@@ -72,14 +72,6 @@ body::before {
   transform: rotate(-.4deg);
   filter: drop-shadow(0 24px 40px rgba(78,62,40,.26)) drop-shadow(0 6px 13px rgba(78,62,40,.16));
 }
-/* faint fold creases */
-.sheet::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
-  background:
-    linear-gradient(90deg, transparent 49.5%, rgba(60,40,22,.05) 50%, rgba(255,248,232,.10) 50.4%, transparent 51%),
-    linear-gradient(0deg,  transparent 32.7%, rgba(60,40,22,.035) 33%, transparent 33.3%);
-  mix-blend-mode: multiply;
-}
 .sheet > * { position: relative; z-index: 2; }
 
 /* ---------------- crest (real label lockup) ---------------- */
@@ -135,29 +127,53 @@ body::before {
 /* tipped-in photograph */
 .plate {
   position: relative; transform: rotate(-1.7deg);
-  background: #f2e7cf; padding: 9px 9px 30px;
-  box-shadow: 0 10px 20px -10px rgba(0,0,0,.6);
-}
-.plate::after { /* aged sheen on the print */
-  content: ""; position: absolute; inset: 9px 9px 30px;
-  background: linear-gradient(150deg, rgba(255,250,235,.35), transparent 45%, rgba(70,45,25,.18));
-  mix-blend-mode: overlay; pointer-events: none;
+  background: linear-gradient(158deg, #fcf8ef, #f1e9d8);
+  padding: 11px 11px 36px; border-radius: 2px;
+  box-shadow:
+    0 1px 1px rgba(0,0,0,.10),
+    0 2px 3px rgba(30,20,10,.14),
+    0 18px 28px -14px rgba(30,20,10,.5);
 }
 .plate img {
   display: block; width: 100%; height: 300px; object-fit: cover;
-  filter: sepia(.5) saturate(.72) contrast(.96) brightness(1.02);
+  filter: sepia(.3) saturate(.82) contrast(1) brightness(1.01);
+}
+/* glossy highlight sweep across the print */
+.plate::before {
+  content: ""; position: absolute; inset: 11px 11px 36px; pointer-events: none; z-index: 2;
+  background: linear-gradient(122deg, rgba(255,255,255,.34), rgba(255,255,255,.05) 22%, transparent 40%);
+  mix-blend-mode: screen;
+}
+/* soft vignette on the print */
+.plate::after {
+  content: ""; position: absolute; inset: 11px 11px 36px; pointer-events: none; z-index: 2;
+  background: radial-gradient(118% 86% at 50% 42%, transparent 56%, rgba(35,22,10,.26));
+  mix-blend-mode: multiply;
 }
 .plate figcaption {
-  font-family: var(--sc); font-size: 11px; letter-spacing: .12em;
-  text-align: center; color: var(--ink-soft); padding-top: 9px;
+  font-family: 'Caveat', cursive; font-weight: 600;
+  font-size: 19px; letter-spacing: .01em; line-height: 1;
+  text-align: center; color: #3c3f52; padding-top: 9px;
+  transform: rotate(-.7deg);
 }
+/* translucent tape: soft torn ends (mask), sheen, shape-matched shadow */
 .tape {
-  position: absolute; width: 62px; height: 22px; z-index: 3;
-  background: rgba(214,196,150,.5);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.25);
+  position: absolute; width: 78px; height: 27px; z-index: 4;
+  background:
+    linear-gradient(180deg, rgba(255,251,240,.30), rgba(208,192,154,.42) 55%, rgba(188,172,134,.44));
+  border-top: 1px solid rgba(255,255,255,.30);
+  border-bottom: 1px solid rgba(120,100,60,.14);
+  -webkit-mask: linear-gradient(90deg, transparent 0, #000 11%, #000 89%, transparent 100%);
+          mask: linear-gradient(90deg, transparent 0, #000 11%, #000 89%, transparent 100%);
+  filter: drop-shadow(0 2px 2px rgba(45,30,12,.24));
 }
-.tape-tl { top: -10px; left: -14px; transform: rotate(-38deg); }
-.tape-br { bottom: 18px; right: -16px; transform: rotate(-40deg); }
+/* faint matte striations on the tape */
+.tape::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 3px, rgba(120,100,60,.05) 3px 6px);
+}
+.tape-tl { top: -13px; left: -17px; transform: rotate(-41deg); }
+.tape-br { bottom: -13px; right: -17px; transform: rotate(-41deg); }
 
 /* prose */
 .body-text .prose { font-size: 18px; line-height: 1.74; text-align: justify; }
