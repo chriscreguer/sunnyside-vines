@@ -25,34 +25,39 @@ body {
   color: var(--ink);
   line-height: 1.62;
   /* the surface the document rests on: dark, worn cellar wood/leather */
-  background-color: #211812;
+  background-color: #dbd3c1;
   background-image:
-    radial-gradient(130% 100% at 50% -10%, #3a2b1f 0%, #211812 55%, #160f0a 100%);
+    radial-gradient(120% 85% at 50% -6%, #ece5d4 0%, #dbd3c1 52%, #cabfa9 100%);
   overflow-x: hidden;
 }
-/* grain over the whole surface */
+/* faint matte tooth over the wall */
 body::before {
   content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
-  opacity: .5; mix-blend-mode: overlay;
+  opacity: .2; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ---------------- masthead ---------------- */
 .masthead {
   position: relative; z-index: 3;
-  display: flex; align-items: baseline; gap: 18px;
-  max-width: 1000px; margin: 0 auto; padding: 30px 40px 6px;
-  color: #d8c6a3;
+  display: flex; align-items: baseline; gap: 20px;
+  max-width: 1000px; margin: 0 auto; padding: 46px 40px 4px;
+  color: var(--ink);
 }
-.masthead-brand { font-family: var(--canon); font-size: 22px; letter-spacing: .02em; }
-.masthead-rule  { flex: 1; height: 0; border-top: 1px solid #6b533a; }
-.masthead-sub   { font-family: var(--sc); font-size: 13px; letter-spacing: .16em; color: #a48b64; }
+.masthead-brand { font-family: var(--canon); font-size: 23px; letter-spacing: .04em; color: var(--ink); }
+.masthead-rule  { flex: 1; height: 0; border-top: 1px solid rgba(67,55,42,.28); transform: translateY(-4px); }
+.masthead-sub   { font-family: var(--sc); font-size: 13px; letter-spacing: .18em; color: var(--ink-soft); }
 
 .eyebrow {
   position: relative; z-index: 3;
   text-align: center; font-family: var(--sc);
-  font-size: 14px; letter-spacing: .32em; color: #b39a70;
-  margin: 26px 0 30px;
+  font-size: 13px; letter-spacing: .34em; color: var(--brick-deep);
+  margin: 30px 0 32px;
+}
+.eyebrow::before, .eyebrow::after {
+  content: ""; display: inline-block; width: 40px; height: 0;
+  border-top: 1px solid var(--rule); opacity: .55;
+  vertical-align: middle; margin: 0 18px 3px;
 }
 
 /* ---------------- the sheet ---------------- */
@@ -64,8 +69,8 @@ body::before {
   padding: 66px clamp(30px, 6vw, 84px) 78px;
   /* the aged, deckle-edged paper */
   background: url("img/motifs/paper-card.png?v=7") center/100% 100% no-repeat;
-  transform: rotate(-.5deg);
-  filter: drop-shadow(0 34px 46px rgba(0,0,0,.62)) drop-shadow(0 8px 14px rgba(0,0,0,.5));
+  transform: rotate(-.4deg);
+  filter: drop-shadow(0 24px 40px rgba(78,62,40,.26)) drop-shadow(0 6px 13px rgba(78,62,40,.16));
 }
 /* faint fold creases */
 .sheet::before {
