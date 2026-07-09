@@ -164,15 +164,18 @@ body::before {
 }
 
 /* spec list — inked back-label */
-.spec {
-  margin: 24px 0 0; padding: 18px 0 4px;
-  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
-  display: grid; grid-template-columns: max-content 1fr; column-gap: 20px; row-gap: 9px;
-  filter: url(#ink);
+.tasting {
+  margin: 24px 0 0; padding: 18px 0 2px;
+  border-top: 1px solid var(--rule);
+  max-width: 500px;
+  font-family: var(--serif); font-style: italic;
+  font-size: 16.5px; line-height: 1.72; color: var(--ink-soft);
 }
-.spec dt { font-family: var(--sc); font-size: 12.5px; letter-spacing: .16em; color: var(--brick-deep); padding-top: 3px; }
-.spec dd { font-size: 16px; color: var(--ink); }
-.spec dd span { color: var(--ink-soft); font-style: italic; }
+.tasting-label {
+  display: block; margin-bottom: 8px;
+  font-family: var(--sc); font-style: normal;
+  font-size: 12px; letter-spacing: .18em; color: var(--brick-deep);
+}
 
 .signoff {
   font-family: var(--sc); font-size: 12px; letter-spacing: .18em;
