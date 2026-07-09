@@ -68,7 +68,7 @@ body::before {
   width: min(880px, 100%);
   padding: 66px clamp(30px, 6vw, 84px) 78px;
   /* the aged, deckle-edged paper */
-  background: url("img/motifs/paper-card.png?v=7") center/100% 100% no-repeat;
+  background: url("img/motifs/paper-card.png?v=8") center/100% 100% no-repeat;
   transform: rotate(-.4deg);
   filter: drop-shadow(0 24px 40px rgba(78,62,40,.26)) drop-shadow(0 6px 13px rgba(78,62,40,.16));
 }
@@ -138,16 +138,10 @@ body::before {
   display: block; width: 100%; height: 300px; object-fit: cover;
   filter: sepia(.3) saturate(.82) contrast(1) brightness(1.01);
 }
-/* glossy highlight sweep across the print */
-.plate::before {
-  content: ""; position: absolute; inset: 11px 11px 36px; pointer-events: none; z-index: 2;
-  background: linear-gradient(122deg, rgba(255,255,255,.34), rgba(255,255,255,.05) 22%, transparent 40%);
-  mix-blend-mode: screen;
-}
-/* soft vignette on the print */
+/* whisper of edge darkening only — matte print, no CG gloss */
 .plate::after {
   content: ""; position: absolute; inset: 11px 11px 36px; pointer-events: none; z-index: 2;
-  background: radial-gradient(118% 86% at 50% 42%, transparent 56%, rgba(35,22,10,.26));
+  background: radial-gradient(125% 92% at 50% 45%, transparent 72%, rgba(35,22,10,.12));
   mix-blend-mode: multiply;
 }
 .plate figcaption {
@@ -156,24 +150,14 @@ body::before {
   text-align: center; color: #3c3f52; padding-top: 9px;
   transform: rotate(-.7deg);
 }
-/* translucent tape: soft torn ends (mask), sheen, shape-matched shadow */
+/* real masking-tape strip (PD paper fibre, torn ends baked into the PNG) */
 .tape {
-  position: absolute; width: 78px; height: 27px; z-index: 4;
-  background:
-    linear-gradient(180deg, rgba(255,251,240,.30), rgba(208,192,154,.42) 55%, rgba(188,172,134,.44));
-  border-top: 1px solid rgba(255,255,255,.30);
-  border-bottom: 1px solid rgba(120,100,60,.14);
-  -webkit-mask: linear-gradient(90deg, transparent 0, #000 11%, #000 89%, transparent 100%);
-          mask: linear-gradient(90deg, transparent 0, #000 11%, #000 89%, transparent 100%);
-  filter: drop-shadow(0 2px 2px rgba(45,30,12,.24));
+  position: absolute; width: 94px; height: 24px; z-index: 4;
+  background: url("img/motifs/tape.png") center/100% 100% no-repeat;
+  filter: drop-shadow(0 2px 3px rgba(40,28,12,.30));
 }
-/* faint matte striations on the tape */
-.tape::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 3px, rgba(120,100,60,.05) 3px 6px);
-}
-.tape-tl { top: -13px; left: -17px; transform: rotate(-41deg); }
-.tape-br { bottom: -13px; right: -17px; transform: rotate(-41deg); }
+.tape-tl { top: -12px; left: -21px; transform: rotate(-40deg); }
+.tape-br { bottom: -12px; right: -21px; transform: rotate(-40deg); }
 
 /* prose */
 .body-text .prose { font-size: 18px; line-height: 1.74; text-align: justify; }
