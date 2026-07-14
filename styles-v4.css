@@ -1,0 +1,660 @@
+/* ============================================================================
+   Sunnyside Vines - v4 "Handmade House Mark"
+   Brand-first hero with warm paper, stamp-like marks, and rougher framed photos.
+   ========================================================================== */
+
+:root {
+  --terra-deep: #a2431b;
+  --terra: #bb5a2c;
+  --terra-soft: #d5824e;
+  --peach: #edc6a2;
+  --cream: #f7f0e8;
+  --sand: #ece4db;
+  --paper: #f5efe6;
+  --paper-warm: #f1dfcc;
+  --ink: #2a1a12;
+  --ink-soft: rgba(42, 26, 18, 0.62);
+  --ink-line: rgba(42, 26, 18, 0.26);
+  --white: #fffdfb;
+  --radius: 14px;
+  --shadow-card: 0 28px 44px -28px rgba(42, 26, 18, 0.52);
+  --shadow-soft: 0 20px 50px -24px rgba(60, 26, 8, 0.3);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.5;
+  overflow-x: hidden;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Reusable atoms ─────────────────────────────────────────────────────── */
+.wrap { width: min(1200px, 92vw); margin: 0 auto; }
+
+.eyebrow {
+  font-size: clamp(14px, 1.4vw, 17px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--terra);
+}
+
+h1, h2, h3, h4, .lede {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.lede {
+  font-size: clamp(26px, 4.2vw, 50px);
+  line-height: 1.14;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 15px 26px;
+  border: none;
+  border-radius: 50px;
+  background: var(--terra);
+  color: var(--white);
+  cursor: pointer;
+  transition: transform 0.2s var(--ease), background 0.2s ease;
+}
+.btn:hover { background: var(--terra-deep); transform: translateY(-2px); }
+.btn.ghost { background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255,255,255,0.4); }
+.btn.ghost:hover { background: rgba(255, 255, 255, 0.24); }
+
+/* ── Navigation (floating pills) ────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px clamp(16px, 4vw, 40px);
+}
+
+.nav-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+}
+.nav-mark img {
+  width: 64px;
+  height: auto;
+  filter: drop-shadow(0 10px 14px rgba(42, 26, 18, 0.12));
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 253, 248, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 8px;
+  border-radius: 50px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(42, 26, 18, 0.12);
+}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 9px 18px;
+  border-radius: 50px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.nav-links a:hover { background: rgba(162, 67, 27, 0.1); }
+.nav-links a.cta { background: var(--terra); color: var(--white); }
+.nav-links a.cta:hover { background: var(--terra-deep); }
+
+.nav-toggle {
+  display: none;
+  flex: 0 0 46px;
+  width: 46px; height: 46px;
+  border: none;
+  border-radius: 50px;
+  background: var(--terra);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  position: relative;
+}
+.nav-toggle span {
+  position: absolute; left: 13px; right: 13px; height: 2px;
+  background: var(--white); border-radius: 2px;
+  transition: transform 0.3s var(--ease), opacity 0.2s ease;
+}
+.nav-toggle span:nth-child(1) { top: 17px; }
+.nav-toggle span:nth-child(2) { top: 23px; }
+.nav-toggle span:nth-child(3) { top: 29px; }
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* ── Hero ───────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: min(100svh, 1120px);
+  padding: 164px 0 0;
+  text-align: center;
+  background-color: var(--paper);
+  color: var(--ink);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+/* subtle grain */
+.hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.075;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  width: min(760px, 92vw);
+  margin: 0 auto;
+}
+.hero-wordmark {
+  width: min(334px, 66vw);
+  height: auto;
+  margin: 0 auto;
+  opacity: 0.92;
+  mix-blend-mode: multiply;
+}
+.hero-sub {
+  margin: 44px auto 0;
+  max-width: 42ch;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(14px, 1.25vw, 17px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(42, 26, 18, 0.68);
+  text-wrap: balance;
+}
+.hero-actions { margin-top: 38px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.hero-actions .btn.primary {
+  background: var(--ink);
+  color: var(--white);
+  box-shadow: 0 18px 32px -24px rgba(42, 26, 18, 0.85);
+}
+.hero-actions .btn.primary:hover {
+  background: var(--terra-deep);
+  transform: translateY(-3px);
+}
+.hero-actions .btn.ghost {
+  background: rgba(255, 253, 251, 0.6);
+  border-color: rgba(42, 26, 18, 0.22);
+  color: rgba(42, 26, 18, 0.82);
+}
+
+/* fanned photo cards */
+.fan {
+  position: relative;
+  z-index: 5;
+  margin-top: clamp(116px, 8.8vw, 140px);
+  margin-bottom: -92px; /* overhang into the next section - breaks the rigid edge */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  min-height: clamp(300px, 27vw, 350px);
+}
+.fan-card {
+  width: clamp(210px, 22vw, 310px);
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  background: var(--paper-warm);
+  border: 4px solid #24150e;
+  transform-origin: bottom center;
+}
+.fan-card img { width: 100%; height: 100%; object-fit: cover; }
+/* asymmetric fan - staggered heights so the bottoms don't form a straight line */
+.fan-card {
+  position: relative;   /* so z-index holds in every state, mid-animation included */
+  --deal-y: 0px;
+  --deal-rot: 0deg;
+  --deal-scale: 1;
+}
+.fan-1 { transform: rotate(-9deg) translate(50px, -6px) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); z-index: 1; }
+.fan-2 { transform: scale(1.07) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); z-index: 3; margin: 0 -30px; }
+.fan-3 { transform: rotate(8deg) translate(-48px, -2px) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); z-index: 2; }
+
+/* ── Section scaffold ───────────────────────────────────────────────────── */
+.section { padding: clamp(80px, 12vw, 150px) 0; }
+.section.cream { background: var(--paper); }
+.section.sand  { background: var(--sand); }
+
+.section-head { max-width: 760px; }
+.section-head .eyebrow { margin-bottom: 18px; }
+
+.section.mission {
+  /* the hero fan overhangs 92px into this section - clear it with room to breathe */
+  padding-top: clamp(140px, 11vw, 170px);
+  padding-bottom: clamp(130px, 15vw, 210px);
+}
+
+/* Mission - a quiet typographic epigraph between the photo collage and the atlas */
+.mission-statement {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  text-align: center;
+}
+.mission-statement p {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+  font-size: clamp(27px, 3.4vw, 44px);
+  font-weight: 500;
+  line-height: 1.26;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+.mission-statement em {
+  font-style: italic;
+  color: var(--terra-deep);
+}
+/* Producers - a real atlas plate: surveyed positions, not decorative pins */
+#producer {
+  padding-top: clamp(88px, 8vw, 118px);
+  padding-bottom: clamp(96px, 10vw, 132px);
+}
+.producers-head { margin-bottom: clamp(26px, 3vw, 40px); }
+.atlas {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(310px, 0.7fr);
+  gap: clamp(26px, 3.6vw, 54px);
+  align-items: center;
+  scroll-margin-top: 120px;
+}
+.atlas-figure { margin: 0; }
+.atlas-map { width: 100%; height: auto; display: block; }
+
+/* map layers */
+.atlas-neighbour { fill: rgba(42, 26, 18, 0.045); stroke: rgba(42, 26, 18, 0.09); stroke-width: 0.8; }
+.atlas-land { fill: var(--paper); stroke: rgba(42, 26, 18, 0.5); stroke-width: 1.1; stroke-linejoin: round; }
+.atlas-borders { fill: none; stroke: rgba(42, 26, 18, 0.13); stroke-width: 0.7; }
+.atlas-cities circle { fill: none; stroke: rgba(42, 26, 18, 0.4); stroke-width: 1.1; }
+.atlas-cities text { font-size: 11px; fill: rgba(42, 26, 18, 0.46); letter-spacing: 0.05em; }
+/* detail circle - Peñafiel and Mélida are only 4.1 km apart */
+.atlas-vineyards {
+  fill: rgba(162, 67, 27, 0.16);
+  stroke: rgba(162, 67, 27, 0.3);
+  stroke-width: 0.35;
+}
+.atlas-villages circle { fill: none; stroke: rgba(42, 26, 18, 0.42); stroke-width: 1; }
+.atlas-detail-disc { fill: var(--paper); filter: drop-shadow(0 10px 18px rgba(42, 26, 18, 0.22)); }
+.atlas-detail-ring { fill: none; stroke: rgba(42, 26, 18, 0.45); stroke-width: 1.1; }
+.atlas-magnifier-line,
+.atlas-source-ring {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+.atlas-magnifier-line {
+  stroke: rgba(42, 26, 18, 0.4);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 6; /* round caps turn each 0.1 dash into a dot */
+}
+.atlas-source-ring {
+  stroke: rgba(42, 26, 18, 0.45);
+  stroke-width: 1.1;
+}
+
+/* pins */
+.pin { transition: opacity 0.3s ease; }
+/* scale these from their own centre - and never from the <g> that carries the
+   translate attribute, since a CSS transform would replace it */
+.pin-pop,
+.atlas-detail-disc,
+.atlas-detail-ring { transform-box: fill-box; transform-origin: center; }
+.pin-dot, .pin-disc { fill: var(--terra-deep); transition: fill 0.3s ease, r 0.3s var(--ease); }
+.pin-halo { fill: var(--terra); opacity: 0.14; transition: opacity 0.3s ease, r 0.3s var(--ease); }
+.pin-num { font-size: 11px; font-weight: 700; fill: var(--white); text-anchor: middle; }
+.pin-place {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 650;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+.atlas[data-active] .pin { opacity: 0.2; }
+.atlas[data-active] .pin.is-active,
+.atlas[data-active="penafalcon"] .pin--cluster,
+.atlas[data-active="convento"] .pin--cluster { opacity: 1; }
+.pin.is-active .pin-halo { opacity: 0.42; r: 19px; }
+.pin.is-active .pin-disc { r: 10.5px; }
+.pin.is-active .pin-disc, .pin.is-active .pin-dot { fill: var(--terra); }
+.pin.is-active .pin-place { fill: var(--terra-deep); }
+
+/* the index - a legend, keyed to the numbered pins */
+.atlas-index {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.atlas-entry {
+  display: grid;
+  grid-template-columns: 24px 62px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 18px 16px;
+  margin: 0 -16px;
+  border-bottom: 1px solid rgba(42, 26, 18, 0.16);
+  transition: background 0.3s var(--ease);
+}
+.atlas-entry:last-child { border-bottom: none; }
+.atlas-entry-num {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  border: 1px solid rgba(187, 90, 44, 0.45);
+  border-radius: 50%;
+  font-family: 'Fraunces', serif;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--terra);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.atlas-entry.is-active .atlas-entry-num { background: rgba(187, 90, 44, 0.14); }
+.atlas-entry-img {
+  margin: 0;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 18px -16px rgba(42, 26, 18, 0.8);
+}
+.atlas-entry-img img { width: 100%; height: 100%; object-fit: cover; }
+.atlas-entry h3 {
+  margin: 4px 0 7px;
+  font-size: clamp(19px, 1.6vw, 23px);
+  font-weight: 650;
+}
+.atlas-entry p { font-size: 14px; line-height: 1.5; color: rgba(42, 26, 18, 0.66); }
+
+/* Wines teaser strip */
+.wines-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 46px;
+  flex-wrap: wrap;
+}
+
+#wines { padding-bottom: clamp(54px, 7vw, 84px); }
+
+#story {
+  padding-top: clamp(16px, 2vw, 32px);
+  padding-bottom: clamp(80px, 10vw, 130px);
+}
+/* wines carousel - four in view, the rest a click (or swipe) away */
+.wines-carousel { position: relative; }
+.wines-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  /* room for the card shadows, clawed back so the layout doesn't grow */
+  padding: 4px 4px 48px;
+  margin: -4px -4px -28px;
+  scroll-padding-left: 4px;
+}
+.wines-row::-webkit-scrollbar { display: none; }
+.wines-row .wine-card {
+  flex: 0 0 calc(25% - 15px);
+  scroll-snap-align: start;
+}
+.wines-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.wines-nav { display: flex; gap: 8px; }
+.wines-arrow {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(42, 26, 18, 0.16);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+.wines-arrow:hover {
+  background: rgba(187, 90, 44, 0.1); /* --terra washed over the white base */
+  border-color: rgba(187, 90, 44, 0.45);
+  color: var(--terra-deep);
+}
+.wines-arrow[disabled] { opacity: 0.35; box-shadow: none; pointer-events: none; }
+
+/* homepage teaser - Los Ángeles art cards keep the same 300px media as the rest */
+.wines-row .wine-media.producer-losangeles {
+  height: 300px;
+  align-items: center;
+  line-height: normal;
+}
+.wines-row .wine-media.producer-losangeles img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 88%;
+  max-height: 88%;
+}
+
+/* Story - big pull quote on terracotta */
+.story {
+  background:
+    radial-gradient(110% 120% at 15% 0%, #c2662f 0%, transparent 55%),
+    linear-gradient(160deg, #a2431b, #c46a38);
+  color: var(--white);
+  border-radius: clamp(24px, 4vw, 44px);
+  padding: clamp(48px, 7vw, 96px);
+}
+.story {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+}
+.story .eyebrow { color: rgba(255,255,255,0.8); margin-bottom: 20px; }
+.story-text p:not(.eyebrow) {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+  font-size: clamp(22px, 2.9vw, 37px);
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: -0.005em;
+  max-width: 22ch;
+}
+.story-text b {
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+}
+.story-img {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 6px solid #fff;
+  box-shadow: var(--shadow-card);
+  transform: rotate(2.5deg);
+}
+.story-img img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 5 / 4; }
+
+/* Contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 50px;
+  align-items: start;
+}
+.contact-info h2 { font-size: clamp(29px, 3.8vw, 46px); line-height: 1.14; max-width: 14ch; }
+.contact-info .row { margin-top: 26px; }
+.contact-info .label { font-size: 13px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; }
+.contact-info .val { font-size: clamp(18px, 2vw, 22px); font-weight: 500; margin-top: 4px; }
+.email-val { display: inline-flex; align-items: center; gap: 10px; }
+.copy-btn {
+  display: inline-grid; place-items: center;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(42, 26, 18, 0.16);
+  background: var(--white);
+  border-radius: 9px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.copy-btn:hover { color: var(--terra); border-color: var(--terra); }
+.copy-btn.copied { color: #3f6b3a; border-color: #3f6b3a; }
+.contact-form { display: grid; gap: 16px; }
+.contact-form .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.contact-form label { display: block; font-size: 13px; color: var(--ink-soft); margin-bottom: 7px; }
+.contact-form input, .contact-form textarea {
+  width: 100%;
+  font: inherit;
+  padding: 14px 16px;
+  border: 1px solid rgba(42,26,18,0.16);
+  border-radius: 14px;
+  background: var(--white);
+  color: var(--ink);
+  transition: border-color 0.2s ease;
+}
+.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--terra); }
+.contact-form textarea { min-height: 130px; resize: vertical; }
+
+/* Footer */
+.footer {
+  background: #272120;
+  color: rgba(255,255,255,0.8);
+  padding: 70px 0 40px;
+}
+.footer-top { display: flex; justify-content: space-between; gap: 30px 56px; flex-wrap: wrap; align-items: center; }
+.footer-logo { width: 120px; height: auto; opacity: 0.2; }
+.footer-brand { font-family: 'Fraunces', serif; font-optical-sizing: auto; font-size: clamp(28px, 4vw, 44px); font-weight: 650; color: #fff; letter-spacing: -0.01em; }
+.footer .muted { font-size: 14px; color: rgba(255,255,255,0.55); }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 26px; }
+.footer-links a { font-size: 14px; color: rgba(255,255,255,0.75); }
+.footer-links a:hover { color: #fff; }
+.footer-bottom { margin-top: 50px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,0.5); }
+
+/* ── Motion ─────────────────────────────────────────────────────────────── */
+/* Everything below only hides content when JS is there to bring it back. */
+.js .reveal,
+.js .hero-wordmark,
+.js .hero-sub,
+.js .hero-actions,
+.js .fan { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .fan-card {
+    --deal-y: 54px;
+    --deal-scale: 0.94;
+  }
+  .js .fan-1 { --deal-rot: 7deg; }
+  .js .fan-2 { --deal-rot: -4deg; }
+  .js .fan-3 { --deal-rot: -8deg; }
+}
+
+/* split-text lines/words ride up from behind a hard edge - no fade, no drift */
+.split-clip { display: inline-block; overflow: clip; vertical-align: top; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal,
+  .js .hero-wordmark,
+  .js .hero-sub,
+  .js .hero-actions,
+  .js .fan { opacity: 1 !important; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 1020px) {
+  .atlas { grid-template-columns: 1fr; gap: 30px; }
+  .atlas-figure { max-width: 620px; margin: 0 auto; }
+  }
+
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column; align-items: stretch;
+    position: absolute; top: 78px; right: clamp(16px, 4vw, 40px);
+    width: min(260px, 80vw); padding: 12px; gap: 4px;
+  }
+  .nav-links.open a { padding: 13px 18px; }
+  .nav-toggle { display: block; background: rgba(255, 255, 255, 0.9); }
+  .nav-toggle span { background: var(--terra-deep); }
+
+  .contact-grid, .story { grid-template-columns: 1fr; }
+  .mission-statement p { max-width: none; }
+  .story-img { transform: rotate(1.5deg); margin-top: 8px; }
+  .wines-row .wine-card { flex-basis: calc(50% - 10px); }
+  .fan-1 { transform: rotate(-7deg) translate(22px, 0) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
+  .fan-2 { transform: translateY(10px) scale(1.06) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
+  .fan-3 { transform: rotate(7deg) translate(-22px, 4px) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
+}
+
+@media (max-width: 540px) {
+  .nav { padding: 22px 20px; }
+  .nav-mark { width: 58px; height: 58px; }
+  .nav-mark img { width: 48px; }
+  .hero { min-height: 0; padding-top: 140px; }
+  .hero-wordmark { width: min(252px, 72vw); }
+  .hero-sub { max-width: 38ch; margin-top: 34px; }
+  .hero-actions { gap: 10px; margin-top: 34px; }
+  .btn { padding: 13px 20px; }
+  /* bigger photos, edges run offscreen on purpose - flex-shrink would
+     otherwise quietly compress them back down to the viewport width */
+  .fan { min-height: 0; margin-top: 82px; margin-bottom: -92px; padding-top: 0; }
+  .fan-card { width: 44vw; flex-shrink: 0; border-width: 4px; }
+  .fan-2 { margin: 0 -24px; }
+  .fan-1 { transform: rotate(-7deg) translate(20px, 2px) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
+  .fan-2 { transform: translateY(10px) scale(1.06) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
+  .fan-3 { transform: rotate(7deg) translate(-20px, 4px) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
+  .section.mission { padding-top: clamp(180px, 49vw, 208px); }
+  .atlas-entry { grid-template-columns: 22px 52px 1fr; gap: 12px; }
+    .contact-form .field-row { grid-template-columns: 1fr; }
+  .footer-logo { width: 44px; }
+  .footer-bottom { flex-direction: column; }
+}
