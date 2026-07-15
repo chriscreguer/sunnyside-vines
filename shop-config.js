@@ -66,8 +66,8 @@ const PRODUCTS = [
              'vineyards in Peñafiel and aged sixty months in fine-grain American and French oak; ' +
              'twice awarded Grand Gold internationally.',
     details: [
-      ['Variety', '100% Tempranillo'],
-      ['Appellation', 'D.O. Ribera del Duero'],
+      ['Serve', '16–18 °C'],
+      ['Pairs with', 'Roast lamb, game and well-aged cheeses — or nothing at all'],
     ],
     image: 'img/shop/penafalcon-gran-reserva-2007.jpg',
     fit: 'label',
@@ -85,8 +85,8 @@ const PRODUCTS = [
           'oak, decorated with two international and one national Great Gold. Serve at 16–18 °C.',
     price: '95.00',
     details: [
-      ['Variety', '100% Tempranillo'],
-      ['Appellation', 'D.O. Ribera del Duero'],
+      ['Serve', '16–18 °C'],
+      ['Pairs with', 'A slow dinner: aged beef, Ibérico ham, mature Manchego'],
     ],
     image: 'img/shop/penafalcon-14-anos-2003.jpg',
     fit: 'label',
@@ -107,8 +107,8 @@ const PRODUCTS = [
              'from a single selected vintage. Deep, structured and built to keep. Twice ' +
              'gold-medalled internationally, alongside a national Great Gold.',
     details: [
-      ['Variety', '100% Tempranillo'],
-      ['Appellation', 'D.O. Ribera del Duero'],
+      ['Serve', '16–18 °C'],
+      ['Pairs with', 'Braised and roasted meats, mature cheeses'],
     ],
     image: 'img/shop/penafalcon-tinto-de-autor-2004.jpg',
     fit: 'label',
@@ -132,8 +132,8 @@ const PRODUCTS = [
              'Fermented with native yeasts and aged ten months in used American and French oak. ' +
              'Gold medal, International Wine Awards Spain 2024.',
     details: [
-      ['Variety', '100% Tempranillo (Tinta Fina)'],
-      ['Appellation', 'D.O. Ribera del Duero'],
+      ['Serve', '16–18 °C'],
+      ['Pairs with', 'Tapas, grilled chorizo, weeknight roast chicken'],
     ],
     image: 'img/shop/penafalcon-10-meses-2021.jpg',
     fit: 'label',
@@ -157,8 +157,8 @@ const PRODUCTS = [
              'numbered from a run of 3,250. The label bears Simon Denis’ “Study of Clouds ' +
              'with a Sunset near Rome.”',
     details: [
-      ['Variety', 'Garnacha'],
-      ['Appellation', 'D.O. Campo de Borja'],
+      ['Serve', '14–16 °C, lightly cooled'],
+      ['Pairs with', 'Charcuterie, mushroom rice, grilled vegetables'],
     ],
     image: 'img/shop/los-angeles-romeroso.jpg',
     fit: 'art',
@@ -179,8 +179,8 @@ const PRODUCTS = [
              'for its “lieu-dit.” Each bottle is individually numbered from a run of 3,250. The ' +
              'label carries Jacques Blanchard’s “Danaë.”',
     details: [
-      ['Variety', 'Red'],
-      ['Appellation', 'D.O. Campo de Borja'],
+      ['Serve', '14–16 °C, lightly cooled'],
+      ['Pairs with', 'Lamb chops, paella, hard sheep’s cheeses'],
     ],
     image: 'img/shop/los-angeles-cruz-alta.jpg',
     fit: 'art',
@@ -201,8 +201,8 @@ const PRODUCTS = [
              'in alcohol. Each bottle is individually numbered from a run of 3,850. Dressed in ' +
              'Turner’s “The Morning After the Deluge.”',
     details: [
-      ['Variety', 'White'],
-      ['Appellation', 'D.O. Campo de Borja'],
+      ['Serve', '8–10 °C, chilled'],
+      ['Pairs with', 'Shellfish, ceviche, fresh goat cheese'],
     ],
     image: 'img/shop/los-angeles-las-suertes.jpg',
     fit: 'art',
@@ -228,8 +228,8 @@ const PRODUCTS = [
              'months in six specially selected French oak barrels — a limited edition of 1,227 ' +
              'bottles.',
     details: [
-      ['Variety', '100% Tinta del País (Tempranillo)'],
-      ['Appellation', 'D.O. Ribera del Duero'],
+      ['Serve', '16–18 °C'],
+      ['Pairs with', 'Prime rib, roast duck, truffle dishes'],
     ],
     image: 'img/shop/convento-seleccion-familia-2020.png',
     fit: 'bottle',
@@ -252,8 +252,8 @@ const PRODUCTS = [
              'balance with the acidity: broad, velvety and persistent. From twenty-five-year-old ' +
              'vines above 900 metres, matured twelve months in French oak of medium and low toast.',
     details: [
-      ['Variety', '98% Tinta del País, 2% Cabernet Sauvignon'],
-      ['Appellation', 'D.O. Ribera del Duero'],
+      ['Serve', '16–18 °C'],
+      ['Pairs with', 'Roast pork, semi-cured cheeses, wild mushrooms'],
     ],
     image: 'img/shop/convento-crianza-2022.png',
     fit: 'bottle',
@@ -275,8 +275,8 @@ const PRODUCTS = [
              'and fruity on the palate; well balanced, easy to drink, with a long finish. Raised ' +
              'three months in French and American oak from vines fifteen to twenty-five years old.',
     details: [
-      ['Variety', 'Tinta del País (Tempranillo)'],
-      ['Appellation', 'D.O. Ribera del Duero'],
+      ['Serve', '14–16 °C, lightly cooled'],
+      ['Pairs with', 'Pizza, burgers, midweek tapas'],
     ],
     image: 'img/shop/convento-roble-2025.png',
     fit: 'bottle',
