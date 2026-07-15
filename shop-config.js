@@ -66,6 +66,7 @@ const PRODUCTS = [
              'vineyards in Peñafiel and aged sixty months in fine-grain American and French oak; ' +
              'twice awarded Grand Gold internationally.',
     details: [
+      ['Alcohol', '15% vol'],
       ['Serve', '16–18 °C'],
       ['Pairs with', 'Roast lamb, game and well-aged cheeses — or nothing at all'],
     ],
@@ -85,6 +86,7 @@ const PRODUCTS = [
           'oak, decorated with two international and one national Great Gold. Serve at 16–18 °C.',
     price: '95.00',
     details: [
+      ['Alcohol', '15% vol'],
       ['Serve', '16–18 °C'],
       ['Pairs with', 'A slow dinner: aged beef, Ibérico ham, mature Manchego'],
     ],
@@ -107,6 +109,7 @@ const PRODUCTS = [
              'from a single selected vintage. Deep, structured and built to keep. Twice ' +
              'gold-medalled internationally, alongside a national Great Gold.',
     details: [
+      ['Alcohol', '14.5% vol'],
       ['Serve', '16–18 °C'],
       ['Pairs with', 'Braised and roasted meats, mature cheeses'],
     ],
@@ -132,6 +135,7 @@ const PRODUCTS = [
              'Fermented with native yeasts and aged ten months in used American and French oak. ' +
              'Gold medal, International Wine Awards Spain 2024.',
     details: [
+      ['Alcohol', '14% vol'],
       ['Serve', '16–18 °C'],
       ['Pairs with', 'Tapas, grilled chorizo, weeknight roast chicken'],
     ],
@@ -157,6 +161,7 @@ const PRODUCTS = [
              'numbered from a run of 3,250. The label bears Simon Denis’ “Study of Clouds ' +
              'with a Sunset near Rome.”',
     details: [
+      ['Alcohol', '14.5% vol'],
       ['Serve', '14–16 °C, lightly cooled'],
       ['Pairs with', 'Charcuterie, mushroom rice, grilled vegetables'],
     ],
@@ -179,6 +184,7 @@ const PRODUCTS = [
              'for its “lieu-dit.” Each bottle is individually numbered from a run of 3,250. The ' +
              'label carries Jacques Blanchard’s “Danaë.”',
     details: [
+      ['Alcohol', '14% vol'],
       ['Serve', '14–16 °C, lightly cooled'],
       ['Pairs with', 'Lamb chops, paella, hard sheep’s cheeses'],
     ],
@@ -201,6 +207,7 @@ const PRODUCTS = [
              'in alcohol. Each bottle is individually numbered from a run of 3,850. Dressed in ' +
              'Turner’s “The Morning After the Deluge.”',
     details: [
+      ['Alcohol', '12% vol'],
       ['Serve', '8–10 °C, chilled'],
       ['Pairs with', 'Shellfish, ceviche, fresh goat cheese'],
     ],
