@@ -374,6 +374,20 @@ h1, h2, h3, h4, .lede {
 .pin.is-active .pin-disc, .pin.is-active .pin-dot { fill: var(--terra); }
 .pin.is-active .pin-place { fill: var(--terra-deep); }
 
+/* the SVG scales way down on small screens - grow the pins so the
+   numbers stay legible (CSS geometry wins over the r attributes) */
+@media (max-width: 640px) {
+  .pin-disc { r: 16px; }
+  .pin-halo { r: 23px; }
+  .pin-dot { r: 6px; }
+  .pin-num { font-size: 19px; transform: translateY(3px); }
+  .pin-place { font-size: 20px; transform: translateY(-6px); }
+  /* Mélida's label hangs below its pin - push it away from the bigger disc */
+  .pin[data-estate="convento"] .pin-place { transform: translateY(10px); }
+  .pin.is-active .pin-halo { r: 28px; }
+  .pin.is-active .pin-disc { r: 18px; }
+}
+
 /* the index - a legend, keyed to the numbered pins */
 .atlas-index {
   margin: 0;
