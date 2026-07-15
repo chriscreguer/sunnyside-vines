@@ -24,7 +24,13 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* body-only overflow-x is ignored by iOS Safari - clip at the root too */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
 
 body {
   font-family: 'Hanken Grotesk', system-ui, sans-serif;
@@ -172,7 +178,10 @@ h1, h2, h3, h4, .lede {
   text-align: center;
   background-color: var(--paper);
   color: var(--ink);
-  overflow: visible;
+  /* clip the photo-fan bleed at the viewport edge without cutting the
+     fan's overhang into the section below (clip + visible is legal) */
+  overflow-x: clip;
+  overflow-y: visible;
   display: flex;
   flex-direction: column;
 }
