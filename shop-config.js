@@ -62,14 +62,12 @@ const PRODUCTS = [
     tasting: 'Cherry-red with a tile rim, clean and bright. An intense, complex nose of compoted ' +
              'black fruit — plum jam, raspberry, ripe fig — over spice and roast: black licorice, ' +
              'nutmeg, cigar leaf. Soft on entry, building to a full-bodied burst of flavor with ' +
-             'silky, velvety tannins and a long, persistent finish.',
+             'silky, velvety tannins and a long, persistent finish. Grown in the family’s own ' +
+             'vineyards in Peñafiel and aged sixty months in fine-grain American and French oak; ' +
+             'twice awarded Grand Gold internationally.',
     details: [
-      ['Variety', '100% Tempranillo from estate vineyards in Peñafiel'],
+      ['Variety', '100% Tempranillo'],
       ['Appellation', 'D.O. Ribera del Duero'],
-      ['Aging', '60 months in fine-grain American & French oak'],
-      ['Alcohol', '15% vol'],
-      ['Serve at', '16–18 °C'],
-      ['Awards', 'Gran Oro, Catavinum World Wine Spain 2016 · Gran Oro, International Wine Guide 2015'],
     ],
     image: 'img/shop/penafalcon-gran-reserva-2007.jpg',
     fit: 'label',
@@ -87,12 +85,8 @@ const PRODUCTS = [
           'oak, decorated with two international and one national Great Gold. Serve at 16–18 °C.',
     price: '95.00',
     details: [
-      ['Variety', '100% Tempranillo, selected vintage'],
+      ['Variety', '100% Tempranillo'],
       ['Appellation', 'D.O. Ribera del Duero'],
-      ['Aging', 'Long aging in American & French oak'],
-      ['Alcohol', '15% vol'],
-      ['Serve at', '16–18 °C'],
-      ['Awards', 'Two international Great Golds · one national Great Gold'],
     ],
     image: 'img/shop/penafalcon-14-anos-2003.jpg',
     fit: 'label',
@@ -109,13 +103,12 @@ const PRODUCTS = [
     note: 'The winemaker’s signature cuvée: thirty-six months in American and French oak from a ' +
           'single selected vintage. Deep, structured and built to keep.',
     price: '65.00',
+    tasting: 'The winemaker’s signature cuvée: thirty-six months in American and French oak ' +
+             'from a single selected vintage. Deep, structured and built to keep. Twice ' +
+             'gold-medalled internationally, alongside a national Great Gold.',
     details: [
-      ['Variety', '100% Tempranillo, selected vintage'],
+      ['Variety', '100% Tempranillo'],
       ['Appellation', 'D.O. Ribera del Duero'],
-      ['Aging', '36 months in American & French oak'],
-      ['Alcohol', '14.5% vol'],
-      ['Serve at', '16–18 °C'],
-      ['Awards', 'Two international Golds · one national Great Gold'],
     ],
     image: 'img/shop/penafalcon-tinto-de-autor-2004.jpg',
     fit: 'label',
@@ -135,13 +128,12 @@ const PRODUCTS = [
     tasting: 'Picota-cherry red of medium depth, clean and bright. Medium-high intensity on the ' +
              'nose: abundant ripe fruit — plum, blackberry, cherry — over a subtle toasted ' +
              'background of sweet spices, vanilla, black licorice and faint balsamic notes. Soft, ' +
-             'ripe tannin and a surprising roundness; sincere, honest and very easy to drink.',
+             'ripe tannin and a surprising roundness; sincere, honest and very easy to drink. ' +
+             'Fermented with native yeasts and aged ten months in used American and French oak. ' +
+             'Gold medal, International Wine Awards Spain 2024.',
     details: [
-      ['Variety', '100% Tempranillo (Tinta Fina), fermented with native yeasts'],
+      ['Variety', '100% Tempranillo (Tinta Fina)'],
       ['Appellation', 'D.O. Ribera del Duero'],
-      ['Aging', '10 months in used American & French oak'],
-      ['Alcohol', '14% vol'],
-      ['Awards', 'Gold, International Wine Awards Spain 2024'],
     ],
     image: 'img/shop/penafalcon-10-meses-2021.jpg',
     fit: 'label',
@@ -160,13 +152,13 @@ const PRODUCTS = [
     note: 'A single-vineyard Garnacha, hand-harvested and made with zero intervention. The label ' +
           'bears Simon Denis’ “Study of Clouds with a Sunset near Rome.”',
     price: '34.00',
+    tasting: 'A natural Garnacha from the single “Romeroso” vineyard — sustainably grown, ' +
+             'hand-harvested and made with zero intervention. Each bottle is individually ' +
+             'numbered from a run of 3,250. The label bears Simon Denis’ “Study of Clouds ' +
+             'with a Sunset near Rome.”',
     details: [
-      ['Variety', 'Garnacha from the single “Romeroso” vineyard (lieu-dit)'],
+      ['Variety', 'Garnacha'],
       ['Appellation', 'D.O. Campo de Borja'],
-      ['Winemaking', 'Natural wine — sustainably grown, hand-harvested'],
-      ['Alcohol', '14.5% vol'],
-      ['Edition', 'Numbered run of 3,250 bottles'],
-      ['Label art', '“Study of Clouds with a Sunset near Rome,” Simon Alexandre Clément Denis'],
     ],
     image: 'img/shop/los-angeles-romeroso.jpg',
     fit: 'art',
@@ -183,13 +175,12 @@ const PRODUCTS = [
     note: 'A sustainably grown, single-vineyard red named for its “lieu-dit.” The label carries ' +
           'Jacques Blanchard’s “Danaë.”',
     price: '32.00',
+    tasting: 'A sustainably grown, single-vineyard natural red from grower Michael Cooper, named ' +
+             'for its “lieu-dit.” Each bottle is individually numbered from a run of 3,250. The ' +
+             'label carries Jacques Blanchard’s “Danaë.”',
     details: [
-      ['Variety', 'Red from the single “Cruz Alta” vineyard (lieu-dit)'],
+      ['Variety', 'Red'],
       ['Appellation', 'D.O. Campo de Borja'],
-      ['Winemaking', 'Natural wine by grower Michael Cooper — sustainable, hand-harvested'],
-      ['Alcohol', '14% vol'],
-      ['Edition', 'Numbered run of 3,250 bottles'],
-      ['Label art', '“Danaë,” Jacques Blanchard'],
     ],
     image: 'img/shop/los-angeles-cruz-alta.jpg',
     fit: 'art',
@@ -206,13 +197,12 @@ const PRODUCTS = [
     note: 'A zero-intervention white from a single vineyard, fresh and low in alcohol. Dressed in ' +
           'Turner’s “The Morning After the Deluge.”',
     price: '28.00',
+    tasting: 'A zero-intervention white from the single “Las Suertes” vineyard, fresh and low ' +
+             'in alcohol. Each bottle is individually numbered from a run of 3,850. Dressed in ' +
+             'Turner’s “The Morning After the Deluge.”',
     details: [
-      ['Variety', 'White from the single “Las Suertes” vineyard (lieu-dit)'],
+      ['Variety', 'White'],
       ['Appellation', 'D.O. Campo de Borja'],
-      ['Winemaking', 'Zero intervention — sustainably grown, hand-harvested'],
-      ['Alcohol', '12% vol'],
-      ['Edition', 'Numbered run of 3,850 bottles'],
-      ['Label art', '“The Morning After the Deluge,” J. M. W. Turner'],
     ],
     image: 'img/shop/los-angeles-las-suertes.jpg',
     fit: 'art',
@@ -233,13 +223,13 @@ const PRODUCTS = [
     price: '55.00',
     tasting: 'Deep cherry. Elegant and complex: fantastic mature black fruit — blackberry and ' +
              'blueberry — with spicy, balsamic, toasted and mineral notes. Powerful yet round, ' +
-             'with elegant fine-grained tannins in fine balance and a long, persistent finish.',
+             'with elegant fine-grained tannins in fine balance and a long, persistent finish. ' +
+             'From twenty-year-old vines at 900 metres in Pago de Tordementes, aged twenty-three ' +
+             'months in six specially selected French oak barrels — a limited edition of 1,227 ' +
+             'bottles.',
     details: [
-      ['Variety', '100% Tinta del País (Tempranillo), 20-year-old vines'],
-      ['Vineyard', 'Pago de Tordementes, Peñafiel — 900 m altitude'],
+      ['Variety', '100% Tinta del País (Tempranillo)'],
       ['Appellation', 'D.O. Ribera del Duero'],
-      ['Aging', '23 months in six specially selected French oak barrels'],
-      ['Edition', 'Limited edition of 1,227 bottles, April 2023'],
     ],
     image: 'img/shop/convento-seleccion-familia-2020.png',
     fit: 'bottle',
@@ -259,12 +249,11 @@ const PRODUCTS = [
     tasting: 'Cherry red of good depth, clean and crystalline. An elegant, intense nose of red ' +
              'fruit — blueberry, raspberry — alongside blackberry, with pleasant pastry ' +
              'fragrances, light spice and balsamic touches. Soft, round tannins in perfect ' +
-             'balance with the acidity: broad, velvety and persistent.',
+             'balance with the acidity: broad, velvety and persistent. From twenty-five-year-old ' +
+             'vines above 900 metres, matured twelve months in French oak of medium and low toast.',
     details: [
-      ['Variety', '98% Tinta del País, 2% Cabernet Sauvignon — 25-year-old vines above 900 m'],
+      ['Variety', '98% Tinta del País, 2% Cabernet Sauvignon'],
       ['Appellation', 'D.O. Ribera del Duero'],
-      ['Aging', '12 months in French oak, medium & low toast'],
-      ['Bottled', 'May 2024'],
     ],
     image: 'img/shop/convento-crianza-2022.png',
     fit: 'bottle',
@@ -283,11 +272,11 @@ const PRODUCTS = [
     price: '19.00',
     tasting: 'Bright cherry with violet tones. Intense fresh fruit on the nose — strawberry and ' +
              'raspberry mingled with hints of spice and a slight balsamic fragrance. Fresh, full ' +
-             'and fruity on the palate; well balanced, easy to drink, with a long finish.',
+             'and fruity on the palate; well balanced, easy to drink, with a long finish. Raised ' +
+             'three months in French and American oak from vines fifteen to twenty-five years old.',
     details: [
-      ['Variety', 'Tinta del País (Tempranillo), vines 15–25 years old'],
+      ['Variety', 'Tinta del País (Tempranillo)'],
       ['Appellation', 'D.O. Ribera del Duero'],
-      ['Aging', '3 months in French & American oak, half and half'],
     ],
     image: 'img/shop/convento-roble-2025.png',
     fit: 'bottle',

@@ -174,7 +174,7 @@
       <div class="detail-body">
         <p class="detail-producer">${meta.name} · ${meta.region}</p>
         <h2 class="detail-name">${p.name} <span class="wine-vintage">${p.vintage}</span></h2>
-        <p class="wine-meta">${p.meta}${p.badge ? ' · ' + p.badge : ''}</p>
+        <p class="wine-meta">${p.meta}</p>
         <p class="detail-note">${p.tasting || p.note}</p>
         ${specs ? `<dl class="detail-specs">${specs}</dl>` : ''}
         <div class="detail-foot">
