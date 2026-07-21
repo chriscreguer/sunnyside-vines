@@ -62,9 +62,9 @@
     <!-- Shop content -->
     <main class="shop-main">
         <div class="wrap">
-            <header class="shop-header reveal-fade">
-                <h1 class="shop-title">All wines</h1>
-                <p class="shop-sub">Every bottle we import, direct from three family estates in Spain: Peñafalcón, Los Ángeles and Convento Oreja.</p>
+            <header class="shop-header">
+                <h1 class="shop-title enter">All wines</h1>
+                <p class="shop-sub enter" data-enter-delay="1">Every bottle we import, direct from three family estates in Spain: Peñafalcón, Los Ángeles and Convento Oreja.</p>
             </header>
 
             <div id="shop-groups"><!-- product groups injected by shop.js --></div>
@@ -87,13 +87,6 @@
             <button class="checkout-btn" id="checkout-btn" disabled>Checkout</button>
         </div>
     </aside>
-
-    <!-- Wine details modal -->
-    <div class="detail-overlay" id="detail-overlay"></div>
-    <div class="detail-modal" id="detail-modal" role="dialog" aria-modal="true" aria-label="Wine details">
-        <button class="detail-close" id="detail-close" aria-label="Close details">&times;</button>
-        <div class="detail-content" id="detail-content"></div>
-    </div>
 
     <div class="toast" id="toast"></div>
 
