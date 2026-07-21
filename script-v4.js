@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; queues.some((q) => i < q.length); i++)
       queues.forEach((q) => { if (q[i]) mixed.push(q[i]); });
     winesRow.innerHTML = mixed.map((p) => `
-      <a class="wine-card reveal" href="shop.html">
+      <a class="wine-card reveal" href="wines/${p.id}.html">
         <div class="wine-media fit-${p.fit} producer-${p.producer}">
           <img src="${p.image}" alt="${p.name} ${p.vintage}" loading="lazy">
         </div>
