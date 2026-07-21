@@ -36,6 +36,22 @@
   .js-shop .reveal-fade { opacity: 1; }
 }
 
+/* page-load entrance, matching the hero's blur/rise cascade (wordmark -> sub) */
+.js-shop .enter {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(10px);
+  transition: opacity 0.8s var(--ease), filter 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.js-shop .enter.is-in {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-shop .enter { opacity: 1; filter: none; transform: none; transition: none; }
+}
+
 /* ── Shop header ──────────────────────────────────────────────────────────── */
 .shop-header {
   margin: 0 0 clamp(36px, 5vw, 56px);
@@ -269,6 +285,7 @@
   outline-offset: 3px;
 }
 .details-hint {
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -499,76 +516,44 @@
 
 
 /* ── Wine details modal ───────────────────────────────────────────────────── */
-body.modal-open { overflow: hidden; }
+/* ── Dedicated wine pages (wines/*.html, generated) ──────────────────────── */
+.shop-main.wine-page-main { padding: 134px 0 clamp(120px, 16vw, 200px); }
+.wine-page-main .wrap { width: min(940px, 92vw); }
 
-.detail-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(42, 26, 18, 0.45);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 1100;
-}
-.detail-overlay.open { opacity: 1; visibility: visible; }
-
-.detail-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.97);
-  width: min(880px, 92vw);
-  max-height: min(86vh, 820px);
-  overflow-y: auto;
-  background: var(--white, #fff);
-  border-radius: 14px;
-  box-shadow: 0 30px 80px rgba(42, 26, 18, 0.35);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, transform 0.3s var(--ease), visibility 0.3s ease;
-  z-index: 1101;
-}
-.detail-modal.open {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, -50%) scale(1);
+/* a gentler version of the shop's page-load entrance - the full blur/rise
+   reads as too heavy on a page that's mostly a photo and body copy */
+.wine-page-main .enter {
+  filter: blur(2px);
+  transform: translateY(6px);
 }
 
-.detail-close {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  z-index: 2;
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  font-size: 22px;
-  line-height: 1;
-  color: var(--ink);
-  background: var(--white, #fff);
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+.crumbs { margin-bottom: 24px; }
+.crumbs a {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.2s ease;
 }
-.detail-close:hover { background: var(--terra); border-color: var(--terra); color: #fff; }
+.crumbs a:hover { color: var(--terra); }
 
-.detail-content {
+.wine-detail {
   display: grid;
   grid-template-columns: 340px 1fr;
+  gap: 56px;
+  align-items: start;
 }
+.wine-detail .detail-name { font-size: clamp(26px, 3.4vw, 36px); }
 
 .detail-media {
   position: sticky;
-  top: 0;
-  align-self: stretch;
+  top: 134px;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 420px;
-  padding: 28px;
-  background: linear-gradient(160deg, #fff, #f0e7dd);
 }
 .detail-media img {
   max-width: 100%;
@@ -579,9 +564,16 @@ body.modal-open { overflow: hidden; }
   border-radius: 3px;
   border: 1px solid var(--line);
 }
+/* convento shots crop the bottle at its base - seat them on the frame's bottom edge */
+.detail-media.producer-convento {
+  align-items: flex-end;
+}
+.detail-media.producer-convento img {
+  object-position: center bottom;
+}
 
 .detail-body {
-  padding: 36px 40px 34px 34px;
+  padding-top: 6px;
 }
 .detail-producer {
   font-size: 11px;
@@ -643,15 +635,28 @@ body.modal-open { overflow: hidden; }
 
 .detail-pdf { margin-top: 18px; }
 
+.more-from {
+  margin-top: clamp(64px, 9vw, 96px);
+  padding-top: clamp(40px, 5vw, 56px);
+  border-top: 1px solid var(--line);
+}
+.more-from-heading {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+  font-weight: 650;
+  font-size: clamp(21px, 2.4vw, 26px);
+  color: var(--ink);
+  margin-bottom: 26px;
+}
+
 @media (max-width: 720px) {
-  .detail-content { grid-template-columns: 1fr; }
+  .wine-detail { grid-template-columns: 1fr; gap: 28px; }
   .detail-media {
     position: static;
     min-height: 0;
-    padding: 34px 24px 20px;
   }
   .detail-media img { max-height: 280px; }
-  .detail-body { padding: 24px 22px 28px; }
+  .detail-body { padding-top: 0; }
 }
 
 /* toast confirmation */
@@ -691,6 +696,7 @@ body.modal-open { overflow: hidden; }
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .shop-main { padding-top: 140px; }
+  .shop-main.wine-page-main { padding-top: 116px; }
   .wine-grid { grid-template-columns: 1fr; gap: 22px; }
   .cart-toggle { padding: 13px 15px; }
   .cart-toggle .cart-label { display: none; }
