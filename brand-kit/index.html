@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Guide · Sunnyside Vines</title>
+<meta name="description" content="The Sunnyside Vines brand: mark, color, type, voice, and photography direction.">
+<meta name="robots" content="noindex">
+
+<link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
+<link rel="manifest" href="../img/favicon/site.webmanifest">
+<link rel="shortcut icon" href="../img/favicon/favicon.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;1,9..144,500&family=Hanken+Grotesk:ital,wght@0,300..800;1,400..600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --terra-deep: #a2431b;
+    --terra: #bb5a2c;
+    --terra-soft: #d5824e;
+    --peach: #edc6a2;
+    --cream: #f7f0e8;
+    --sand: #ece4db;
+    --paper: #f5efe6;
+    --paper-warm: #f1dfcc;
+    --ink: #2a1a12;
+    --ink-soft: rgba(42, 26, 18, 0.62);
+    --ink-line: rgba(42, 26, 18, 0.26);
+    --white: #fffdfb;
+
+    --bg: var(--paper);
+    --surface: var(--white);
+    --text: var(--ink);
+    --text-soft: var(--ink-soft);
+    --border: var(--ink-line);
+    --accent: var(--terra);
+    --accent-deep: var(--terra-deep);
+    --code-bg: var(--sand);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c130d;
+      --surface: #291a12;
+      --text: #f5efe6;
+      --text-soft: rgba(245, 239, 230, 0.64);
+      --border: rgba(245, 239, 230, 0.14);
+      --accent: #e0925c;
+      --accent-deep: #edc6a2;
+      --code-bg: #2f1e15;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  .back-link {
+    display: block;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 24px 0;
+    font-size: 13px;
+    color: var(--text-soft);
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  .shell {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 780px);
+    gap: 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 120px;
+  }
+  @media (max-width: 860px) {
+    .shell { grid-template-columns: 1fr; gap: 28px; padding: 24px 20px 80px; }
+  }
+
+  .toc {
+    position: sticky;
+    top: 40px;
+    align-self: start;
+    font-size: 13.5px;
+  }
+  @media (max-width: 860px) {
+    .toc {
+      position: static;
+      display: flex;
+      overflow-x: auto;
+      gap: 4px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+  .toc-mark {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 650;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .toc-sub { color: var(--text-soft); font-size: 12.5px; margin-bottom: 26px; }
+  @media (max-width: 860px) { .toc-mark, .toc-sub { display: none; } }
+  .toc a {
+    display: block;
+    padding: 7px 10px;
+    margin-left: -10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-soft);
+    white-space: nowrap;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .toc a:hover { color: var(--text); background: var(--surface); }
+
+  main { min-width: 0; }
+
+  section { margin-bottom: 76px; scroll-margin-top: 40px; }
+  section > .kicker {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin: 0 0 6px;
+  }
+  section > h2 {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    font-size: 27px;
+    margin: 0 0 10px;
+  }
+  section > .section-note {
+    color: var(--text-soft);
+    font-size: 15px;
+    max-width: 60ch;
+    margin: 0 0 30px;
+  }
+
+  /* ── essence ── */
+  .essence {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 40px clamp(24px, 5vw, 52px);
+  }
+  .essence blockquote {
+    margin: 0;
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    font-size: clamp(21px, 3vw, 27px);
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+  .essence cite {
+    display: block;
+    font-style: normal;
+    font-size: 12.5px;
+    color: var(--text-soft);
+    margin-top: 18px;
+  }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 22px;
+    margin-top: 34px;
+  }
+  .pillar-word {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .pillar-desc { font-size: 13.5px; color: var(--text-soft); }
+
+  /* ── mark ── */
+  .mark-stage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  @media (max-width: 620px) { .mark-stage { grid-template-columns: 1fr; } }
+  .mark-stage-3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 760px) { .mark-stage-3 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 460px) { .mark-stage-3 { grid-template-columns: 1fr; } }
+  .mark-panel {
+    border-radius: 16px;
+    padding: 44px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+  }
+  .mark-stage-3 .mark-panel { padding: 32px 22px; min-height: 150px; }
+  .mark-panel.light { background: var(--paper); border: 1px solid var(--border); }
+  .mark-panel.dark { background: var(--terra-deep); }
+  .mark-panel img.house-mark { width: 108px; }
+  .mark-panel img.wordmark-img { width: 78%; max-width: 340px; }
+  .mark-caption {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-top: 10px;
+  }
+  .mark-group-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-soft);
+    margin: 0 0 12px;
+  }
+
+  .rule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+  .rule-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+  }
+  .rule-label { font-size: 12px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+  .rule-demo { display: flex; align-items: center; justify-content: center; height: 90px; margin-bottom: 12px; }
+  .clearspace-demo {
+    position: relative;
+    padding: 26px;
+    background: repeating-linear-gradient(45deg, transparent, transparent 6px, var(--code-bg) 6px, var(--code-bg) 7px);
+    border-radius: 8px;
+  }
+  .clearspace-demo img { width: 64px; }
+  .rule-text { font-size: 13.5px; color: var(--text-soft); }
+
+  .misuse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .misuse-card {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .misuse-visual {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper-warm);
+    position: relative;
+    overflow: hidden;
+  }
+  .misuse-visual img { width: 130px; }
+  .misuse-visual.stretch img { transform: scaleX(2.1); }
+  .misuse-visual.recolor .mask-fill {
+    width: 130px; height: 130px;
+    background-color: #3a6ea5;
+    -webkit-mask-image: url('sunnyside-vines-wordmark-ink.png');
+    mask-image: url('sunnyside-vines-wordmark-ink.png');
+    -webkit-mask-size: contain; mask-size: contain;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+  }
+  .misuse-visual.busy { background: url('../img/hero/vineyard-1.jpg') center/cover; }
+  .misuse-visual.busy img { width: 150px; filter: brightness(0) invert(1); opacity: 0.95; }
+  .misuse-label {
+    padding: 12px 14px;
+    font-size: 12.5px;
+    color: var(--text-soft);
+    background: var(--surface);
+  }
+  .misuse-label b { color: var(--text); font-weight: 600; }
+
+  /* ── color ── */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+  .swatch {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    display: block;
+    width: 100%;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .swatch:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -14px rgba(42,26,18,.4); }
+  .swatch:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .swatch-fill { height: 74px; position: relative; }
+  .swatch-copy-hint {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px;
+    background: rgba(20, 12, 8, 0.42);
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  .swatch:hover .swatch-copy-hint, .swatch:focus-visible .swatch-copy-hint { opacity: 1; }
+  .swatch-info { padding: 10px 12px 12px; }
+  .swatch-name { font-size: 13px; font-weight: 600; }
+  .swatch-hex {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11.5px;
+    color: var(--text-soft);
+    text-transform: uppercase;
+  }
+  .swatch-use { font-size: 11.5px; color: var(--text-soft); margin-top: 4px; }
+
+  #copy-toast {
+    position: fixed;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--ink);
+    color: var(--white);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 50px;
+    box-shadow: 0 14px 30px -12px rgba(0,0,0,.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 200;
+  }
+  #copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── type ── */
+  .specimen {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 30px;
+    margin-bottom: 16px;
+  }
+  .specimen-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-bottom: 14px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  .spec-display {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    font-size: clamp(26px, 4vw, 42px);
+    line-height: 1.14;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .type-roles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 6px;
+  }
+  .type-role {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .type-role .role-name { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-soft); margin-bottom: 8px; }
+  .type-role .role-face { font-family: 'Fraunces', serif; font-weight: 500; font-size: 15px; margin-bottom: 6px; }
+  .type-role.sans .role-face { font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; }
+  .type-role .role-desc { font-size: 13px; color: var(--text-soft); }
+
+  /* ── voice ── */
+  .voice-principles {
+    display: grid;
+    gap: 18px;
+    margin-bottom: 34px;
+  }
+  .voice-principle {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 620px) { .voice-principle { grid-template-columns: 1fr; gap: 6px; } }
+  .voice-principle:last-child { border-bottom: none; }
+  .voice-principle-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 16.5px;
+  }
+  .voice-principle-desc { font-size: 14px; color: var(--text-soft); }
+
+  .voice-examples { display: grid; gap: 12px; }
+  .voice-example {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    font-size: 14.5px;
+  }
+  .voice-example .src { font-size: 11.5px; color: var(--text-soft); margin-top: 8px; }
+
+  /* ── photography ── */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+  @media (max-width: 700px) { .photo-grid { grid-template-columns: 1fr; } }
+  .photo-frame {
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+  .photo-frame.tall { aspect-ratio: 4/5; }
+  .photo-frame.wide { aspect-ratio: 4/5; }
+  .photo-cap {
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-top: 8px;
+  }
+  .photo-do-dont {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .pd-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+  .pd-card .pd-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 8px; }
+  .pd-card.do .pd-tag { color: #6a8a4f; }
+  .pd-card.dont .pd-tag { color: #b8503f; }
+  .pd-card p { font-size: 13.5px; color: var(--text-soft); margin: 0; }
+
+  /* ── downloads ── */
+  .asset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+  }
+  .asset-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .asset-preview {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background-color: var(--paper);
+  }
+  .asset-preview.on-dark { background-color: var(--terra-deep); }
+  .asset-preview img { max-height: 84px; max-width: 90%; object-fit: contain; }
+  .asset-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .asset-name { font-size: 13px; font-weight: 600; }
+  .asset-meta { font-size: 11px; color: var(--text-soft); margin-top: 2px; }
+  .asset-dl {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--code-bg);
+    color: var(--text);
+    flex-shrink: 0;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .asset-dl:hover { background: var(--accent); color: var(--white); }
+  .asset-dl svg { width: 15px; height: 15px; }
+
+  footer.end {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 12.5px;
+    color: var(--text-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="../index.html">&larr; Sunnyside Vines</a>
+
+<div class="shell">
+  <nav class="toc">
+    <div class="toc-mark">Sunnyside Vines</div>
+    <div class="toc-sub">Brand Guide</div>
+    <a href="#essence">Essence</a>
+    <a href="#mark">The Mark</a>
+    <a href="#color">Color</a>
+    <a href="#type">Typography</a>
+    <a href="#voice">Voice &amp; Tone</a>
+    <a href="#photography">Photography</a>
+    <a href="#downloads">Downloads</a>
+  </nav>
+
+  <main>
+    <section id="essence">
+      <p class="kicker">01</p>
+      <h2>Essence</h2>
+      <div class="essence">
+        <blockquote>"We believe the most memorable wines come from small, family-run vineyards, where heritage is honored and every bottle tells a story."</blockquote>
+        <cite>Source: Sunnyside Vines homepage</cite>
+        <div class="pillars">
+          <div>
+            <div class="pillar-word">Named, not generic</div>
+            <div class="pillar-desc">Every wine belongs to a grower with a name and a hillside. The brand never speaks of "Spain" in the abstract.</div>
+          </div>
+          <div>
+            <div class="pillar-word">Handmade, not manufactured</div>
+            <div class="pillar-desc">Marks look stamped, photos look shot on location, edges look slightly rough. Nothing reads as templated.</div>
+          </div>
+          <div>
+            <div class="pillar-word">Warm, not loud</div>
+            <div class="pillar-desc">Terracotta and paper tones, golden-hour light, one adjective instead of three. The wine does the talking.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mark">
+      <p class="kicker">02</p>
+      <h2>The Mark</h2>
+      <p class="section-note">A postage-stamp icon, perforated edges around a sunrise and a wine glass, paired with custom lettering. The icon can stand alone once the brand is established; the wordmark carries the name when it can't.</p>
+
+      <div class="mark-stage">
+        <div>
+          <div class="mark-panel light"><img class="house-mark" src="../img/logo_hero.svg" alt="Sunnyside Vines house mark on paper"></div>
+          <div class="mark-caption">House mark, on paper</div>
+        </div>
+        <div>
+          <div class="mark-panel dark"><img class="house-mark" src="../img/logomark_white.svg" alt="Sunnyside Vines house mark, white, on terra-deep"></div>
+          <div class="mark-caption">White mark, on terra-deep</div>
+        </div>
+      </div>
+
+      <p class="mark-group-label">Wordmark, homepage hero lockup</p>
+      <div class="mark-stage mark-stage-3">
+        <div>
+          <div class="mark-panel light"><img class="wordmark-img" src="sunnyside-vines-wordmark-ink.png" alt="Sunnyside Vines wordmark in ink"></div>
+          <div class="mark-caption">Ink</div>
+        </div>
+        <div>
+          <div class="mark-panel light"><img class="wordmark-img" src="sunnyside-vines-wordmark-terra.png" alt="Sunnyside Vines wordmark in terra"></div>
+          <div class="mark-caption">Terra</div>
+        </div>
+        <div>
+          <div class="mark-panel" style="background:#272120;"><img class="wordmark-img" src="sunnyside-vines-wordmark-white.png" alt="Sunnyside Vines wordmark in white"></div>
+          <div class="mark-caption">White</div>
+        </div>
+      </div>
+
+      <p class="mark-group-label">Plain-text wordmark, footer treatment</p>
+      <div class="mark-stage mark-stage-3" style="margin-bottom: 36px;">
+        <div>
+          <div class="mark-panel light"><img class="wordmark-img" src="sunnyside-vines-wordmark-text-ink.svg" alt="Sunnyside Vines plain-text wordmark in ink"></div>
+          <div class="mark-caption">Ink</div>
+        </div>
+        <div>
+          <div class="mark-panel light"><img class="wordmark-img" src="sunnyside-vines-wordmark-text-terra.svg" alt="Sunnyside Vines plain-text wordmark in terra"></div>
+          <div class="mark-caption">Terra</div>
+        </div>
+        <div>
+          <div class="mark-panel" style="background:#272120;"><img class="wordmark-img" src="sunnyside-vines-wordmark-text-white.svg" alt="Sunnyside Vines plain-text wordmark in white"></div>
+          <div class="mark-caption">White</div>
+        </div>
+      </div>
+
+      <div class="rule-grid">
+        <div class="rule-card">
+          <div class="rule-label">Clear space</div>
+          <div class="rule-demo"><div class="clearspace-demo"><img src="../img/logo_hero.svg" alt=""></div></div>
+          <div class="rule-text">Keep space equal to the mark's own width open on every side. Nothing else sits inside that margin: no type, no edge of frame.</div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-label">Minimum size</div>
+          <div class="rule-demo"><img src="../img/logo_hero.svg" alt="" style="width:32px;"></div>
+          <div class="rule-text">Below roughly 24px the perforated edge and the wine glass lose their definition. Drop to the wordmark alone instead of shrinking further.</div>
+        </div>
+      </div>
+
+      <div class="misuse-grid">
+        <div class="misuse-card">
+          <div class="misuse-visual stretch"><img src="sunnyside-vines-wordmark-ink.png" alt=""></div>
+          <div class="misuse-label"><b>Don't</b> stretch or squeeze the lockup to fit a space.</div>
+        </div>
+        <div class="misuse-card">
+          <div class="misuse-visual recolor"><div class="mask-fill"></div></div>
+          <div class="misuse-label"><b>Don't</b> recolor the wordmark outside ink, terra, or white.</div>
+        </div>
+        <div class="misuse-card">
+          <div class="misuse-visual busy"><img src="sunnyside-vines-wordmark-ink.png" alt=""></div>
+          <div class="misuse-label"><b>Don't</b> drop it on a busy photo with no scrim behind it.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="color">
+      <p class="kicker">03</p>
+      <h2>Color</h2>
+      <p class="section-note">Terracotta earth and paper stock: the color of Rioja soil and an old label, not a swatch chosen for contrast ratios. Terra is the one accent; everything else is a neutral built to sit near it without competing.</p>
+      <div class="swatch-grid">
+        <button type="button" class="swatch" data-copy="#A2431B" aria-label="Copy hex A2431B"><div class="swatch-fill" style="background:#a2431b"><span class="swatch-copy-hint">Copy hex</span></div><div class="swatch-info"><div class="swatch-name">Terra Deep</div><div class="swatch-hex">#A2431B</div><div class="swatch-use">Hover states, dark grounds</div></div></button>
+        <button type="button" class="swatch" data-copy="#BB5A2C" aria-label="Copy hex BB5A2C"><div class="swatch-fill" style="background:#bb5a2c"><span class="swatch-copy-hint">Copy hex</span></div><div class="swatch-info"><div class="swatch-name">Terra</div><div class="swatch-hex">#BB5A2C</div><div class="swatch-use">The brand accent</div></div></button>
+        <button type="button" class="swatch" data-copy="#D5824E" aria-label="Copy hex D5824E"><div class="swatch-fill" style="background:#d5824e"><span class="swatch-copy-hint">Copy hex</span></div><div class="swatch-info"><div class="swatch-name">Terra Soft</div><div class="swatch-hex">#D5824E</div><div class="swatch-use">Secondary accent</div></div></button>
+        <button type="button" class="swatch" data-copy="#EDC6A2" aria-label="Copy hex EDC6A2"><div class="swatch-fill" style="background:#edc6a2"><span class="swatch-copy-hint">Copy hex</span></div><div class="swatch-info"><div class="swatch-name">Peach</div><div class="swatch-hex">#EDC6A2</div><div class="swatch-use">Highlight, tint</div></div></button>
+        <button type="button" class="swatch" data-copy="#F7F0E8" aria-label="Copy hex F7F0E8"><div class="swatch-fill" style="background:#f7f0e8"><span class="swatch-copy-hint">Copy hex</span></div><div class="swatch-info"><div class="swatch-name">Cream</div><div class="swatch-hex">#F7F0E8</div><div class="swatch-use">Light fill</div></div></button>
+        <button type="button" class="swatch" data-copy="#ECE4DB" aria-label="Copy hex ECE4DB"><div class="swatch-fill" style="background:#ece4db"><span class="swatch-copy-hint">Copy hex</span></div><div class="swatch-info"><div class="swatch-name">Sand</div><div class="swatch-hex">#ECE4DB</div><div class="swatch-use">Muted fill, dividers</div></div></button>
+        <button type="button" class="swatch" data-copy="#F5EFE6" aria-label="Copy hex F5EFE6"><div class="swatch-fill" style="background:#f5efe6"><span class="swatch-copy-hint">Copy hex</span></div><div class="swatch-info"><div class="swatch-name">Paper</div><div class="swatch-hex">#F5EFE6</div><div class="swatch-use">The ground everything sits on</div></div></button>
+        <button type="button" class="swatch" data-copy="#2A1A12" aria-label="Copy hex 2A1A12"><div class="swatch-fill" style="background:#2a1a12"><span class="swatch-copy-hint">Copy hex</span></div><div class="swatch-info"><div class="swatch-name">Ink</div><div class="swatch-hex">#2A1A12</div><div class="swatch-use">Text, linework</div></div></button>
+      </div>
+    </section>
+
+    <section id="type">
+      <p class="kicker">04</p>
+      <h2>Typography</h2>
+      <p class="section-note">Fraunces speaks for the brand; it has the slight irregularity of hand-set type. Hanken Grotesk stays out of the way underneath it.</p>
+
+      <div class="specimen">
+        <div class="specimen-label"><span>Fraunces · 500</span><span>every headline, every wine name</span></div>
+        <p class="spec-display">Bodegas Peñafalcón</p>
+      </div>
+
+      <div class="type-roles">
+        <div class="type-role">
+          <div class="role-name">Display</div>
+          <div class="role-face">Fraunces</div>
+          <div class="role-desc">Headlines, wine names, pull quotes. Carries the brand's voice: warm, a little irregular, never sans-serif.</div>
+        </div>
+        <div class="type-role sans">
+          <div class="role-name">Text &amp; UI</div>
+          <div class="role-face">Hanken Grotesk</div>
+          <div class="role-desc">Body copy, labels, prices, navigation. Quiet on purpose; it never competes with Fraunces for attention.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="voice">
+      <p class="kicker">05</p>
+      <h2>Voice &amp; Tone</h2>
+      <p class="section-note">The brand describes wine the way a grower would over a kitchen table: specific, unhurried, no salesmanship.</p>
+
+      <div class="voice-principles">
+        <div class="voice-principle">
+          <div class="voice-principle-name">Name the place</div>
+          <div class="voice-principle-desc">"Limestone slopes above the river" beats "beautiful terroir." A real hillside, a real distance, a real family name, always chosen over an abstract claim.</div>
+        </div>
+        <div class="voice-principle">
+          <div class="voice-principle-name">One adjective, not three</div>
+          <div class="voice-principle-desc">No stacked praise, no exclamation points. If a wine is remarkable, say "remarkable" once and move on to the fact that proves it.</div>
+        </div>
+        <div class="voice-principle">
+          <div class="voice-principle-name">People before product</div>
+          <div class="voice-principle-desc">Casimiro, Michael Cooper: growers are named like colleagues, not credited like suppliers.</div>
+        </div>
+        <div class="voice-principle">
+          <div class="voice-principle-name">Numbers over hype</div>
+          <div class="voice-principle-desc">"Since the 17th century." "Four kilometres further up the valley." A specific fact does the convincing that an adjective can't.</div>
+        </div>
+      </div>
+
+      <div class="voice-examples">
+        <div class="voice-example">Organic Tempranillo from limestone slopes above the river, aged long in oak. Casimiro's family has pressed wine in Peñafiel's cellars since the 17th century.<div class="src">Bodegas Peñafalcón, producer copy</div></div>
+        <div class="voice-example">Zero-intervention, single-vineyard wines from grower Michael Cooper: dry-farmed old vines in the Ebro basin, under the Moncayo.<div class="src">Los Ángeles, producer copy</div></div>
+        <div class="voice-example">Small-production Spanish wines, imported direct from growers we know by name.<div class="src">Homepage, hero subhead</div></div>
+      </div>
+    </section>
+
+    <section id="photography">
+      <p class="kicker">06</p>
+      <h2>Photography</h2>
+      <p class="section-note">Shot on location, in real light. Never staged in a studio, never stock.</p>
+
+      <div class="photo-grid">
+        <div class="photo-frame tall"><img src="../img/hero/wine-cave.jpg" alt="Wine cave cellar with barrels, lit by low golden-hour sun"></div>
+        <div class="photo-frame wide"><img src="../img/hero/vineyard-1.jpg" alt="Vineyard rows backlit by low sun, Ribera del Duero"></div>
+      </div>
+      <p class="photo-cap">Actual location photography used on the site: a cave cellar in Ribera del Duero, and vine rows at golden hour.</p>
+
+      <div class="photo-do-dont">
+        <div class="pd-card do"><div class="pd-tag">Do</div><p>Shoot at the edges of the day. Let the sun flare, let shadows fall long.</p></div>
+        <div class="pd-card do"><div class="pd-tag">Do</div><p>Show the work: barrels, hands, rock, dirt. The place should look worked, not staged.</p></div>
+        <div class="pd-card dont"><div class="pd-tag">Don't</div><p>Use flat midday light or anything that reads as a studio product shot.</p></div>
+        <div class="pd-card dont"><div class="pd-tag">Don't</div><p>Over-retouch. A little grain and imperfection is the point, not a flaw.</p></div>
+      </div>
+    </section>
+
+    <section id="downloads">
+      <p class="kicker">07</p>
+      <h2>Downloads</h2>
+      <p class="section-note">The mark and wordmark, ready to drop into a deck or a label proof.</p>
+      <div class="asset-grid">
+        <div class="asset-card">
+          <div class="asset-preview"><img src="../img/logo_hero.svg" alt="House mark"></div>
+          <div class="asset-info">
+            <div><div class="asset-name">House mark</div><div class="asset-meta">SVG · on paper</div></div>
+            <a class="asset-dl" href="sunnyside-vines-mark.svg" download="sunnyside-vines-mark.svg" aria-label="Download house mark SVG">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview on-dark"><img src="../img/logomark_white.svg" alt="White mark"></div>
+          <div class="asset-info">
+            <div><div class="asset-name">White mark</div><div class="asset-meta">SVG · on dark</div></div>
+            <a class="asset-dl" href="sunnyside-vines-mark-white.svg" download="sunnyside-vines-mark-white.svg" aria-label="Download white mark SVG">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview"><img src="sunnyside-vines-wordmark-ink.png" alt="Wordmark, ink"></div>
+          <div class="asset-info">
+            <div><div class="asset-name">Wordmark, ink</div><div class="asset-meta">PNG · homepage lockup</div></div>
+            <a class="asset-dl" href="sunnyside-vines-wordmark-ink.png" download="sunnyside-vines-wordmark-ink.png" aria-label="Download wordmark PNG, ink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview"><img src="sunnyside-vines-wordmark-terra.png" alt="Wordmark, terra"></div>
+          <div class="asset-info">
+            <div><div class="asset-name">Wordmark, terra</div><div class="asset-meta">PNG · homepage lockup</div></div>
+            <a class="asset-dl" href="sunnyside-vines-wordmark-terra.png" download="sunnyside-vines-wordmark-terra.png" aria-label="Download wordmark PNG, terra">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview on-dark"><img src="sunnyside-vines-wordmark-white.png" alt="Wordmark, white"></div>
+          <div class="asset-info">
+            <div><div class="asset-name">Wordmark, white</div><div class="asset-meta">PNG · homepage lockup</div></div>
+            <a class="asset-dl" href="sunnyside-vines-wordmark-white.png" download="sunnyside-vines-wordmark-white.png" aria-label="Download wordmark PNG, white">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview"><img src="sunnyside-vines-wordmark-text-ink.svg" alt="Plain-text mark, ink"></div>
+          <div class="asset-info">
+            <div><div class="asset-name">Plain-text mark, ink</div><div class="asset-meta">SVG · footer treatment</div></div>
+            <a class="asset-dl" href="sunnyside-vines-wordmark-text-ink.svg" download="sunnyside-vines-wordmark-text-ink.svg" aria-label="Download plain-text wordmark SVG, ink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview"><img src="sunnyside-vines-wordmark-text-terra.svg" alt="Plain-text mark, terra"></div>
+          <div class="asset-info">
+            <div><div class="asset-name">Plain-text mark, terra</div><div class="asset-meta">SVG · footer treatment</div></div>
+            <a class="asset-dl" href="sunnyside-vines-wordmark-text-terra.svg" download="sunnyside-vines-wordmark-text-terra.svg" aria-label="Download plain-text wordmark SVG, terra">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="asset-card">
+          <div class="asset-preview on-dark"><img src="sunnyside-vines-wordmark-text-white.svg" alt="Plain-text mark, white"></div>
+          <div class="asset-info">
+            <div><div class="asset-name">Plain-text mark, white</div><div class="asset-meta">SVG · footer treatment</div></div>
+            <a class="asset-dl" href="sunnyside-vines-wordmark-text-white.svg" download="sunnyside-vines-wordmark-text-white.svg" aria-label="Download plain-text wordmark SVG, white">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="end">
+      Brand reference for Sunnyside Vines, drawn from the live site and its source assets (<code style="background:var(--code-bg); padding:2px 6px; border-radius:5px;">styles-v4.css</code>, <code style="background:var(--code-bg); padding:2px 6px; border-radius:5px;">img/</code>). Unlisted page: not linked from the main site nav.
+    </footer>
+  </main>
+</div>
+
+<script>
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-copy]');
+    if (!el) return;
+    copyText(el.getAttribute('data-copy'));
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var el = e.target.closest('[data-copy]');
+    if (!el) return;
+    e.preventDefault();
+    copyText(el.getAttribute('data-copy'));
+  });
+
+  function copyText(value) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(value).then(
+        function () { showToast('Copied ' + value); },
+        function () { fallbackCopy(value); }
+      );
+    } else {
+      fallbackCopy(value);
+    }
+  }
+
+  function fallbackCopy(value) {
+    var ta = document.createElement('textarea');
+    ta.value = value;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); showToast('Copied ' + value); }
+    catch (err) { showToast('Copy failed'); }
+    document.body.removeChild(ta);
+  }
+
+  var toastTimer;
+  function showToast(msg) {
+    var toast = document.getElementById('copy-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'copy-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1400);
+  }
+</script>
+</body>
+</html>
