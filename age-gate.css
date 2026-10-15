@@ -24,7 +24,7 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
   margin: auto;
   padding: clamp(28px, 6vw, 56px) clamp(24px, 5vw, 48px);
   border: 1px solid #a2431b;
-  border-radius: 4px;
+  border-radius: 14px;
   overflow-y: auto;
 }
 
@@ -44,7 +44,7 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
 }
 
 #age-gate h2 {
-  margin: 0 0 18px;
+  margin: 0 0 32px;
   font-family: 'Fraunces', Georgia, serif;
   font-size: clamp(32px, 6vw, 44px);
   font-weight: 500;
@@ -70,7 +70,7 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
   min-height: 48px;
   padding: 13px 16px;
   border: 1px solid #a2431b;
-  border-radius: 2px;
+  border-radius: 50px;
   background: #a2431b;
   color: #fffdfb;
   font: 600 16px/1.4 'Hanken Grotesk', sans-serif;
