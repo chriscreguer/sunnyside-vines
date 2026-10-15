@@ -31,10 +31,10 @@
   gate.setAttribute('aria-labelledby', 'age-gate-title');
   gate.innerHTML = `
     <p class="age-gate-brand">Sunnyside Vines</p>
-    <h2 id="age-gate-title">Confirm your age</h2>
+    <h2 id="age-gate-title">Are you 21 or older?</h2>
     <div class="hero-actions age-gate-actions">
-      <button type="button" class="btn primary age-gate-confirm" disabled>Yes</button>
-      <button type="button" class="btn ghost age-gate-decline" disabled>No</button>
+      <button type="button" class="btn primary age-gate-confirm">Yes</button>
+      <button type="button" class="btn ghost age-gate-decline">No</button>
     </div>`;
   gate.addEventListener('cancel', event => event.preventDefault());
   document.body.append(gate);
@@ -93,8 +93,6 @@
     .finally(() => {
       clearTimeout(timeout);
       title.textContent = `Are you ${age} or older?`;
-      confirm.disabled = false;
-      decline.disabled = false;
       confirm.focus({ preventScroll: true });
     });
 })();

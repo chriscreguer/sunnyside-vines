@@ -113,11 +113,6 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
   background: rgba(255, 255, 255, 0.24);
 }
 
-#age-gate button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 #age-gate :focus-visible {
   outline: 3px solid #2a1a12;
   outline-offset: 4px;
