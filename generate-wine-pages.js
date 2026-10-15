@@ -80,6 +80,8 @@ function pageHTML(p) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../age-gate.css">
+    <script src="../age-gate.js" defer></script>
     <title>${esc(title)} · Sunnyside Vines</title>
     <meta name="description" content="${esc(p.note)}">
     <link rel="canonical" href="${canonical}">
@@ -121,6 +123,7 @@ ${jsonld}
     </script>
 </head>
 <body class="shop-page wine-page" data-asset-root="../">
+    <noscript><div class="age-gate-noscript">You must be 21 or older to visit Sunnyside Vines.<br>Please enable JavaScript to confirm your age.</div></noscript>
     <!-- Navigation (shared with the homepage) -->
     <nav class="nav" id="nav">
         <a href="../index.html" class="nav-mark" aria-label="Sunnyside Vines home">
