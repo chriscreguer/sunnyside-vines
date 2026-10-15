@@ -1,10 +1,10 @@
-/* Keep content hidden until the visitor explicitly confirms their age. */
+/* The site stays visible beneath the modal while interaction remains blocked. */
 html:not([data-age-verified]) {
   overflow: hidden;
 }
 
-html:not([data-age-verified]) body {
-  visibility: hidden;
+html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
+  pointer-events: none;
 }
 
 #age-gate,
@@ -19,6 +19,7 @@ html:not([data-age-verified]) body {
 #age-gate {
   box-sizing: border-box;
   width: min(520px, calc(100% - 32px));
+  max-height: calc(100vh - 32px);
   max-height: calc(100dvh - 32px);
   margin: auto;
   padding: clamp(28px, 6vw, 56px) clamp(24px, 5vw, 48px);
@@ -28,7 +29,9 @@ html:not([data-age-verified]) body {
 }
 
 #age-gate::backdrop {
-  background: #ece4db;
+  background: rgba(31, 22, 17, 0.56);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 #age-gate .age-gate-brand {
@@ -52,6 +55,34 @@ html:not([data-age-verified]) body {
   margin: 0 0 24px;
   font-size: 16px;
   line-height: 1.6;
+}
+
+#age-gate .age-gate-location {
+  margin: 0 0 22px;
+  text-align: left;
+}
+
+#age-gate label {
+  display: block;
+  margin: 0 0 7px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#age-gate select {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 36px 10px 12px;
+  border: 1px solid rgba(42, 26, 18, 0.48);
+  border-radius: 2px;
+  background: #fffdfb;
+  color: #2a1a12;
+  font: 16px/1.4 'Hanken Grotesk', sans-serif;
+}
+
+#age-gate .age-gate-province {
+  margin-top: 12px;
 }
 
 #age-gate .age-gate-actions {
@@ -83,6 +114,11 @@ html:not([data-age-verified]) body {
 #age-gate button:hover,
 #age-gate .age-gate-exit:hover {
   box-shadow: inset 0 0 0 2px currentColor;
+}
+
+#age-gate button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 #age-gate :focus-visible {
