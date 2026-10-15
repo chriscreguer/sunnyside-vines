@@ -35,7 +35,7 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
 }
 
 #age-gate .age-gate-brand {
-  margin: 0 0 28px;
+  margin: 0 0 12px;
   color: #a2431b;
   font-size: 13px;
   font-weight: 700;
@@ -58,34 +58,59 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
 }
 
 #age-gate .age-gate-actions {
-  display: grid;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 12px;
+  margin: 0;
 }
 
-#age-gate button,
-#age-gate .age-gate-exit {
+/* Fallbacks for older pages; the main site supplies the same .btn styles. */
+:where(#age-gate) .btn,
+:where(#age-gate) .age-gate-exit {
   box-sizing: border-box;
-  display: block;
-  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   min-height: 48px;
-  padding: 13px 16px;
-  border: 1px solid #a2431b;
+  padding: 15px 26px;
+  border: none;
   border-radius: 50px;
-  background: #a2431b;
-  color: #fffdfb;
-  font: 600 16px/1.4 'Hanken Grotesk', sans-serif;
+  background: var(--terra, #bb5a2c);
+  color: var(--white, #fffdfb);
+  font: 600 15px/1.4 'Hanken Grotesk', sans-serif;
   text-decoration: none;
   cursor: pointer;
+  transition: transform 0.2s var(--ease, ease), background 0.2s ease;
 }
 
-#age-gate .age-gate-decline {
-  background: transparent;
-  color: #a2431b;
+:where(#age-gate) .age-gate-actions .btn.primary,
+:where(#age-gate) .age-gate-exit {
+  background: var(--ink, #2a1a12);
+  color: var(--white, #fffdfb);
+  box-shadow: 0 18px 32px -24px rgba(42, 26, 18, 0.85);
 }
 
-#age-gate button:hover,
-#age-gate .age-gate-exit:hover {
-  box-shadow: inset 0 0 0 2px currentColor;
+:where(#age-gate) .age-gate-actions .btn.ghost {
+  background: rgba(255, 253, 251, 0.6);
+  border: 1px solid rgba(42, 26, 18, 0.22);
+  color: rgba(42, 26, 18, 0.82);
+}
+
+#age-gate .age-gate-actions .btn {
+  min-width: 120px;
+  justify-content: center;
+}
+
+:where(#age-gate) .btn:hover,
+:where(#age-gate) .age-gate-exit:hover {
+  background: var(--terra-deep, #a2431b);
+  transform: translateY(-2px);
+}
+
+:where(#age-gate) .age-gate-actions .btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.24);
 }
 
 #age-gate button:disabled {
