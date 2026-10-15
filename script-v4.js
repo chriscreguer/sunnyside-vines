@@ -49,14 +49,21 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  if (reduced) {
-    utils.set('.reveal, .hero-wordmark, .hero-sub, .hero-actions, .fan', { opacity: 1 });
-  } else {
-    // splitText only finds its lines/words once the webfonts have landed -
-    // before that it returns empty arrays and nothing animates
-    const ready = document.fonts ? document.fonts.ready : Promise.resolve();
-    Promise.race([ready, new Promise((r) => setTimeout(r, 1500))]).then(buildMotion);
-  }
+  // Prepare the fonts while the gate is open, then start the normal entrance
+  // sequence when the visitor can actually see the page.
+  const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+  let motionStarted = false;
+  const startMotion = () => {
+    if (motionStarted) return;
+    motionStarted = true;
+    if (reduced) {
+      utils.set('.reveal, .hero-wordmark, .hero-sub, .hero-actions, .fan', { opacity: 1 });
+    } else {
+      Promise.race([fontsReady, new Promise((r) => setTimeout(r, 1500))]).then(buildMotion);
+    }
+  };
+  if (document.documentElement.hasAttribute('data-age-verified')) startMotion();
+  else document.addEventListener('age:verified', startMotion, { once: true });
 
   /* Atlas - link each legend entry to its pin on the map */
   const atlas = document.getElementById('atlas');

@@ -32,7 +32,7 @@
   gate.innerHTML = `
     <p class="age-gate-brand">Sunnyside Vines</p>
     <h2 id="age-gate-title">Are you 21 or older?</h2>
-    <div class="hero-actions age-gate-actions">
+    <div class="age-gate-actions">
       <button type="button" class="btn primary age-gate-confirm">Yes</button>
       <button type="button" class="btn ghost age-gate-decline">No</button>
     </div>`;
@@ -66,6 +66,7 @@
     document.documentElement.setAttribute('data-age-verified', '');
     gate.close();
     gate.remove();
+    document.dispatchEvent(new Event('age:verified'));
     document.querySelector('nav a, main a, a[href], button')?.focus({ preventScroll: true });
   });
   decline.addEventListener('click', () => {
@@ -74,6 +75,7 @@
   });
 
   gate.showModal();
+  confirm.focus({ preventScroll: true });
   if (saved?.status === 'denied') {
     denyEntry();
     return;
@@ -92,7 +94,7 @@
     })
     .finally(() => {
       clearTimeout(timeout);
+      if (!gate.isConnected || !confirm.isConnected) return;
       title.textContent = `Are you ${age} or older?`;
-      confirm.focus({ preventScroll: true });
     });
 })();

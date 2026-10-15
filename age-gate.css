@@ -1,9 +1,10 @@
-/* The site stays visible beneath the modal while interaction remains blocked. */
+/* Keep the page laid out for its entrance animations, but blank until entry. */
 html:not([data-age-verified]) {
   overflow: hidden;
 }
 
 html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
+  visibility: hidden;
   pointer-events: none;
 }
 
