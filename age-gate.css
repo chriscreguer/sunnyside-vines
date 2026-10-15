@@ -57,52 +57,6 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
   line-height: 1.6;
 }
 
-#age-gate .age-gate-detected {
-  margin: 0 0 24px;
-  font-size: 14px;
-}
-
-#age-gate .age-gate-detected button.age-gate-change {
-  display: inline;
-  width: auto;
-  min-height: 0;
-  margin: 0 0 0 7px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #a2431b;
-  font: 700 14px/1.4 'Hanken Grotesk', sans-serif;
-  text-decoration: underline;
-}
-
-#age-gate .age-gate-location {
-  margin: 0 0 22px;
-  text-align: left;
-}
-
-#age-gate label {
-  display: block;
-  margin: 0 0 7px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-#age-gate select {
-  display: block;
-  width: 100%;
-  min-height: 46px;
-  padding: 10px 36px 10px 12px;
-  border: 1px solid rgba(42, 26, 18, 0.48);
-  border-radius: 2px;
-  background: #fffdfb;
-  color: #2a1a12;
-  font: 16px/1.4 'Hanken Grotesk', sans-serif;
-}
-
-#age-gate .age-gate-province {
-  margin-top: 12px;
-}
-
 #age-gate .age-gate-actions {
   display: grid;
   gap: 12px;
@@ -142,11 +96,6 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
 #age-gate :focus-visible {
   outline: 3px solid #2a1a12;
   outline-offset: 4px;
-}
-
-#age-gate .age-gate-note {
-  margin: 24px 0 0;
-  font-size: 13px;
 }
 
 .age-gate-noscript {
