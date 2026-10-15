@@ -38,7 +38,11 @@
     <p class="age-gate-brand">Sunnyside Vines</p>
     <h2 id="age-gate-title">Welcome to Sunnyside Vines</h2>
     <p id="age-gate-description">Please confirm you are old enough to purchase wine where you are.</p>
-    <div class="age-gate-location">
+    <div class="age-gate-detected">
+      <span id="age-gate-location-status" role="status">Checking your location…</span>
+      <button type="button" class="age-gate-change">Change</button>
+    </div>
+    <div class="age-gate-location" hidden>
       <label for="age-gate-country">Your current location</label>
       <select id="age-gate-country">
         <option value="US">United States</option>
@@ -88,8 +92,13 @@
   const country = gate.querySelector('#age-gate-country');
   const region = gate.querySelector('#age-gate-region');
   const province = gate.querySelector('.age-gate-province');
+  const locationControls = gate.querySelector('.age-gate-location');
+  const locationStatus = gate.querySelector('#age-gate-location-status');
+  const changeLocation = gate.querySelector('.age-gate-change');
   const confirm = gate.querySelector('.age-gate-confirm');
   const decline = gate.querySelector('.age-gate-decline');
+  let checking = saved?.status !== 'denied';
+  let manualChange = false;
   if (saved?.status === 'denied' && Object.hasOwn(ages, saved.country)) {
     country.value = saved.country;
     region.value = saved.region || '';
@@ -107,13 +116,65 @@
     const age = selectedAge();
     confirm.textContent = `Yes, I am ${age} or older`;
     decline.textContent = `No, I am under ${age}`;
-    confirm.disabled = isCanada && !region.value;
-    decline.disabled = isCanada && !region.value;
+    confirm.disabled = checking || (isCanada && !region.value);
+    decline.disabled = checking || (isCanada && !region.value);
   }
 
-  country.addEventListener('change', updateAge);
-  region.addEventListener('change', updateAge);
+  function locationName() {
+    const countryName = country.selectedOptions[0].textContent.replace(/ \(.+\)$/, '');
+    return country.value === 'CA' && region.value
+      ? `${region.selectedOptions[0].textContent}, ${countryName}`
+      : countryName;
+  }
+
+  changeLocation.addEventListener('click', () => {
+    manualChange = true;
+    locationControls.hidden = false;
+    country.focus();
+  });
+  country.addEventListener('change', () => {
+    manualChange = true;
+    region.value = '';
+    locationStatus.textContent = `Location: ${locationName()}`;
+    updateAge();
+  });
+  region.addEventListener('change', () => {
+    manualChange = true;
+    locationStatus.textContent = `Location: ${locationName()}`;
+    updateAge();
+  });
   updateAge();
+
+  async function detectLocation() {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 2500);
+    try {
+      const response = await fetch('/api/visitor-region', {
+        cache: 'no-store',
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error('Location unavailable');
+      const detected = await response.json();
+      if (!manualChange && detected.country) {
+        country.value = Object.hasOwn(ages, detected.country) ? detected.country : 'OTHER';
+        if (country.value === 'CA') {
+          region.value = detected.region || '';
+          if (!region.value) locationControls.hidden = false;
+        }
+        locationStatus.textContent = country.value === 'CA' && !region.value
+          ? 'Canada detected · Select your province or territory'
+          : `Detected: ${locationName()}`;
+      } else if (!manualChange) {
+        locationStatus.textContent = 'Location unavailable · Using U.S. age limit';
+      }
+    } catch (_) {
+      if (!manualChange) locationStatus.textContent = 'Location unavailable · Using U.S. age limit';
+    } finally {
+      clearTimeout(timeout);
+      checking = false;
+      updateAge();
+    }
+  }
 
   function remember(value) {
     try {
@@ -132,7 +193,8 @@
     gate.querySelector('#age-gate-title').textContent = `For guests ${age} and older`;
     gate.querySelector('#age-gate-description').textContent =
       `You must be at least ${age} years old to visit Sunnyside Vines from this location. Thank you for understanding.`;
-    gate.querySelector('.age-gate-location').remove();
+    gate.querySelector('.age-gate-detected').remove();
+    locationControls.remove();
     gate.querySelector('.age-gate-actions').innerHTML =
       '<a class="age-gate-exit" href="about:blank">Leave site</a>';
     gate.querySelector('.age-gate-exit').focus();
@@ -153,4 +215,8 @@
 
   gate.showModal();
   if (saved?.status === 'denied') denyEntry();
+  else {
+    confirm.focus({ preventScroll: true });
+    detectLocation();
+  }
 })();

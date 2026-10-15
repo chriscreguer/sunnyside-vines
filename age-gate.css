@@ -57,6 +57,24 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
   line-height: 1.6;
 }
 
+#age-gate .age-gate-detected {
+  margin: 0 0 24px;
+  font-size: 14px;
+}
+
+#age-gate .age-gate-detected button.age-gate-change {
+  display: inline;
+  width: auto;
+  min-height: 0;
+  margin: 0 0 0 7px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #a2431b;
+  font: 700 14px/1.4 'Hanken Grotesk', sans-serif;
+  text-decoration: underline;
+}
+
 #age-gate .age-gate-location {
   margin: 0 0 22px;
   text-align: left;
