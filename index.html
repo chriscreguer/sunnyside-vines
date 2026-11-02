@@ -305,12 +305,12 @@
                     <div class="val">New York City, New York</div>
                 </div>
             </div>
-            <form class="contact-form reveal" id="contactForm">
+            <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/xjkalwan" method="POST">
                 <div class="field-row">
                     <div><label for="name">Your name</label><input type="text" id="name" name="name"></div>
-                    <div><label for="email">Your email</label><input type="email" id="email" name="email"></div>
+                    <div><label for="email">Your email</label><input type="email" id="email" name="email" required></div>
                 </div>
-                <div><label for="message">Message</label><textarea id="message" name="message" placeholder="How can we help?"></textarea></div>
+                <div><label for="message">Message</label><textarea id="message" name="message" required placeholder="How can we help?"></textarea></div>
                 <button type="submit" class="btn" style="justify-content:center">Send message</button>
             </form>
         </div>

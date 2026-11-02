@@ -141,17 +141,30 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Contact form (no backend yet) */
   const form = document.getElementById('contactForm');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    // Posts to Formspree, which emails the message on
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = form.querySelector('button');
       const original = btn.textContent;
-      btn.textContent = 'Thanks, we\'ll be in touch';
       btn.disabled = true;
+      let wait = 2600;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        if (!res.ok) throw new Error(res.status);
+        btn.textContent = 'Thanks, we\'ll be in touch';
+        form.reset();
+      } catch {
+        btn.textContent = 'Couldn\'t send. Email info@sunnysidevines.com';
+        wait = 6000;
+      }
       setTimeout(() => {
         btn.textContent = original;
         btn.disabled = false;
-        form.reset();
-      }, 2600);
+      }, wait);
     });
   }
 });
