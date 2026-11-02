@@ -61,12 +61,6 @@ a { color: inherit; text-decoration: none; }
 /* ── Reusable atoms ─────────────────────────────────────────────────────── */
 .wrap { width: min(1200px, 92vw); margin: 0 auto; }
 
-.eyebrow {
-  font-size: clamp(14px, 1.4vw, 17px);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--terra);
-}
 
 h1, h2, h3, h4, .lede {
   font-family: 'Fraunces', serif;
@@ -84,6 +78,7 @@ h1, h2, h3, h4, .lede {
 
 .btn {
   display: inline-flex;
+  font-family: inherit;
   align-items: center;
   gap: 10px;
   font-weight: 600;
@@ -274,7 +269,6 @@ h1, h2, h3, h4, .lede {
 .section.sand  { background: var(--sand); }
 
 .section-head { max-width: 760px; }
-.section-head .eyebrow { margin-bottom: 18px; }
 
 .section.mission {
   /* the hero fan overhangs 92px into this section - clear it with room to breathe */
@@ -395,17 +389,39 @@ h1, h2, h3, h4, .lede {
   list-style: none;
 }
 .atlas-entry {
+  position: relative;
   display: grid;
   grid-template-columns: 24px 62px 1fr;
+  grid-template-areas: "num img body";
   gap: 16px;
   align-items: start;
   padding: 18px 16px;
   margin: 0 -16px;
   border-bottom: 1px solid rgba(42, 26, 18, 0.16);
+  border-radius: 10px;
+  scroll-margin-top: 120px;
   transition: background 0.3s var(--ease);
 }
 .atlas-entry:last-child { border-bottom: none; }
+.atlas-entry:focus-visible { outline: 2px solid var(--terra); outline-offset: -2px; }
+/* hover only tints the row and fills the number - nothing changes size */
+.atlas-entry.is-active { background: rgba(237, 198, 162, 0.22); }
+/* the whole row links to that producer's wines on the shop page */
+.atlas-entry-link { color: inherit; }
+.atlas-entry-link::after { content: ""; position: absolute; inset: 0; border-radius: 10px; }
+.atlas-entry-link:focus-visible { outline: none; }
+.atlas-entry:has(.atlas-entry-link:focus-visible) { outline: 2px solid var(--terra); outline-offset: -2px; }
+.atlas-entry-more {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  transition: color 0.2s ease;
+}
+.atlas-entry.is-active .atlas-entry-more { color: var(--terra-deep); }
 .atlas-entry-num {
+  grid-area: num;
   display: grid;
   place-items: center;
   width: 22px;
@@ -417,10 +433,11 @@ h1, h2, h3, h4, .lede {
   font-size: 12px;
   font-weight: 650;
   color: var(--terra);
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-.atlas-entry.is-active .atlas-entry-num { background: rgba(187, 90, 44, 0.14); }
+.atlas-entry.is-active .atlas-entry-num { background: var(--terra); border-color: var(--terra); color: var(--white); }
 .atlas-entry-img {
+  grid-area: img;
   margin: 0;
   aspect-ratio: 1;
   border-radius: 8px;
@@ -428,6 +445,7 @@ h1, h2, h3, h4, .lede {
   box-shadow: 0 10px 18px -16px rgba(42, 26, 18, 0.8);
 }
 .atlas-entry-img img { width: 100%; height: 100%; object-fit: cover; }
+.atlas-entry-body { grid-area: body; }
 .atlas-entry h3 {
   margin: 4px 0 7px;
   font-size: clamp(19px, 1.6vw, 23px);
@@ -435,78 +453,112 @@ h1, h2, h3, h4, .lede {
 }
 .atlas-entry p { font-size: 14px; line-height: 1.5; color: rgba(42, 26, 18, 0.66); }
 
-/* Wines teaser strip */
-.wines-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 46px;
-  flex-wrap: wrap;
-}
-
-#wines { padding-bottom: clamp(54px, 7vw, 84px); }
-
+/* Wine lineup - every bottle in one row, overlapping more as space runs out */
+/* the same space above the bottles (from the producers band) as below them
+   (to the story card) */
+#wines { padding: clamp(64px, 9vw, 120px) 0; }
 #story {
-  padding-top: clamp(16px, 2vw, 32px);
+  padding-top: 0;
   padding-bottom: clamp(80px, 10vw, 130px);
 }
-/* wines carousel - four in view, the rest a click (or swipe) away */
-.wines-carousel { position: relative; }
-.wines-row {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  /* room for the card shadows, clawed back so the layout doesn't grow */
-  padding: 4px 4px 48px;
-  margin: -4px -4px -28px;
-  scroll-padding-left: 4px;
-}
-.wines-row::-webkit-scrollbar { display: none; }
-.wines-row .wine-card {
-  flex: 0 0 calc(25% - 15px);
-  scroll-snap-align: start;
-}
-.wines-head-actions {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.wines-nav { display: flex; gap: 8px; }
-.wines-arrow {
-  width: 42px;
-  height: 42px;
+/* wide screens: heading + link in a left column, level with the middle of the
+   bottles packed to the right */
+.lineup-split {
   display: grid;
-  place-items: center;
-  border: 1px solid rgba(42, 26, 18, 0.16);
-  border-radius: 50%;
-  background: var(--white);
-  color: var(--ink);
-  box-shadow: var(--shadow-soft);
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
-}
-.wines-arrow:hover {
-  background: rgba(187, 90, 44, 0.1); /* --terra washed over the white base */
-  border-color: rgba(187, 90, 44, 0.45);
-  color: var(--terra-deep);
-}
-.wines-arrow[disabled] { opacity: 0.35; box-shadow: none; pointer-events: none; }
-
-/* homepage teaser - Los Ángeles art cards keep the same 300px media as the rest */
-.wines-row .wine-media.producer-losangeles {
-  height: 300px;
+  grid-template-columns: minmax(260px, 0.4fr) 1fr;
+  gap: 40px;
   align-items: center;
-  line-height: normal;
 }
-.wines-row .wine-media.producer-losangeles img {
+.lineup-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+.lineup-sub { margin-top: 12px; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.5; color: var(--ink-soft); max-width: 30ch; }
+.lineup-link {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--terra-deep);
+  text-decoration: underline;
+  text-decoration-color: rgba(162, 67, 27, 0.35);
+  text-underline-offset: 4px;
+}
+.lineup-link:hover { color: var(--terra); text-decoration-color: currentColor; }
+.lineup {
+  --h: clamp(140px, 22vw, 300px);   /* bottle height */
+  --overlap: -0.06;                 /* share of the height each bottle tucks behind the last */
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  /* no padding: the hover name tags float up into the section's own padding */
+}
+/* a soft pool of shadow for the whole row to stand in */
+.lineup::after {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: -15px;
+  height: 30px;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(60, 26, 8, 0.2), transparent 72%);
+  z-index: -1;
+}
+.lineup-bottle { position: relative; display: block; flex: none; }
+.lineup-bottle + .lineup-bottle { margin-left: calc(var(--h) * var(--overlap)); }
+.lineup-bottle img {
   display: block;
+  height: var(--h);
   width: auto;
-  height: auto;
-  max-width: 88%;
-  max-height: 88%;
+  filter: drop-shadow(0 8px 6px rgba(60, 26, 8, 0.16));
+  transition: transform 0.35s var(--ease);
+}
+.lineup-bottle:focus-visible { outline: none; }
+/* the tag rides above the neighbours; the bottle keeps its place in the stack */
+.lineup-bottle:hover .lineup-tag, .lineup-bottle:focus-visible .lineup-tag { z-index: 20; }
+.lineup-bottle:hover img, .lineup-bottle:focus-visible img { transform: translateY(-10px); }
+.lineup-tag {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  transform: translate(-50%, 6px);
+  padding: 7px 13px 8px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.3s var(--ease);
+}
+.lineup-tag i { font-weight: 400; opacity: 0.75; }
+.lineup-tag small { display: block; font-size: 11.5px; font-weight: 400; opacity: 0.65; }
+.lineup-bottle:hover .lineup-tag, .lineup-bottle:focus-visible .lineup-tag { opacity: 1; transform: translate(-50%, 0); }
+/* narrower: heading on top with the link on the right; the row starts at the
+   heading's left edge so the two still line up */
+@media (max-width: 1000px) {
+  .lineup-split { grid-template-columns: 1fr; gap: clamp(28px, 5vw, 44px); }
+  .lineup-head { flex-direction: row; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 14px 24px; }
+  .lineup { justify-content: flex-start; --h: min(34vw, 330px); --overlap: -0.05; }
+}
+/* phones: capped so the bottles don't loom */
+@media (max-width: 760px)  { .lineup { --h: min(40vw, 190px); --overlap: -0.1; } }
+/* the heading's line box adds air above the letters and the bottles' shadow
+   eats into the space below, so on phones nudge the padding to look even */
+@media (max-width: 760px) {
+  #wines { padding: 76px 0 84px; }
+  /* phones: everything centred, "Shop all wines" under the bottles */
+  .lineup-split { gap: 44px; }
+  .lineup-head { display: contents; }
+  .lineup-head > div { order: 1; text-align: center; }
+  .lineup-sub { margin-left: auto; margin-right: auto; }
+  .lineup { order: 2; justify-content: center; }
+  .lineup-link { order: 3; justify-self: center; }
 }
 
 /* Story - big pull quote on terracotta */
@@ -524,15 +576,15 @@ h1, h2, h3, h4, .lede {
   gap: clamp(28px, 5vw, 56px);
   align-items: center;
 }
-.story .eyebrow { color: rgba(255,255,255,0.8); margin-bottom: 20px; }
-.story-text p:not(.eyebrow) {
+.story-text p {
   font-family: 'Fraunces', serif;
   font-optical-sizing: auto;
   font-size: clamp(22px, 2.9vw, 37px);
   font-weight: 500;
   line-height: 1.28;
   letter-spacing: -0.005em;
-  max-width: 22ch;
+  max-width: 19ch;
+  text-wrap: balance;
 }
 .story-text b {
   font-weight: 500;
@@ -546,6 +598,12 @@ h1, h2, h3, h4, .lede {
   transform: rotate(2.5deg);
 }
 .story-img img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 5 / 4; }
+/* trade orders live on the story card: it's the line about shops and sommeliers */
+.story-actions { display: flex; align-items: center; gap: 14px 22px; flex-wrap: wrap; margin-top: clamp(26px, 3vw, 36px); }
+.btn.light { background: var(--cream); color: var(--terra-deep); }
+.btn.light:hover { background: var(--white); }
+.story-email { font-size: 15px; color: rgba(255, 255, 255, 0.82); text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.4); text-underline-offset: 3px; }
+.story-email:hover { color: var(--white); }
 
 /* Contact */
 .contact-grid {
@@ -556,8 +614,9 @@ h1, h2, h3, h4, .lede {
 }
 .contact-info h2 { font-size: clamp(29px, 3.8vw, 46px); line-height: 1.14; max-width: 14ch; }
 .contact-info .row { margin-top: 26px; }
-.contact-info .label { font-size: 13px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; }
-.contact-info .val { font-size: clamp(18px, 2vw, 22px); font-weight: 500; margin-top: 4px; }
+/* the site's small-caps label: same as the wine pages' spec labels and producer regions */
+.contact-info .label { font-size: 11px; font-weight: 600; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.12em; }
+.contact-info .val { font-size: clamp(18px, 2vw, 22px); font-weight: 500; margin-top: 6px; }
 .email-val { display: inline-flex; align-items: center; gap: 10px; }
 .copy-btn {
   display: inline-grid; place-items: center;
@@ -601,6 +660,25 @@ h1, h2, h3, h4, .lede {
 .footer-links a { font-size: 14px; color: rgba(255,255,255,0.75); }
 .footer-links a:hover { color: #fff; }
 .footer-bottom { margin-top: 50px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,0.5); }
+.footer-legal { display: flex; gap: 8px 22px; flex-wrap: wrap; }
+.footer-legal a { color: rgba(255,255,255,0.6); }
+.footer-legal a:hover { color: #fff; }
+.newsletter { width: min(380px, 100%); }
+.newsletter label { display: block; font-family: 'Fraunces', serif; font-size: 20px; color: #fff; }
+.newsletter p { margin-top: 6px; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.55); }
+.newsletter-row { display: flex; gap: 8px; margin-top: 16px; }
+.newsletter-row input {
+  flex: 1; min-width: 0;
+  font: inherit; font-size: 15px;
+  padding: 12px 18px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50px;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+}
+.newsletter-row input::placeholder { color: rgba(255,255,255,0.45); }
+.newsletter-row input:focus { outline: none; border-color: var(--terra-soft); }
+.newsletter-row .btn { padding: 12px 20px; }
 
 /* ── Motion ─────────────────────────────────────────────────────────────── */
 /* Everything below only hides content when JS is there to bring it back. */
@@ -652,7 +730,6 @@ h1, h2, h3, h4, .lede {
   .contact-grid, .story { grid-template-columns: 1fr; }
   .mission-statement p { max-width: none; }
   .story-img { transform: rotate(1.5deg); margin-top: 8px; }
-  .wines-row .wine-card { flex-basis: calc(50% - 10px); }
   .fan-1 { transform: rotate(-7deg) translate(22px, 0) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
   .fan-2 { transform: translateY(10px) scale(1.06) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
   .fan-3 { transform: rotate(7deg) translate(-22px, 4px) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
@@ -676,8 +753,44 @@ h1, h2, h3, h4, .lede {
   .fan-2 { transform: translateY(10px) scale(1.06) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
   .fan-3 { transform: rotate(7deg) translate(-20px, 4px) translateY(var(--deal-y)) rotate(var(--deal-rot)) scale(var(--deal-scale)); }
   .section.mission { padding-top: clamp(180px, 49vw, 208px); }
+  .mission-statement { padding: 0 6px; }
+  .mission-statement p { font-size: 23px; line-height: 1.32; }
   .atlas-entry { grid-template-columns: 22px 52px 1fr; gap: 12px; }
-    .contact-form .field-row { grid-template-columns: 1fr; }
+  .contact-form .field-row { grid-template-columns: 1fr; }
   .footer-logo { width: 44px; }
-  .footer-bottom { flex-direction: column; }
+  /* footer: three clear blocks (brand + links, newsletter, legal) with room
+     between them */
+  .footer { padding: 56px 0 36px; }
+  .footer-top { flex-direction: column; align-items: stretch; gap: 44px; }
+  .footer-links { gap: 6px 20px; margin-top: 20px; }
+  .footer-links a { padding: 4px 0; }
+  .footer-bottom { flex-direction: column; gap: 18px; margin-top: 44px; }
+  .footer-legal { display: grid; grid-template-columns: auto auto; justify-content: start; gap: 12px 28px; }
 }
+
+/* ── Language switch (injected into the nav by js/i18n.js) ─────────────── */
+.lang-toggle {
+  display: flex;
+  padding: 6px;
+  gap: 2px;
+  background: rgba(255, 253, 248, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 50px;
+  box-shadow: var(--shadow-soft);
+}
+.lang-toggle button {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 50px;
+  background: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.lang-toggle button:hover { color: var(--ink); }
+.lang-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--white); }

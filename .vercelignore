@@ -1,0 +1,18 @@
+# Production is deployed from this folder with the Vercel CLI, which uploads
+# everything that isn't listed here. Keep working files off the public site.
+.git
+.claude
+.agents
+.windsurf
+.DS_Store
+**/.DS_Store
+*.wav
+new assets
+docs/superpowers
+SHOPIFY-SETUP.md
+skills-lock.json
+generate-wine-pages.js
+make-shelf-cutouts.py
+shelf-lab.html
+lineup-lab.html
+tools

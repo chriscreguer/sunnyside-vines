@@ -41,16 +41,19 @@
         <a href="index.html" class="nav-mark" aria-label="Sunnyside Vines home">
             <img src="img/logo_hero.svg" alt="">
         </a>
+        <div class="nav-right">
         <div class="nav-links" id="navLinks">
-            <a href="#producer">Producers</a>
-            <a href="#wines">Wines</a>
-            <a href="#story">About</a>
-            <a href="#contact">Contact</a>
-            <a href="shop.html" class="cta">Shop</a>
+            <a href="#producer" data-i18n="nav.producers">Producers</a>
+            <a href="#wines" data-i18n="nav.wines">Wines</a>
+            <a href="#story" data-i18n="nav.about">About</a>
+            <a href="trade.html" data-i18n="nav.trade">Trade</a>
+            <a href="#contact" data-i18n="nav.contact">Contact</a>
+            <a href="shop.html" class="cta" data-i18n="nav.shop">Shop</a>
         </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" data-i18n-attr="aria-label:nav.menu">
             <span></span><span></span><span></span>
         </button>
+        </div>
     </nav>
 
     <!-- Hero -->
@@ -58,10 +61,10 @@
         <div class="hero-copy">
             <img src="img/wordmark.png" alt="Sunnyside Vines" class="hero-wordmark">
             <h1 class="sr-only">Sunnyside Vines</h1>
-            <p class="hero-sub">Small-production Spanish wines, imported direct from growers we know by name.</p>
+            <p class="hero-sub" data-i18n="home.heroSub">Small-production Spanish wines, imported direct from growers we know by name.</p>
             <div class="hero-actions">
-                <a href="shop.html" class="btn primary">Shop wines</a>
-                <a href="#producer" class="btn ghost">Our producers</a>
+                <a href="trade.html" class="btn primary" data-i18n="home.tradeOrders">Trade orders</a>
+                <a href="shop.html" class="btn ghost" data-i18n="home.shopWines">Shop wines</a>
             </div>
         </div>
 
@@ -76,7 +79,7 @@
     <section class="section cream mission">
         <div class="wrap">
             <blockquote class="mission-statement reveal">
-                <p>We believe the most memorable wines come from <em>small, family-run vineyards,</em> where heritage is honored and every bottle tells a story.</p>
+                <p data-i18n="home.mission">We believe the most memorable wines come from <em>small, family-run vineyards,</em> where heritage is honored and every bottle tells a story.</p>
             </blockquote>
         </div>
     </section>
@@ -85,12 +88,12 @@
     <section class="section sand" id="producer">
         <div class="wrap">
             <div class="producers-head">
-                <h2 class="lede reveal">Our producers</h2>
+                <h2 class="lede reveal" data-i18n="home.producersTitle">Our producers</h2>
             </div>
             <div class="atlas" id="atlas">
                 <figure class="atlas-figure reveal">
                     <svg class="atlas-map" viewBox="0 0 800 640" role="img" aria-labelledby="atlasTitle">
-      <title id="atlasTitle">Map of Spain: Bodegas Peñafalcón and Convento Oreja in Peñafiel, Ribera del Duero; Los Ángeles in Pozuelo de Aragón, Campo de Borja</title>
+      <title id="atlasTitle">Map of Spain: Bodegas Peñafalcón and Convento Oreja in Peñafiel, Ribera del Duero; Cooper Cellars – Los Ángeles in Pozuelo de Aragón, Campo de Borja</title>
       <defs>
         <clipPath id="atlasDetailClip"><circle cx="158" cy="424" r="116"/></clipPath>
         <clipPath id="atlasLandClip"><path d="M465.8 49.7L465.7 53.3L468 55L468.6 57.1L473.8 56.5L475.8 60.4L477.7 60L479.3 57.4L486.6 58.7L488.2 60.4L487.2 68.8L483.7 73.1L485.6 75.9L490.8 76.7L491.7 72L495.2 70.7L493.6 72.8L494.9 74.9L503.2 78.5L510.2 79.8L515.1 82.7L525.6 82.5L526.9 87.3L532.3 89.8L537 95.7L538.9 94.7L538.9 92.9L545.3 94L550.9 89.7L556.1 93.9L560.3 93L560.6 95.7L563 99.1L567.7 101.4L579.5 97.6L583.5 98.7L585.8 101.9L590.1 97.9L593.4 100.5L607.6 99.3L608.1 97.2L606 95L607 87.6L609.9 86.8L616 87.7L622.4 91.1L624 90L632 91.6L635.9 96.4L646.8 95.6L652.3 104.2L651.3 109.4L652.6 109.2L653.9 111.3L651.6 112.7L654.1 116.7L658.1 116.8L659.6 115.1L665 113.5L665.7 111.2L668.7 110.5L681.7 114.8L684.1 120.1L686.9 121.5L689.9 120.5L693.9 115.7L701.9 114.2L710.5 117.1L712 119.5L716.1 121.3L717.9 119L724.5 119.6L723.1 117.1L725.8 114.3L731.4 113.4L739.4 108.2L744.9 108.2L748.4 110.9L753.8 110.2L754.7 116.5L762.4 118L759.7 124.7L756.7 125L754.2 123.6L751.5 127.1L752.2 133.1L758 138.3L757.1 141.1L759.7 147.8L755.6 156L753.6 155.9L751.5 157.7L751.1 159.9L743.8 167.3L738.5 169.1L735.1 173.1L716.6 183.1L706.4 190.6L699.2 202.4L692.9 205.8L665.1 213.6L646.6 221.1L644.2 224.9L639.7 224.1L635 225.9L618.1 245.2L617.1 247.6L620.5 249L621.4 248.5L620.4 247.4L621.4 247.4L626 251.3L627.9 251.6L627.1 254.9L622.9 257.1L616.9 264.8L613.3 265.9L611.8 263.8L616 264.1L619.9 259.3L612.1 261.3L610.1 263.2L598.6 287.6L590.3 296.8L587 304.2L581 310.4L567.9 333.4L567.2 337.4L560.7 349.2L560.7 355.9L562.6 364.3L568.3 375.1L566.7 376.4L567.8 380.6L572.3 389L575.6 393.9L580.4 398L591.8 401.5L593.8 403.6L592.9 404.2L596.5 406.1L597 408.2L593.5 409.8L591.7 412.8L588 415L588 417.3L580.5 419.1L578.8 424.8L572.6 426L563.5 430.9L559.6 435.4L558.6 439.3L555.8 439.8L555 441.6L552.8 441.6L553.5 451.8L548.2 453.3L546.3 455.5L544.9 469.1L541.1 472.9L538.8 479.2L538.8 484.4L537.1 482.4L535.7 486.5L533.1 488.8L536.1 494.6L539.6 496.5L542.5 496.3L542.7 498.1L541.4 499.4L529.3 503.5L526.2 502L519.2 501.8L517.2 503.6L518.2 505.7L509.6 502.2L508.5 504L504.6 503.7L495.6 510.2L494.1 514.5L493 514.1L483.5 519.8L480 526.2L474.9 532.2L469.4 549.4L469.9 553.1L464.4 556.4L459.5 566.2L454.8 569.9L451.2 569.4L446.2 563.7L441.2 561.7L436.7 563.4L433.7 562.4L428.8 563.3L425.3 570.4L422.7 573.1L419 574.1L416.6 574.3L412.5 571.7L410.9 572.8L405.5 568.8L402.1 570L387 568.7L380.7 569.5L375.3 573.4L371.4 573.3L369 571.4L366.9 572.1L363.7 569.7L355.5 571.2L348.8 569L341.1 570.9L335.1 569.3L331.8 571L324.6 572L313.4 571L311.5 572L305.7 582.1L301.7 582.6L300 586L297.2 587.8L293.2 588.9L281.9 587.7L276.1 591.5L271.8 591.8L263.9 594.9L259.5 603.7L257.2 605.2L253.9 615.8L248.5 612.7L247.4 615.1L247.5 621.8L236.5 626L235.4 623.6L231.7 621.1L230.1 621.7L225 619.6L217.5 611.7L210 611L205.9 603.8L202.5 601.9L201 596.6L193.5 583.6L196.7 585.3L198.3 588.6L201.7 585.5L198.8 585.6L198.3 580.5L195.4 577.6L188.4 575.4L186.3 566.4L191.9 563.2L192.5 556.3L194.7 554.5L199.8 555L201.6 552.7L198.8 554.1L196 553.1L192.2 554.9L191.9 561.2L189.2 562.1L182.6 550L167.7 538.4L158.7 533L157.3 529.2L161.5 523.1L156.5 527.7L154.5 527.6L156.5 532.5L145.9 528L144.2 528.7L146.8 529.5L131.7 529.3L129.5 530.7L127.3 530.3L125.5 526.2L123.8 507.5L120.4 501L121.4 497.6L124.2 494.9L126.2 487.7L135.1 478.6L137.6 468.9L144.6 467.6L147 464.3L153 465.9L158.2 452.5L153.4 452.1L148.6 453.9L145 446.1L136.3 433.8L133.8 432L135.3 430.3L134.7 428.3L136.6 423.6L139.7 418.9L138.5 416.6L139.4 410.8L147.6 403.4L153.5 400.9L153 397L159 388.7L158.4 384.5L155.3 381.1L148.1 381.1L147.6 376L143.1 373.9L141.9 371L142.9 368L138.6 362.3L139.7 353.3L135.6 351L130.7 345.6L128 342.1L125.8 335.3L138.7 336.5L145.1 335.6L148.3 336.6L158 335.5L159.6 327.1L164.1 322.6L164.4 318.2L167.4 311.2L163.1 303.8L159.6 302.4L158.1 297.4L159.9 294.1L168.2 291.3L168.8 288.9L173.4 284.3L170.2 280.1L170 277.5L172.8 271.9L170.7 266.6L173.1 261.6L171.9 252.9L172.3 246.5L173.5 245.2L166.5 232.6L168.7 229.5L174.8 229.1L177.2 225.7L177.9 221.8L184.6 213.5L189.5 213.4L193.5 211.7L199.3 205.4L200.5 205.5L200.6 203.9L204 202.9L206.6 196.3L211.1 190.7L207.4 186.1L202 183.1L196.5 182L193.9 183.7L191.7 183.2L189.8 176.8L193.2 167L190.3 165.6L190.7 161L188.5 159.4L187.7 161L181.6 161.6L176.1 157.3L174.2 160.4L169 160.2L166.3 158.3L162.8 160.1L156.7 156.4L154.3 158L154.2 162.9L152.9 164.6L146.8 167L142.7 167.1L139.7 169.8L138.3 166.1L135.6 165L133.7 167.5L130.2 167.8L129.3 166.5L130.3 164.1L123.7 161.8L113.5 164.5L113.1 160.2L110.7 163.7L107.8 163.8L104.5 167.4L96.8 167.4L97.1 164.4L94.7 162.8L94.3 160L102.6 149.7L100.3 147.1L96.4 147.2L95.7 140.6L88.3 144.2L71.9 147.3L69.1 151.2L64.3 153.3L57.4 159.2L56.4 158.8L56.6 141.1L60.7 140.5L59.6 138L62.2 135.3L73.3 127.1L73.2 124.1L70.2 127.8L63.7 130.5L58.9 130.5L59.9 126.8L61.4 127.5L61.4 124L64.8 124.1L71.9 116.8L69.7 116.8L65.9 119.1L60.9 119.1L58.6 114.9L55.5 113.7L59.2 111.7L60.3 112.7L59.4 113.9L62.2 114.6L62.8 106.2L65.7 103.7L68.7 97.3L65.3 100.8L62.4 97.4L60.4 102.3L58.9 102.1L59.3 101.3L56.5 103L57.3 104L54.5 105L51.8 108.6L50.8 104.9L48.7 103.3L51.6 94.8L59.5 88.6L60.3 85.6L59.2 84.9L58.8 86.7L56.5 88.2L50.9 87.9L49.6 90.6L47.8 90.6L46.1 86.2L48.2 84.7L45.9 82.7L46.6 78L43.3 75.3L43.2 77.1L40.9 76.3L38.8 79.6L37.6 77.1L40.4 69.9L39 66.8L42.8 62.4L44.3 63.4L49.2 60.7L43.5 60.6L43 59.2L45.9 56.8L47.8 55.9L51.9 56.8L55.1 53.4L56.5 54.4L59.6 53.9L60.6 53.2L56.7 50L65.3 46.1L73.5 50.2L79.3 48.1L81.2 49.1L88 44.6L91.2 43.9L93 46.9L94.5 42.5L98 44.3L101 50.1L101.3 44L103.4 42.1L98.4 41L96.2 39.1L103.4 37.7L104.1 36.3L99 37.1L99 36L94.7 37.4L95.8 33.4L97.2 32.7L96.2 30L100.8 29.5L109.3 23.6L110 25L111.3 24.8L110.1 21.9L111.1 19.6L115.5 19.1L119.8 15.5L121.4 15.9L123.1 20L121.9 19.4L121.5 22L119.5 23.1L122.3 23.3L121.9 21L124.6 21.2L125.1 19.2L130.8 16.5L132.5 14L133.4 15.7L131.9 19.2L134.9 17.3L136.1 22.4L140.4 19.2L150.1 23.6L153.4 30.1L156 31.6L155.1 33.1L168 33.8L167.7 40L170.4 34.1L173.7 33.5L187.3 34.6L190.4 33L198.2 35.8L200.9 35.3L200.6 33.7L203.5 34.9L209.3 34.4L214.6 32.5L217.1 34.1L223.2 34.7L225.9 33.4L232.4 33.5L232.5 29.7L235 29.4L235.7 27.8L238.4 28.8L243.6 35.3L244.4 34.2L245.4 36L261.5 36.8L260.3 40.5L263.5 38.1L266.8 38.2L273.6 42.1L285.1 44.7L287 43.7L298.7 48.1L311.6 49.4L313 50.9L315.8 49.4L318.9 50.9L320 49.7L329.7 49.3L339.7 45.7L341.5 46.8L343.8 43.8L350.3 42.2L353.5 43.6L349.3 46.3L351.1 47.8L353.4 45.7L354.9 46.8L354.3 44.2L355.8 44.7L355.8 43.6L364.3 40.6L368.5 43.6L372.7 44.6L372.9 46.1L370.5 45.6L368.7 47.4L371 48.8L371.8 47.4L381.9 49.4L389.8 53.2L392.2 52.3L396.8 55.8L395.6 51.5L400.6 48.3L400.2 47.2L410.3 45.4L413.4 47.6L414.8 52L416.5 48.5L426.6 51.6L427.7 53.3L433.3 55.8L438 56.7L443 55.7L446.9 57.8L456.4 53.3L458.8 55L459.6 54.4L458.3 53.3L464.8 49L465.8 49.7Z"/></clipPath>
@@ -178,28 +181,31 @@
     </svg>
                 </figure>
                 <ol class="atlas-index">
-                <li class="atlas-entry reveal" data-estate="penafalcon">
+                <li class="atlas-entry reveal" id="producer-penafalcon" data-estate="penafalcon">
                     <span class="atlas-entry-num">1</span>
                     <figure class="atlas-entry-img"><img src="img/roseto_family_vineyard_landscape.jpeg" alt="Peñafalcón vineyards above the Duero"></figure>
                     <div class="atlas-entry-body">
-                        <h3>Bodegas Peñafalcón</h3>
-                        <p>Organic Tempranillo from limestone slopes above the river, aged long in oak. Casimiro's family has pressed wine in Peñafiel's cellars since the 17th century.</p>
+                        <h3><a class="atlas-entry-link" href="shop.html#penafalcon">Bodegas Peñafalcón</a></h3>
+                        <p data-i18n="home.penafalcon">Organic Tempranillo from limestone slopes above the river, aged long in oak. Casimiro's family has pressed wine in Peñafiel's cellars since the 17th century.</p>
+                        <span class="atlas-entry-more" aria-hidden="true" data-i18n="home.seeWines">Browse wines →</span>
                     </div>
                 </li>
-                <li class="atlas-entry reveal" data-estate="convento">
+                <li class="atlas-entry reveal" id="producer-convento" data-estate="convento">
                     <span class="atlas-entry-num">2</span>
                     <figure class="atlas-entry-img"><img src="img/vineyard_1.png" alt="Convento Oreja old vines"></figure>
                     <div class="atlas-entry-body">
-                        <h3>Convento Oreja</h3>
-                        <p>Old-vine Tinta del País from the parcels around Mélida, a hamlet of Peñafiel four kilometres further up the valley.</p>
+                        <h3><a class="atlas-entry-link" href="shop.html#convento">Convento Oreja</a></h3>
+                        <p data-i18n="home.convento">Old-vine Tinta del País from the parcels around Mélida, a hamlet of Peñafiel four kilometres further up the valley.</p>
+                        <span class="atlas-entry-more" aria-hidden="true" data-i18n="home.seeWines">Browse wines →</span>
                     </div>
                 </li>
-                <li class="atlas-entry reveal" data-estate="angeles">
+                <li class="atlas-entry reveal" id="producer-angeles" data-estate="angeles">
                     <span class="atlas-entry-num">3</span>
-                    <figure class="atlas-entry-img"><img src="img/IMG_1605.png" alt="Los Ángeles single vineyard"></figure>
+                    <figure class="atlas-entry-img"><img src="img/IMG_1605.png" alt="Cooper Cellars – Los Ángeles single vineyard"></figure>
                     <div class="atlas-entry-body">
-                        <h3>Los Ángeles</h3>
-                        <p>Zero-intervention, single-vineyard wines from grower Michael Cooper: dry-farmed old vines in the Ebro basin, under the Moncayo.</p>
+                        <h3><a class="atlas-entry-link" href="shop.html#losangeles">Cooper Cellars – Los Ángeles</a></h3>
+                        <p data-i18n="home.angeles">Zero-intervention, single-vineyard wines from grower Michael Cooper: dry-farmed old vines in the Ebro basin, under the Moncayo.</p>
+                        <span class="atlas-entry-more" aria-hidden="true" data-i18n="home.seeWines">Browse wines →</span>
                     </div>
                 </li>
                 </ol>
@@ -210,58 +216,15 @@
     <!-- Wines teaser -->
     <section class="section cream" id="wines">
         <div class="wrap">
-            <div class="wines-head">
-                <div class="section-head">
-                    <p class="eyebrow reveal">Now pouring</p>
-                    <h2 class="lede reveal">A short list of remarkable bottles.</h2>
+            <div class="lineup-split">
+                <div class="lineup-head">
+                    <div>
+                        <h2 class="lede" data-i18n="home.winesTitle">Now pouring</h2>
+                        <p class="lineup-sub" data-i18n="home.winesSub">Our favorite bottles, imported from family estates in Spain.</p>
+                    </div>
+                    <a class="lineup-link" href="shop.html" data-i18n="home.viewAll">Shop all wines →</a>
                 </div>
-                <div class="wines-head-actions reveal">
-                    <a href="shop.html" class="btn">View all wines</a>
-                    <div class="wines-nav">
-                        <button class="wines-arrow prev" type="button" aria-label="Previous wines" disabled>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </button>
-                        <button class="wines-arrow next" type="button" aria-label="More wines">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="wines-carousel">
-                <div class="wines-row" id="winesRow">
-                <a class="wine-card reveal" href="wines/penafalcon-gran-reserva-2007.html">
-                    <div class="wine-media fit-label producer-penafalcon"><img src="img/shop/penafalcon-gran-reserva-2007.jpg" alt="Gran Reserva 2007"></div>
-                    <div class="wine-body">
-                        <h3 class="wine-name">Gran Reserva <span class="wine-vintage">2007</span></h3>
-                        <p class="wine-meta">Peñafalcón</p>
-                        <div class="wine-foot"><span class="wine-price">$75.00</span></div>
-                    </div>
-                </a>
-                <a class="wine-card reveal" href="wines/los-angeles-romeroso-2021.html">
-                    <div class="wine-media fit-art producer-losangeles"><img src="img/shop/los-angeles-romeroso.jpg" alt="Romeroso 2021"></div>
-                    <div class="wine-body">
-                        <h3 class="wine-name">Romeroso <span class="wine-vintage">2021</span></h3>
-                        <p class="wine-meta">Los Ángeles</p>
-                        <div class="wine-foot"><span class="wine-price">$34.00</span></div>
-                    </div>
-                </a>
-                <a class="wine-card reveal" href="wines/convento-seleccion-familia-2020.html">
-                    <div class="wine-media fit-bottle producer-convento"><img src="img/shop/convento-seleccion-familia-2020.png" alt="Selección de Familia 2020"></div>
-                    <div class="wine-body">
-                        <h3 class="wine-name">Selección de Familia <span class="wine-vintage">2020</span></h3>
-                        <p class="wine-meta">Convento Oreja</p>
-                        <div class="wine-foot"><span class="wine-price">$55.00</span></div>
-                    </div>
-                </a>
-                <a class="wine-card reveal" href="wines/penafalcon-14-anos-2003.html">
-                    <div class="wine-media fit-label producer-penafalcon"><img src="img/shop/penafalcon-14-anos-2003.jpg" alt="14 Años 2003"></div>
-                    <div class="wine-body">
-                        <h3 class="wine-name">14 Años <span class="wine-vintage">2003</span></h3>
-                        <p class="wine-meta">Peñafalcón</p>
-                        <div class="wine-foot"><span class="wine-price">$95.00</span></div>
-                    </div>
-                </a>
-                </div>
+                <div class="lineup" id="shelf"><!-- every bottle, by producer, rendered by script-v4.js --></div>
             </div>
         </div>
     </section>
@@ -271,8 +234,11 @@
         <div class="wrap">
             <div class="story reveal">
                 <div class="story-text">
-                    <p class="eyebrow">Rooted in New York</p>
-                    <p>We bring authentic, estate-grown wines from Spain's family producers directly to the tables, shops and sommeliers of <b>greater New York</b>.</p>
+                    <p data-i18n="home.story">Bring our wines to your bar, restaurant or shop.</p>
+                    <div class="story-actions" id="trade">
+                        <a class="btn light" href="trade.html" data-i18n="trade.start">Request a trade order</a>
+                        <a class="story-email" href="mailto:ops@sunnysidevines.com" data-i18n="trade.orEmail">or email ops@sunnysidevines.com</a>
+                    </div>
                 </div>
                 <figure class="story-img">
                     <img src="img/la_dive_wine_bar.png" alt="Wine poured at a New York bar">
@@ -285,33 +251,32 @@
     <section class="section sand" id="contact">
         <div class="wrap contact-grid">
             <div class="contact-info">
-                <p class="eyebrow reveal">Get in touch</p>
-                <h2 class="reveal">For orders, tastings, and trade enquiries.</h2>
+                <h2 class="reveal" data-i18n="contact.title">Get in touch</h2>
                 <div class="row reveal">
-                    <div class="label">Email</div>
+                    <div class="label" data-i18n="contact.email">Email</div>
                     <div class="val email-val">
                         <a href="mailto:info@sunnysidevines.com">info@sunnysidevines.com</a>
-                        <button class="copy-btn" id="copyEmail" aria-label="Copy email address">
+                        <button class="copy-btn" id="copyEmail" aria-label="Copy email address" data-i18n-attr="aria-label:contact.copy">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 11V3.5A1.5 1.5 0 0 1 4.5 2H10" stroke="currentColor" stroke-width="1.5"/></svg>
                         </button>
                     </div>
                 </div>
                 <div class="row reveal">
-                    <div class="label">Phone</div>
-                    <div class="val"><a href="tel:+15551234567">+1 555.123.4567</a></div>
+                    <div class="label" data-i18n="contact.phone">Phone</div>
+                    <div class="val"><a href="tel:+19297389424">+1 929.738.9424</a></div>
                 </div>
                 <div class="row reveal">
-                    <div class="label">Based in</div>
-                    <div class="val">New York City, New York</div>
+                    <div class="label" data-i18n="contact.based">Based in</div>
+                    <div class="val" data-i18n="contact.city">New York City, New York</div>
                 </div>
             </div>
             <form class="contact-form reveal" id="contactForm" action="https://formspree.io/f/xjkalwan" method="POST">
                 <div class="field-row">
-                    <div><label for="name">Your name</label><input type="text" id="name" name="name"></div>
-                    <div><label for="email">Your email</label><input type="email" id="email" name="email" required></div>
+                    <div><label for="name" data-i18n="contact.name">Your name</label><input type="text" id="name" name="name"></div>
+                    <div><label for="email" data-i18n="contact.yourEmail">Your email</label><input type="email" id="email" name="email" required></div>
                 </div>
-                <div><label for="message">Message</label><textarea id="message" name="message" required placeholder="How can we help?"></textarea></div>
-                <button type="submit" class="btn" style="justify-content:center">Send message</button>
+                <div><label for="message" data-i18n="contact.message">Message</label><textarea id="message" name="message" required placeholder="How can we help?" data-i18n-attr="placeholder:contact.placeholder"></textarea></div>
+                <button type="submit" class="btn" style="justify-content:center" data-i18n="contact.send">Send message</button>
             </form>
         </div>
     </section>
@@ -322,25 +287,40 @@
             <div class="footer-top">
                 <div>
                     <div class="footer-brand">Sunnyside Vines</div>
-                    <p class="muted">Wine imports · New York City</p>
+                    <p class="muted" data-i18n="footer.tagline">Wine imports · New York City</p>
                     <div class="footer-links">
-                        <a href="#producer">Producers</a>
-                        <a href="#wines">Wines</a>
-                        <a href="shop.html">Shop</a>
-                        <a href="#contact">Contact</a>
+                        <a href="#producer" data-i18n="nav.producers">Producers</a>
+                        <a href="shop.html" data-i18n="nav.shop">Shop</a>
+                        <a href="trade.html" data-i18n="footer.trade">Trade orders</a>
+                        <a href="faq.html" data-i18n="footer.faq">FAQ</a>
+                        <a href="#contact" data-i18n="nav.contact">Contact</a>
                     </div>
                 </div>
-                <img src="img/logomark_white.svg" alt="" class="footer-logo">
+                <form class="newsletter" data-newsletter>
+                    <label for="newsletter-email" data-i18n="footer.newsletter">Newsletter</label>
+                    <p data-i18n="footer.newsletterCopy">New arrivals and updates, sent a few times a year.</p>
+                    <div class="newsletter-row">
+                        <input type="email" id="newsletter-email" name="email" placeholder="Your email" data-i18n-attr="placeholder:footer.emailPlaceholder" autocomplete="email" required>
+                        <button type="submit" class="btn" data-i18n="footer.subscribe">Subscribe</button>
+                    </div>
+                </form>
             </div>
             <div class="footer-bottom">
-                <span>© 2026 Sunnyside Vines. All rights reserved.</span>
-                <span>info@sunnysidevines.com</span>
+                <span data-i18n="footer.rights">© 2026 Sunnyside Vines. All rights reserved.</span>
+                <span class="footer-legal">
+                    <a href="terms.html" data-i18n="footer.terms">Terms &amp; Conditions</a>
+                    <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+                    <a href="tel:+19297389424">+1 929.738.9424</a>
+                    <a href="mailto:info@sunnysidevines.com">info@sunnysidevines.com</a>
+                </span>
             </div>
         </div>
     </footer>
 
+    <script src="js/newsletter.js"></script>
     <script src="js/anime.iife.js"></script>
     <script src="shop-config.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="script-v4.js"></script>
 </body>
 </html>

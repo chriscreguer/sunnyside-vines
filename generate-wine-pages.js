@@ -17,42 +17,52 @@
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
+// the wine details block, shared with the quick-look modal on trade.html
+const WineDetail = require('./js/wine-detail.js');
 
 const SITE_ORIGIN = 'https://sunnyside-vines.vercel.app'; // update when a custom domain lands
 
 const root = __dirname;
 const config = fs.readFileSync(path.join(root, 'shop-config.js'), 'utf8');
-const { PRODUCERS, PRODUCTS } = vm.runInNewContext(config + ';({ PRODUCERS, PRODUCTS })', {});
+const { PRODUCERS, PRODUCTS, bottleImage } = vm.runInNewContext(config + ';({ PRODUCERS, PRODUCTS, bottleImage })', {});
+// Keep existing links usable when the catalog replaces a wine.
+const REDIRECTS = {
+  'convento-seleccion-familia-2020': 'convento-memoria-reserva-2022',
+};
 
-const esc = (s) => String(s)
-  .replace(/&/g, '&amp;')
-  .replace(/</g, '&lt;')
-  .replace(/>/g, '&gt;')
-  .replace(/"/g, '&quot;');
+const { esc } = WineDetail;
 
 const money = (n) => '$' + parseFloat(n).toFixed(2);
 
 function pageHTML(p) {
   const meta = PRODUCERS[p.producer];
-  const title = `${p.name} ${p.vintage} — ${meta.name}`;
+  const title = `${[p.name, p.vintage].filter(Boolean).join(' ')} — ${meta.name}`;
   const canonical = `${SITE_ORIGIN}/wines/${p.id}.html`;
   const imageURL = `${SITE_ORIGIN}/${encodeURI(p.image)}`;
-  const specs = (p.details || [])
-    .map(([k, v]) => `<div class="detail-row"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`)
-    .join('\n            ');
+
+  // the producer (photo beside their blurb), then their other wines as shop cards
+  const producerNoteHTML = `
+            <section class="producer-note">
+                <figure class="producer-note-img"><img src="../${esc(meta.image)}" alt="${esc(meta.name)}" loading="lazy"></figure>
+                <div class="producer-note-body">
+                    <h2 class="producer-note-name">${esc(meta.name)}</h2>
+                    <p data-i18n-data="producer:${p.producer}:blurb">${esc(meta.blurb)}</p>
+                    <a class="producer-note-link" href="../index.html#${esc(meta.anchor)}" data-i18n="wine.meet">Meet the producer &rarr;</a>
+                </div>
+            </section>`;
 
   const otherWines = PRODUCTS.filter((o) => o.producer === p.producer && o.id !== p.id);
   const moreFromHTML = otherWines.length ? `
-            <section class="more-from reveal-fade">
-                <h2 class="more-from-heading">More from ${esc(meta.name)}</h2>
+            <section class="more-from">
+                <h2 class="more-from-heading"><span data-i18n="wine.moreFrom">More from</span> ${esc(meta.name)}</h2>
                 <div class="wine-grid">
                     ${otherWines.map((o) => `<a class="wine-card producer-${o.producer}" href="${o.id}.html">
                         <div class="wine-media fit-${o.fit} producer-${o.producer}">
-                            <img src="../${esc(o.image)}" alt="${esc(`${o.name} ${o.vintage}`)}" loading="lazy">
+                            <img src="../${esc(bottleImage(o))}" alt="${esc(`${o.name} ${o.vintage}`)}" loading="lazy">
                         </div>
                         <div class="wine-body">
                             <h3 class="wine-name">${esc(o.name)} <span class="wine-vintage">${esc(o.vintage)}</span></h3>
-                            <p class="wine-meta">${esc(o.meta)}</p>
+                            <p class="wine-meta" data-i18n-data="product:${o.id}:meta">${esc(o.meta)}</p>
                             <div class="wine-foot"><span class="wine-price">${money(o.price)}</span></div>
                         </div>
                     </a>`).join('\n                    ')}
@@ -131,22 +141,23 @@ ${jsonld}
         </a>
         <div class="nav-right">
             <div class="nav-links" id="navLinks">
-                <a href="../index.html#producer">Producers</a>
-                <a href="../index.html#wines">Wines</a>
-                <a href="../index.html#story">About</a>
-                <a href="../index.html#contact">Contact</a>
-                <a href="../shop.html" class="cta">Shop</a>
+                <a href="../index.html#producer" data-i18n="nav.producers">Producers</a>
+                <a href="../index.html#wines" data-i18n="nav.wines">Wines</a>
+                <a href="../index.html#story" data-i18n="nav.about">About</a>
+                <a href="../trade.html" data-i18n="nav.trade">Trade</a>
+                <a href="../index.html#contact" data-i18n="nav.contact">Contact</a>
+                <a href="../shop.html" class="cta" data-i18n="nav.shop">Shop</a>
             </div>
-            <button class="cart-toggle" id="cart-toggle" aria-label="Open cart">
+            <button class="cart-toggle" id="cart-toggle" aria-label="Open cart" data-i18n-attr="aria-label:cart.open">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <circle cx="9.5" cy="20" r="1.4" fill="currentColor"/>
                     <circle cx="18" cy="20" r="1.4" fill="currentColor"/>
                     <path d="M2.5 3.5h2.6l2.5 11.4a1.8 1.8 0 0 0 1.76 1.4h8.5a1.8 1.8 0 0 0 1.76-1.4L21.5 7.5H6.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <span class="cart-label">Cart</span>
+                <span class="cart-label" data-i18n="cart.label">Cart</span>
                 <span class="cart-count hidden" id="cart-count">0</span>
             </button>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" data-i18n-attr="aria-label:nav.menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -156,25 +167,20 @@ ${jsonld}
     <main class="shop-main wine-page-main">
         <div class="wrap">
             <nav class="crumbs" aria-label="Breadcrumb">
-                <a href="../shop.html">&larr; All wines</a>
+                <a href="../shop.html" data-i18n="wine.allWines">&larr; All wines</a>
             </nav>
-            <article class="wine-detail">
-                <div class="detail-media fit-${p.fit} producer-${p.producer} enter">
-                    <img src="../${esc(p.image)}" alt="${esc(`${p.name} ${p.vintage}`)}">
-                </div>
-                <div class="detail-body enter" data-enter-delay="1">
-                    <p class="detail-producer">${esc(meta.name)} · ${esc(meta.region)}</p>
-                    <h1 class="detail-name">${esc(p.name)} <span class="wine-vintage">${esc(p.vintage)}</span></h1>
-                    <p class="wine-meta">${esc(p.meta)}</p>
-                    <p class="detail-note">${esc(p.tasting || p.note)}</p>
-                    ${specs ? `<dl class="detail-specs">\n            ${specs}\n          </dl>` : ''}
-                    <div class="detail-foot">
+            ${WineDetail.html(p, meta, {
+              assetRoot: '../',
+              image: bottleImage(p, 'large'),
+              actions: `<div class="detail-foot">
                         <span class="wine-price">${money(p.price)}</span>
-                        <button class="add-btn" data-add="${p.id}">Add to cart</button>
+                        <button class="add-btn" data-add="${p.id}" data-i18n="cart.add">Add to cart</button>
                     </div>
-                    ${p.ficha ? `<a class="ficha-link detail-pdf" href="../${encodeURI(p.ficha)}" target="_blank" rel="noopener">Producer spec sheet (PDF) →</a>` : ''}
-                </div>
-            </article>${moreFromHTML}
+                    <p class="detail-links">
+                        ${p.ficha ? `<a href="../${encodeURI(p.ficha)}" target="_blank" rel="noopener" data-i18n="wine.specPdf">Spec sheet (PDF)</a><span aria-hidden="true">·</span>` : ''}
+                        <a href="../trade.html?add=${p.id}" data-i18n="wine.tradeAdd">Add to a trade order →</a>
+                    </p>`,
+            })}${producerNoteHTML}${moreFromHTML}
         </div>
     </main>
 
@@ -182,16 +188,16 @@ ${jsonld}
     <div class="cart-overlay" id="cart-overlay"></div>
     <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
         <div class="cart-head">
-            <h2>Your Cart</h2>
-            <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+            <h2 data-i18n="cart.title">Your Cart</h2>
+            <button class="cart-close" id="cart-close" aria-label="Close cart" data-i18n-attr="aria-label:cart.close">&times;</button>
         </div>
         <div class="cart-items" id="cart-items"></div>
         <div class="cart-foot">
             <div class="cart-subtotal">
-                <span>Subtotal</span>
+                <span data-i18n="cart.subtotal">Subtotal</span>
                 <span id="cart-subtotal-value">$0.00</span>
             </div>
-            <button class="checkout-btn" id="checkout-btn" disabled>Checkout</button>
+            <button class="checkout-btn" id="checkout-btn" disabled data-i18n="cart.checkout">Checkout</button>
         </div>
     </aside>
 
@@ -203,24 +209,39 @@ ${jsonld}
             <div class="footer-top">
                 <div>
                     <div class="footer-brand">Sunnyside Vines</div>
-                    <p class="muted">Wine imports · New York City</p>
+                    <p class="muted" data-i18n="footer.tagline">Wine imports · New York City</p>
                     <div class="footer-links">
-                        <a href="../index.html#producer">Producers</a>
-                        <a href="../index.html#wines">Wines</a>
-                        <a href="../shop.html">Shop</a>
-                        <a href="../index.html#contact">Contact</a>
+                        <a href="../index.html#producer" data-i18n="nav.producers">Producers</a>
+                        <a href="../shop.html" data-i18n="nav.shop">Shop</a>
+                        <a href="../trade.html" data-i18n="footer.trade">Trade orders</a>
+                        <a href="../faq.html" data-i18n="footer.faq">FAQ</a>
+                        <a href="../index.html#contact" data-i18n="nav.contact">Contact</a>
                     </div>
                 </div>
-                <img src="../img/logomark_white.svg" alt="" class="footer-logo">
+                <form class="newsletter" data-newsletter>
+                    <label for="newsletter-email" data-i18n="footer.newsletter">Newsletter</label>
+                    <p data-i18n="footer.newsletterCopy">New arrivals and updates, sent a few times a year.</p>
+                    <div class="newsletter-row">
+                        <input type="email" id="newsletter-email" name="email" placeholder="Your email" data-i18n-attr="placeholder:footer.emailPlaceholder" autocomplete="email" required>
+                        <button type="submit" class="btn" data-i18n="footer.subscribe">Subscribe</button>
+                    </div>
+                </form>
             </div>
             <div class="footer-bottom">
-                <span>© 2026 Sunnyside Vines. All rights reserved.</span>
-                <span>info@sunnysidevines.com</span>
+                <span data-i18n="footer.rights">© 2026 Sunnyside Vines. All rights reserved.</span>
+                <span class="footer-legal">
+                    <a href="../terms.html" data-i18n="footer.terms">Terms &amp; Conditions</a>
+                    <a href="../privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+                    <a href="tel:+19297389424">+1 929.738.9424</a>
+                    <a href="mailto:info@sunnysidevines.com">info@sunnysidevines.com</a>
+                </span>
             </div>
         </div>
     </footer>
 
+    <script src="../js/newsletter.js"></script>
     <script src="../shop-config.js"></script>
+    <script src="../js/i18n.js"></script>
     <script src="../shop.js"></script>
 </body>
 </html>
@@ -232,7 +253,7 @@ fs.mkdirSync(outDir, { recursive: true });
 
 // remove pages for wines no longer in the config
 for (const f of fs.readdirSync(outDir)) {
-  if (f.endsWith('.html') && !PRODUCTS.some((p) => `${p.id}.html` === f)) {
+  if (f.endsWith('.html') && !PRODUCTS.some((p) => `${p.id}.html` === f) && !REDIRECTS[f.slice(0, -5)]) {
     fs.unlinkSync(path.join(outDir, f));
     console.log(`removed wines/${f}`);
   }
@@ -242,5 +263,26 @@ for (const p of PRODUCTS) {
   const file = path.join(outDir, `${p.id}.html`);
   fs.writeFileSync(file, pageHTML(p));
   console.log(`wrote wines/${p.id}.html`);
+}
+for (const [oldId, newId] of Object.entries(REDIRECTS)) {
+  const product = PRODUCTS.find((p) => p.id === newId);
+  if (!product) throw new Error(`Missing redirect target: ${newId}`);
+  fs.writeFileSync(path.join(outDir, `${oldId}.html`), `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../age-gate.css">
+    <script src="../age-gate.js" defer></script>
+    <meta http-equiv="refresh" content="0;url=${newId}.html">
+    <link rel="canonical" href="${SITE_ORIGIN}/wines/${newId}.html">
+    <title>Updated wine selection · Sunnyside Vines</title>
+</head>
+<body>
+    <noscript><div class="age-gate-noscript">You must be 21 or older to visit Sunnyside Vines.<br>Please enable JavaScript to confirm your age.</div></noscript>
+    <p>Our current Convento Oreja selection features <a href="${newId}.html">${esc(product.name)} ${esc(product.vintage)}</a>.</p>
+</body>
+</html>
+`);
 }
 console.log(`${PRODUCTS.length} pages generated.`);

@@ -6,13 +6,13 @@
     <link rel="stylesheet" href="../age-gate.css">
     <script src="../age-gate.js" defer></script>
     <title>Crianza 2022 — Convento Oreja · Sunnyside Vines</title>
-    <meta name="description" content="Cherry-red and crystalline. Elegant red and black fruit (blueberry, raspberry, blackberry) with pastry, light spice and balsamic. Soft, round, velvety tannins.">
+    <meta name="description" content="Twelve months in French oak. Red and black berries, pastry, gentle spice and balsamic notes, with soft, rounded tannins and a velvety finish.">
     <link rel="canonical" href="https://sunnyside-vines.vercel.app/wines/convento-crianza-2022.html">
 
     <meta property="og:type" content="product">
     <meta property="og:title" content="Crianza 2022 — Convento Oreja">
-    <meta property="og:description" content="Cherry-red and crystalline. Elegant red and black fruit (blueberry, raspberry, blackberry) with pastry, light spice and balsamic. Soft, round, velvety tannins.">
-    <meta property="og:image" content="https://sunnyside-vines.vercel.app/img/shop/convento-crianza-2022.png">
+    <meta property="og:description" content="Twelve months in French oak. Red and black berries, pastry, gentle spice and balsamic notes, with soft, rounded tannins and a velvety finish.">
+    <meta property="og:image" content="https://sunnyside-vines.vercel.app/img/catalog-2026/convento-crianza-2022.jpeg">
     <meta property="og:url" content="https://sunnyside-vines.vercel.app/wines/convento-crianza-2022.html">
     <meta property="og:site_name" content="Sunnyside Vines">
 
@@ -21,8 +21,8 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Crianza 2022",
-  "image": "https://sunnyside-vines.vercel.app/img/shop/convento-crianza-2022.png",
-  "description": "Cherry-red and crystalline. Elegant red and black fruit (blueberry, raspberry, blackberry) with pastry, light spice and balsamic. Soft, round, velvety tannins.",
+  "image": "https://sunnyside-vines.vercel.app/img/catalog-2026/convento-crianza-2022.jpeg",
+  "description": "Twelve months in French oak. Red and black berries, pastry, gentle spice and balsamic notes, with soft, rounded tannins and a velvety finish.",
   "brand": {
     "@type": "Brand",
     "name": "Convento Oreja"
@@ -31,7 +31,7 @@
     "@type": "Offer",
     "url": "https://sunnyside-vines.vercel.app/wines/convento-crianza-2022.html",
     "priceCurrency": "USD",
-    "price": "30.00",
+    "price": "33.99",
     "availability": "https://schema.org/InStock"
   }
 }
@@ -71,22 +71,23 @@
         </a>
         <div class="nav-right">
             <div class="nav-links" id="navLinks">
-                <a href="../index.html#producer">Producers</a>
-                <a href="../index.html#wines">Wines</a>
-                <a href="../index.html#story">About</a>
-                <a href="../index.html#contact">Contact</a>
-                <a href="../shop.html" class="cta">Shop</a>
+                <a href="../index.html#producer" data-i18n="nav.producers">Producers</a>
+                <a href="../index.html#wines" data-i18n="nav.wines">Wines</a>
+                <a href="../index.html#story" data-i18n="nav.about">About</a>
+                <a href="../trade.html" data-i18n="nav.trade">Trade</a>
+                <a href="../index.html#contact" data-i18n="nav.contact">Contact</a>
+                <a href="../shop.html" class="cta" data-i18n="nav.shop">Shop</a>
             </div>
-            <button class="cart-toggle" id="cart-toggle" aria-label="Open cart">
+            <button class="cart-toggle" id="cart-toggle" aria-label="Open cart" data-i18n-attr="aria-label:cart.open">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <circle cx="9.5" cy="20" r="1.4" fill="currentColor"/>
                     <circle cx="18" cy="20" r="1.4" fill="currentColor"/>
                     <path d="M2.5 3.5h2.6l2.5 11.4a1.8 1.8 0 0 0 1.76 1.4h8.5a1.8 1.8 0 0 0 1.76-1.4L21.5 7.5H6.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <span class="cart-label">Cart</span>
+                <span class="cart-label" data-i18n="cart.label">Cart</span>
                 <span class="cart-count hidden" id="cart-count">0</span>
             </button>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" data-i18n-attr="aria-label:nav.menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -96,49 +97,62 @@
     <main class="shop-main wine-page-main">
         <div class="wrap">
             <nav class="crumbs" aria-label="Breadcrumb">
-                <a href="../shop.html">&larr; All wines</a>
+                <a href="../shop.html" data-i18n="wine.allWines">&larr; All wines</a>
             </nav>
             <article class="wine-detail">
-                <div class="detail-media fit-bottle producer-convento enter">
-                    <img src="../img/shop/convento-crianza-2022.png" alt="Crianza 2022">
+                <div class="detail-media fit-bottle producer-convento">
+                    <img src="../img/bottles/large/convento-crianza-2022.png" alt="Crianza 2022">
                 </div>
-                <div class="detail-body enter" data-enter-delay="1">
-                    <p class="detail-producer">Convento Oreja · Ribera del Duero, Spain</p>
+                <div class="detail-body">
+                    <p class="detail-producer">Convento Oreja · <span data-i18n-data="producer:convento:region">Ribera del Duero, Spain</span></p>
                     <h1 class="detail-name">Crianza <span class="wine-vintage">2022</span></h1>
-                    <p class="wine-meta">Tempranillo</p>
-                    <p class="detail-note">Cherry red of good depth, clean and crystalline. An elegant, intense nose of red fruit — blueberry, raspberry — alongside blackberry, with pleasant pastry fragrances, light spice and balsamic touches. Soft, round tannins in perfect balance with the acidity: broad, velvety and persistent. From twenty-five-year-old vines above 900 metres, matured twelve months in French oak of medium and low toast.</p>
+                    <p class="detail-note" data-i18n-data="product:convento-crianza-2022:tasting">A blend of 98% Tempranillo and 2% Cabernet Sauvignon from Mélida and Langayo in the Comarca de Peñafiel. Fermented in temperature-controlled stainless steel and matured for twelve months in medium- and low-toast French oak; bottled in May 2024. Cherry-red, clean and crystalline, with blueberry, raspberry and blackberry, pastry aromas, light spice and balsamic touches. Soft, rounded tannins balance the acidity in a broad, velvety and persistent palate.</p>
                     <dl class="detail-specs">
-            <div class="detail-row"><dt>Serve</dt><dd>16–18 °C</dd></div>
-            <div class="detail-row"><dt>Pairs with</dt><dd>Roast pork, semi-cured cheeses, wild mushrooms</dd></div>
-          </dl>
+                        <div class="detail-row"><dt data-i18n="spec.Grapes">Grapes</dt><dd data-i18n-data="product:convento-crianza-2022:details:0">98% Tempranillo, 2% Cabernet Sauvignon</dd></div>
+                        <div class="detail-row"><dt data-i18n="spec.Alcohol">Alcohol</dt><dd data-i18n-data="product:convento-crianza-2022:details:1">14.5% vol</dd></div>
+                        <div class="detail-row"><dt data-i18n="spec.Aging">Aging</dt><dd data-i18n-data="product:convento-crianza-2022:details:2">12 months in French oak</dd></div>
+                        <div class="detail-row"><dt data-i18n="spec.Bottled">Bottled</dt><dd data-i18n-data="product:convento-crianza-2022:details:3">May 2024</dd></div>
+                        <div class="detail-row"><dt data-i18n="spec.Pairs with">Pairs with</dt><dd data-i18n-data="product:convento-crianza-2022:details:4">Grilled red meat, roasted lamb, mushrooms and cured sheep’s cheese</dd></div>
+                    </dl>
                     <div class="detail-foot">
-                        <span class="wine-price">$30.00</span>
-                        <button class="add-btn" data-add="convento-crianza-2022">Add to cart</button>
+                        <span class="wine-price">$33.99</span>
+                        <button class="add-btn" data-add="convento-crianza-2022" data-i18n="cart.add">Add to cart</button>
                     </div>
-                    <a class="ficha-link detail-pdf" href="../new%20assets/Convento%20Oreja/Ficha_T%C3%A9cnica_Convento_Oreja_Crianza_2022_Ingles.pdf" target="_blank" rel="noopener">Producer spec sheet (PDF) →</a>
+                    <p class="detail-links">
+                        <a href="../docs/catalog-2026/convento-crianza-2022.pdf" target="_blank" rel="noopener" data-i18n="wine.specPdf">Spec sheet (PDF)</a><span aria-hidden="true">·</span>
+                        <a href="../trade.html?add=convento-crianza-2022" data-i18n="wine.tradeAdd">Add to a trade order →</a>
+                    </p>
                 </div>
             </article>
-            <section class="more-from reveal-fade">
-                <h2 class="more-from-heading">More from Convento Oreja</h2>
+            <section class="producer-note">
+                <figure class="producer-note-img"><img src="../img/vineyard_1.png" alt="Convento Oreja" loading="lazy"></figure>
+                <div class="producer-note-body">
+                    <h2 class="producer-note-name">Convento Oreja</h2>
+                    <p data-i18n-data="producer:convento:blurb">Tinta del País grown at over 900 metres in Peñafiel. Founded in 2002, the estate crafts elegant, balsamic-tinged reds from old vines and French oak.</p>
+                    <a class="producer-note-link" href="../index.html#producer-convento" data-i18n="wine.meet">Meet the producer &rarr;</a>
+                </div>
+            </section>
+            <section class="more-from">
+                <h2 class="more-from-heading"><span data-i18n="wine.moreFrom">More from</span> Convento Oreja</h2>
                 <div class="wine-grid">
-                    <a class="wine-card producer-convento" href="convento-seleccion-familia-2020.html">
+                    <a class="wine-card producer-convento" href="convento-memoria-reserva-2022.html">
                         <div class="wine-media fit-bottle producer-convento">
-                            <img src="../img/shop/convento-seleccion-familia-2020.png" alt="Selección de Familia 2020" loading="lazy">
+                            <img src="../img/bottles/small/convento-memoria-reserva-2022.png" alt="Memoria Reserva 2022" loading="lazy">
                         </div>
                         <div class="wine-body">
-                            <h3 class="wine-name">Selección de Familia <span class="wine-vintage">2020</span></h3>
-                            <p class="wine-meta">Tempranillo</p>
-                            <div class="wine-foot"><span class="wine-price">$55.00</span></div>
+                            <h3 class="wine-name">Memoria Reserva <span class="wine-vintage">2022</span></h3>
+                            <p class="wine-meta" data-i18n-data="product:convento-memoria-reserva-2022:meta">Tempranillo</p>
+                            <div class="wine-foot"><span class="wine-price">$52.99</span></div>
                         </div>
                     </a>
                     <a class="wine-card producer-convento" href="convento-roble-2025.html">
                         <div class="wine-media fit-bottle producer-convento">
-                            <img src="../img/shop/convento-roble-2025.png" alt="Roble 2025" loading="lazy">
+                            <img src="../img/bottles/small/convento-roble-2025.png" alt="Roble 2025" loading="lazy">
                         </div>
                         <div class="wine-body">
                             <h3 class="wine-name">Roble <span class="wine-vintage">2025</span></h3>
-                            <p class="wine-meta">Tempranillo</p>
-                            <div class="wine-foot"><span class="wine-price">$19.00</span></div>
+                            <p class="wine-meta" data-i18n-data="product:convento-roble-2025:meta">Tempranillo</p>
+                            <div class="wine-foot"><span class="wine-price">$22.99</span></div>
                         </div>
                     </a>
                 </div>
@@ -150,16 +164,16 @@
     <div class="cart-overlay" id="cart-overlay"></div>
     <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
         <div class="cart-head">
-            <h2>Your Cart</h2>
-            <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+            <h2 data-i18n="cart.title">Your Cart</h2>
+            <button class="cart-close" id="cart-close" aria-label="Close cart" data-i18n-attr="aria-label:cart.close">&times;</button>
         </div>
         <div class="cart-items" id="cart-items"></div>
         <div class="cart-foot">
             <div class="cart-subtotal">
-                <span>Subtotal</span>
+                <span data-i18n="cart.subtotal">Subtotal</span>
                 <span id="cart-subtotal-value">$0.00</span>
             </div>
-            <button class="checkout-btn" id="checkout-btn" disabled>Checkout</button>
+            <button class="checkout-btn" id="checkout-btn" disabled data-i18n="cart.checkout">Checkout</button>
         </div>
     </aside>
 
@@ -171,24 +185,39 @@
             <div class="footer-top">
                 <div>
                     <div class="footer-brand">Sunnyside Vines</div>
-                    <p class="muted">Wine imports · New York City</p>
+                    <p class="muted" data-i18n="footer.tagline">Wine imports · New York City</p>
                     <div class="footer-links">
-                        <a href="../index.html#producer">Producers</a>
-                        <a href="../index.html#wines">Wines</a>
-                        <a href="../shop.html">Shop</a>
-                        <a href="../index.html#contact">Contact</a>
+                        <a href="../index.html#producer" data-i18n="nav.producers">Producers</a>
+                        <a href="../shop.html" data-i18n="nav.shop">Shop</a>
+                        <a href="../trade.html" data-i18n="footer.trade">Trade orders</a>
+                        <a href="../faq.html" data-i18n="footer.faq">FAQ</a>
+                        <a href="../index.html#contact" data-i18n="nav.contact">Contact</a>
                     </div>
                 </div>
-                <img src="../img/logomark_white.svg" alt="" class="footer-logo">
+                <form class="newsletter" data-newsletter>
+                    <label for="newsletter-email" data-i18n="footer.newsletter">Newsletter</label>
+                    <p data-i18n="footer.newsletterCopy">New arrivals and updates, sent a few times a year.</p>
+                    <div class="newsletter-row">
+                        <input type="email" id="newsletter-email" name="email" placeholder="Your email" data-i18n-attr="placeholder:footer.emailPlaceholder" autocomplete="email" required>
+                        <button type="submit" class="btn" data-i18n="footer.subscribe">Subscribe</button>
+                    </div>
+                </form>
             </div>
             <div class="footer-bottom">
-                <span>© 2026 Sunnyside Vines. All rights reserved.</span>
-                <span>info@sunnysidevines.com</span>
+                <span data-i18n="footer.rights">© 2026 Sunnyside Vines. All rights reserved.</span>
+                <span class="footer-legal">
+                    <a href="../terms.html" data-i18n="footer.terms">Terms &amp; Conditions</a>
+                    <a href="../privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+                    <a href="tel:+19297389424">+1 929.738.9424</a>
+                    <a href="mailto:info@sunnysidevines.com">info@sunnysidevines.com</a>
+                </span>
             </div>
         </div>
     </footer>
 
+    <script src="../js/newsletter.js"></script>
     <script src="../shop-config.js"></script>
+    <script src="../js/i18n.js"></script>
     <script src="../shop.js"></script>
 </body>
 </html>

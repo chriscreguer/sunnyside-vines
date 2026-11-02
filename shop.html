@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="age-gate.css">
     <script src="age-gate.js" defer></script>
-    <title>Shop · Sunnyside Vines</title>
+    <title data-i18n="title.shop">Shop · Sunnyside Vines</title>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
@@ -41,22 +41,23 @@
         </a>
         <div class="nav-right">
             <div class="nav-links" id="navLinks">
-                <a href="index.html#producer">Producers</a>
-                <a href="index.html#wines">Wines</a>
-                <a href="index.html#story">About</a>
-                <a href="index.html#contact">Contact</a>
-                <a href="shop.html" class="cta" aria-current="page">Shop</a>
+                <a href="index.html#producer" data-i18n="nav.producers">Producers</a>
+                <a href="index.html#wines" data-i18n="nav.wines">Wines</a>
+                <a href="index.html#story" data-i18n="nav.about">About</a>
+                <a href="trade.html" data-i18n="nav.trade">Trade</a>
+                <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
+                <a href="shop.html" class="cta" aria-current="page" data-i18n="nav.shop">Shop</a>
             </div>
-            <button class="cart-toggle" id="cart-toggle" aria-label="Open cart">
+            <button class="cart-toggle" id="cart-toggle" aria-label="Open cart" data-i18n-attr="aria-label:cart.open">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <circle cx="9.5" cy="20" r="1.4" fill="currentColor"/>
                     <circle cx="18" cy="20" r="1.4" fill="currentColor"/>
                     <path d="M2.5 3.5h2.6l2.5 11.4a1.8 1.8 0 0 0 1.76 1.4h8.5a1.8 1.8 0 0 0 1.76-1.4L21.5 7.5H6.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <span class="cart-label">Cart</span>
+                <span class="cart-label" data-i18n="cart.label">Cart</span>
                 <span class="cart-count hidden" id="cart-count">0</span>
             </button>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" data-i18n-attr="aria-label:nav.menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -65,10 +66,14 @@
     <!-- Shop content -->
     <main class="shop-main">
         <div class="wrap">
-            <header class="shop-header">
-                <h1 class="shop-title enter">All wines</h1>
-                <p class="shop-sub enter" data-enter-delay="1">Every bottle we import, direct from three family estates in Spain: Peñafalcón, Los Ángeles and Convento Oreja.</p>
+            <header class="shop-header no-rule">
+                <h1 class="shop-title" data-i18n="shop.title">All wines</h1>
             </header>
+
+            <a class="trade-strip" href="trade.html">
+                <span data-i18n="shop.tradeQ">Buying for a shop or restaurant?</span>
+                <span class="trade-strip-cta" data-i18n="shop.tradeCta">Request a trade order →</span>
+            </a>
 
             <div id="shop-groups"><!-- product groups injected by shop.js --></div>
         </div>
@@ -78,16 +83,16 @@
     <div class="cart-overlay" id="cart-overlay"></div>
     <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
         <div class="cart-head">
-            <h2>Your Cart</h2>
-            <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+            <h2 data-i18n="cart.title">Your Cart</h2>
+            <button class="cart-close" id="cart-close" aria-label="Close cart" data-i18n-attr="aria-label:cart.close">&times;</button>
         </div>
         <div class="cart-items" id="cart-items"></div>
         <div class="cart-foot">
             <div class="cart-subtotal">
-                <span>Subtotal</span>
+                <span data-i18n="cart.subtotal">Subtotal</span>
                 <span id="cart-subtotal-value">$0.00</span>
             </div>
-            <button class="checkout-btn" id="checkout-btn" disabled>Checkout</button>
+            <button class="checkout-btn" id="checkout-btn" disabled data-i18n="cart.checkout">Checkout</button>
         </div>
     </aside>
 
@@ -99,24 +104,39 @@
             <div class="footer-top">
                 <div>
                     <div class="footer-brand">Sunnyside Vines</div>
-                    <p class="muted">Wine imports · New York City</p>
+                    <p class="muted" data-i18n="footer.tagline">Wine imports · New York City</p>
                     <div class="footer-links">
-                        <a href="index.html#producer">Producers</a>
-                        <a href="index.html#wines">Wines</a>
-                        <a href="shop.html">Shop</a>
-                        <a href="index.html#contact">Contact</a>
+                        <a href="index.html#producer" data-i18n="nav.producers">Producers</a>
+                        <a href="shop.html" data-i18n="nav.shop">Shop</a>
+                        <a href="trade.html" data-i18n="footer.trade">Trade orders</a>
+                        <a href="faq.html" data-i18n="footer.faq">FAQ</a>
+                        <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
                     </div>
                 </div>
-                <img src="img/logomark_white.svg" alt="" class="footer-logo">
+                <form class="newsletter" data-newsletter>
+                    <label for="newsletter-email" data-i18n="footer.newsletter">Newsletter</label>
+                    <p data-i18n="footer.newsletterCopy">New arrivals and updates, sent a few times a year.</p>
+                    <div class="newsletter-row">
+                        <input type="email" id="newsletter-email" name="email" placeholder="Your email" data-i18n-attr="placeholder:footer.emailPlaceholder" autocomplete="email" required>
+                        <button type="submit" class="btn" data-i18n="footer.subscribe">Subscribe</button>
+                    </div>
+                </form>
             </div>
             <div class="footer-bottom">
-                <span>© 2026 Sunnyside Vines. All rights reserved.</span>
-                <span>info@sunnysidevines.com</span>
+                <span data-i18n="footer.rights">© 2026 Sunnyside Vines. All rights reserved.</span>
+                <span class="footer-legal">
+                    <a href="terms.html" data-i18n="footer.terms">Terms &amp; Conditions</a>
+                    <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+                    <a href="tel:+19297389424">+1 929.738.9424</a>
+                    <a href="mailto:info@sunnysidevines.com">info@sunnysidevines.com</a>
+                </span>
             </div>
         </div>
     </footer>
 
+    <script src="js/newsletter.js"></script>
     <script src="shop-config.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="shop.js"></script>
 </body>
 </html>

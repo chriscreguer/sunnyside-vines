@@ -18,18 +18,6 @@ const onView = (el, fn, threshold = 0.25) => {
   io.observe(el);
 };
 
-/* Words rise out from behind a hard edge - typeset, not floated in. */
-const riseWords = (el, delay = 0, step = 45, duration = 800) => {
-  const { words } = text.split(el, { words: { wrap: 'clip' }, chars: false });
-  utils.set(el, { opacity: 1 });
-  animate(words, {
-    y: ['110%', '0%'],
-    duration,
-    delay: stagger(step, { start: delay }),
-    ease: 'out(3)',
-  });
-};
-
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.add('js');
 
@@ -82,43 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* Wines carousel - render every wine from the shop config, page with arrows */
-  const winesRow = document.getElementById('winesRow');
-  if (winesRow && typeof PRODUCTS !== 'undefined') {
-    const money = (n) => '$' + parseFloat(n).toFixed(2);
-    // interleave the estates round-robin so any four in view mix producers
-    const byProducer = {};
-    PRODUCTS.forEach((p) => (byProducer[p.producer] ||= []).push(p));
-    const queues = Object.values(byProducer);
-    const mixed = [];
-    for (let i = 0; queues.some((q) => i < q.length); i++)
-      queues.forEach((q) => { if (q[i]) mixed.push(q[i]); });
-    winesRow.innerHTML = mixed.map((p) => `
-      <a class="wine-card reveal" href="wines/${p.id}.html">
-        <div class="wine-media fit-${p.fit} producer-${p.producer}">
-          <img src="${p.image}" alt="${p.name} ${p.vintage}" loading="lazy">
-        </div>
-        <div class="wine-body">
-          <h3 class="wine-name">${p.name} <span class="wine-vintage">${p.vintage}</span></h3>
-          <p class="wine-meta">${PRODUCERS[p.producer].name}</p>
-          <div class="wine-foot"><span class="wine-price">${money(p.price)}</span></div>
-        </div>
-      </a>`).join('');
-
-    const prev = document.querySelector('.wines-arrow.prev');
-    const next = document.querySelector('.wines-arrow.next');
-    if (prev && next) {
-      const update = () => {
-        const max = winesRow.scrollWidth - winesRow.clientWidth - 4;
-        prev.disabled = winesRow.scrollLeft <= 4;
-        next.disabled = winesRow.scrollLeft >= max;
-      };
-      prev.addEventListener('click', () => winesRow.scrollBy({ left: -winesRow.clientWidth, behavior: 'smooth' }));
-      next.addEventListener('click', () => winesRow.scrollBy({ left: winesRow.clientWidth, behavior: 'smooth' }));
-      winesRow.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update);
-      update();
-    }
+  /* Wine lineup - every bottle from the shop config in one row, in the
+     same producer order as the map; they overlap more as the screen narrows */
+  const shelf = document.getElementById('shelf');
+  if (shelf && typeof PRODUCTS !== 'undefined') {
+    shelf.innerHTML = ['penafalcon', 'convento', 'losangeles']
+      .flatMap((key) => PRODUCTS.filter((p) => p.producer === key))
+      .map((p) => `
+        <a class="lineup-bottle" href="wines/${p.id}.html">
+          <img src="${bottleImage(p)}" alt="${p.name} ${p.vintage}, ${PRODUCERS[p.producer].name}" loading="lazy">
+          <span class="lineup-tag" aria-hidden="true">${p.name} <i>${p.vintage}</i><small>${PRODUCERS[p.producer].name}</small></span>
+        </a>`).join('');
   }
 
   /* Copy email */
@@ -144,8 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Posts to Formspree, which emails the message on
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const t = (key, en) => (window.SVI18N ? SVI18N.t(key, en) : en);
       const btn = form.querySelector('button');
-      const original = btn.textContent;
+      const original = btn.innerHTML;
       btn.disabled = true;
       let wait = 2600;
       try {
@@ -155,14 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
           body: new FormData(form),
         });
         if (!res.ok) throw new Error(res.status);
-        btn.textContent = 'Thanks, we\'ll be in touch';
+        btn.textContent = t('contact.thanks', 'Thanks, we\'ll be in touch');
         form.reset();
       } catch {
-        btn.textContent = 'Couldn\'t send. Email info@sunnysidevines.com';
+        btn.textContent = t('contact.failed', 'Couldn\'t send. Email info@sunnysidevines.com');
         wait = 6000;
       }
       setTimeout(() => {
-        btn.textContent = original;
+        btn.innerHTML = original;
         btn.disabled = false;
       }, wait);
     });
@@ -237,126 +200,50 @@ function buildMotion() {
     }, 0.35);
   }
 
-  /* ── Section headings ───────────────────────────────────────────────────── */
-  claim('.lede.reveal').forEach((el) => onView(el, () => riseWords(el)));
-  claim('.eyebrow.reveal').forEach((el) =>
-    onView(el, () => animate(el, { opacity: [0, 1], duration: 700, ease: 'out(2)' }))
-  );
-
-  /* ── Atlas: the plate draws itself ──────────────────────────────────────── */
+  /* ── Atlas: the map is already there; the detail, vineyards and pins arrive ─ */
   const [atlasFig] = claim('.atlas-figure.reveal');
   if (atlasFig) {
-    utils.set('.atlas-detail, .atlas-magnifier, .atlas-cities, .atlas-borders, .atlas-neighbour', { opacity: 0 });
+    utils.set(atlasFig, { opacity: 1 });
+    utils.set('.atlas-detail, .atlas-magnifier', { opacity: 0 });
     utils.set('.atlas-map .pin', { opacity: 0 });
-    utils.set('.atlas-land', { fillOpacity: 0 });   // the outline inks first, the paper fills after
 
     onView(atlasFig, () => {
-      utils.set(atlasFig, { opacity: 1 });
       const plate = createTimeline({ defaults: { ease: 'out(2)' } });
 
-      // the coastline inks in and the land fills behind it
-      plate.add(svg.createDrawable('.atlas-land'), {
-        draw: ['0 0', '0 1'],
-        duration: 1000,
-        ease: 'inOut(2)',
-      }, 0);
-      plate.add('.atlas-land', { fillOpacity: [0, 1], duration: 600 }, 350);
-
-      // everything that is just context simply arrives
-      plate.add('.atlas-neighbour, .atlas-borders, .atlas-cities', {
-        opacity: [0, 1],
-        duration: 500,
-      }, 450);
-
       // the detail circle opens
-      plate.add('.atlas-detail', { opacity: 1, duration: 1 }, 950);
+      plate.add('.atlas-detail', { opacity: 1, duration: 1 }, 0);
       plate.add('.atlas-detail-disc, .atlas-detail-ring', {
         scale: [0, 1],
-        duration: 550,
+        duration: 500,
         ease: 'out(4)',
-      }, 950);
-      plate.add('.atlas-magnifier', { opacity: [0, 1], duration: 220 }, 980);
+      }, 0);
+      plate.add('.atlas-magnifier', { opacity: [0, 1], duration: 220 }, 30);
       // the dotted magnifier lines keep their own dasharray, so they fade in
       // with the group instead of being stroke-drawn (which would overwrite it)
       plate.add(svg.createDrawable('.atlas-source-ring'), {
         draw: ['0 0', '0 1'],
-        duration: 520,
+        duration: 450,
         ease: 'inOut(2)',
-      }, 980);
+      }, 30);
       plate.add('.atlas-vineyards, .atlas-villages', {
         opacity: [0, 1],
-        duration: 450,
-      }, 1200);
+        duration: 400,
+      }, 220);
 
       // pins land (scale the inner <g>; the outer one carries the translate attribute)
-      plate.add('.atlas-map .pin', { opacity: [0, 1], duration: 250, delay: stagger(80) }, 1350);
+      plate.add('.atlas-map .pin', { opacity: [0, 1], duration: 250, delay: stagger(80) }, 320);
       plate.add('.atlas-map .pin-pop', {
         scale: [0, 1],
         duration: 700,
         delay: stagger(80),
         ease: createSpring({ stiffness: 130, damping: 11 }),
-      }, 1350);
+      }, 320);
     }, 0.2);
   }
 
-  /* ── Legend: the rule wipes, the number lands, the copy follows ─────────── */
-  claim('.atlas-entry.reveal').forEach((el) =>
-    onView(el, () => {
-      const tl = createTimeline({ defaults: { ease: 'out(3)' } });
-      tl.add(el, { opacity: [0, 1], duration: 500 }, 0);
-      tl.add(el.querySelector('.atlas-entry-num'), {
-        scale: [0, 1],
-        duration: 800,
-        ease: createSpring({ stiffness: 150, damping: 12 }),
-      }, 120);
-      tl.add(el.querySelector('.atlas-entry-img'), {
-        clipPath: ['inset(0 0 100% 0)', 'inset(0 0 0% 0)'],
-        duration: 900,
-      }, 60);
-    }, 0.4)
-  );
-
-  /* ── Wine cards: fade in, staggered ──────────────────────────────────────── */
-  /* opacity only - an inline transform would stick around and kill the CSS hover lift */
-  const tiles = claim('.wine-card.reveal');
-  tiles.forEach((tile, i) =>
-    onView(tile, () => {
-      animate(tile, {
-        opacity: [0, 1],
-        duration: 600,
-        delay: i * 70,
-        ease: 'out(3)',
-      });
-    }, 0.3)
-  );
-
-  /* ── Story: copy fades in, the photo swings into its tilt ────────────────── */
-  const [story] = claim('.story.reveal');
-  if (story) {
-    onView(story, () => {
-      utils.set(story, { opacity: 1 });
-      animate(story.querySelector('.story-text'), { opacity: [0, 1], duration: 500 });
-      animate(story.querySelector('.story-img'), {
-        opacity: [0, 1],
-        rotate: ['0deg', '2.5deg'],
-        scale: [0.96, 1],
-        duration: 700,
-        ease: 'out(4)',
-      });
-    }, 0.25);
-  }
-
-  /* ── Contact: labels and rows settle, no drifting ────────────────────────── */
-  claim('.contact-info h2.reveal').forEach((el) =>
-    onView(el, () => animate(el, { opacity: [0, 1], duration: 500, ease: 'out(2)' }))
-  );
-  claim('.contact-info .row.reveal, .contact-form.reveal').forEach((el, i) =>
-    onView(el, () => animate(el, { opacity: [0, 1], duration: 450, delay: i * 50, ease: 'out(2)' }))
-  );
-
-  /* anything still marked .reveal that no rule above claimed */
+  /* Below the hero only the mission line and the atlas move; everything
+     else (headings, legend, wine cards, story, trade, contact) just appears. */
   document.querySelectorAll('.reveal').forEach((el) => {
-    if (claimed.has(el)) return;
-    onView(el, () => animate(el, { opacity: [0, 1], duration: 700, ease: 'out(2)' }));
+    if (!claimed.has(el)) utils.set(el, { opacity: 1 });
   });
 }

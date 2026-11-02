@@ -87,6 +87,7 @@ function initScrollReveal() {
         el.dataset.revealDelay = delay;
         observer.observe(el);
     });
+
 }
 
 // Copy email function
@@ -166,6 +167,7 @@ function initAnalytics() {
             gtag('event', 'nav_producer_click', { event_category: 'navigation' });
         });
     });
+
 }
 
 document.addEventListener('DOMContentLoaded', initAnalytics);

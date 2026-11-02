@@ -1,0 +1,95 @@
+{
+  "source": "· Sunnyside Wines 2026 NEW07.pdf",
+  "images": [
+    {
+      "name": "Convento Memoria / Reserva 2022",
+      "file": "convento-memoria-reserva-2022.png",
+      "page": 3,
+      "width": 345,
+      "height": 1300,
+      "transparent": true,
+      "bytes": 266269
+    },
+    {
+      "name": "Convento Crianza 2022",
+      "file": "convento-crianza-2022.jpeg",
+      "page": 4,
+      "width": 244,
+      "height": 758,
+      "transparent": false,
+      "bytes": 23237
+    },
+    {
+      "name": "Convento Roble 2025",
+      "file": "convento-roble-2025.jpeg",
+      "page": 5,
+      "width": 365,
+      "height": 1136,
+      "transparent": false,
+      "bytes": 32811
+    },
+    {
+      "name": "Los Ángeles Cruz Alta",
+      "file": "los-angeles-cruz-alta.jpeg",
+      "page": 6,
+      "width": 425,
+      "height": 1333,
+      "transparent": false,
+      "bytes": 45881
+    },
+    {
+      "name": "Los Ángeles Las Suertes",
+      "file": "los-angeles-las-suertes.png",
+      "page": 7,
+      "width": 346,
+      "height": 1273,
+      "transparent": true,
+      "bytes": 723781
+    },
+    {
+      "name": "Los Ángeles Romeroso",
+      "file": "los-angeles-romeroso.jpeg",
+      "page": 8,
+      "width": 363,
+      "height": 1136,
+      "transparent": false,
+      "bytes": 30588
+    },
+    {
+      "name": "Peñafalcón 10 Meses 2021",
+      "file": "penafalcon-10-meses-2021.jpeg",
+      "page": 9,
+      "width": 192,
+      "height": 813,
+      "transparent": false,
+      "bytes": 32504
+    },
+    {
+      "name": "Peñafalcón 14 Años 2003",
+      "file": "penafalcon-14-anos-2003.jpeg",
+      "page": 10,
+      "width": 260,
+      "height": 1086,
+      "transparent": false,
+      "bytes": 55346
+    },
+    {
+      "name": "Peñafalcón Gran Reserva 2007",
+      "file": "penafalcon-gran-reserva-2007.png",
+      "page": 11,
+      "width": 479,
+      "height": 1417,
+      "transparent": true,
+      "bytes": 647518
+    },
+    {
+      "name": "Peñafalcón Tinto de Autor 2004",
+      "file": "penafalcon-tinto-de-autor-2004.jpeg",
+      "page": 12,
+      "width": 370,
+      "height": 1333,
+      "transparent": false,
+      "bytes": 72072
+    }
+  ]
+}

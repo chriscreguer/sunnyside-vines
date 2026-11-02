@@ -15,6 +15,9 @@
 
   const byId = (id) => PRODUCTS.find((p) => p.id === id);
   const money = (n) => '$' + n.toFixed(2);
+  // English / Spanish (js/i18n.js); falls back to English if it isn't loaded
+  const t = (key, en, vars) => (window.SVI18N ? SVI18N.t(key, en, vars) : en);
+  const loc = (obj, field) => (window.SVI18N ? SVI18N.loc(obj, field) : obj[field]);
 
   /* ── Cart state (persisted) ──────────────────────────────────────────── */
   let cart = loadCart();
@@ -39,14 +42,14 @@
       const wines = PRODUCTS.filter((p) => p.producer === key);
       if (!wines.length) return '';
       return `
-        <section class="producer-group reveal-fade">
+        <section class="producer-group" id="${key}">
           <header class="producer-group-header">
             <div>
               <div class="producer-title">
                 <span class="producer-name">${meta.name}</span>
-                <span class="producer-region">${meta.region}</span>
+                <span class="producer-region">${loc(meta, 'region')}</span>
               </div>
-              <p class="producer-blurb">${meta.blurb}</p>
+              <p class="producer-blurb">${loc(meta, 'blurb')}</p>
             </div>
           </header>
           <div class="wine-grid">
@@ -60,17 +63,17 @@
     return `
       <article class="wine-card producer-${p.producer}" data-details="${p.id}">
         <div class="wine-media fit-${p.fit} producer-${p.producer}">
-          <img src="${ASSET_ROOT}${p.image}" alt="${p.name} ${p.vintage}" loading="lazy">
+          <img src="${ASSET_ROOT}${bottleImage(p)}" alt="${p.name} ${p.vintage}" loading="lazy">
         </div>
         <div class="wine-body">
           <h3 class="wine-name">${p.name} <span class="wine-vintage">${p.vintage}</span></h3>
-          <p class="wine-meta">${p.meta}</p>
-          <p class="wine-note">${p.note}</p>
+          <p class="wine-meta">${loc(p, 'meta')}</p>
+          <p class="wine-note">${loc(p, 'note')}</p>
           <div class="wine-foot">
             <span class="wine-price">${money(parseFloat(p.price))}</span>
-            <button class="add-btn" data-add="${p.id}">Add to cart</button>
+            <button class="add-btn" data-add="${p.id}">${t('cart.add', 'Add to cart')}</button>
           </div>
-          <a class="details-hint" href="wines/${p.id}.html" aria-label="View details for ${p.name} ${p.vintage}">View details <span class="details-arrow" aria-hidden="true">→</span></a>
+          <a class="details-hint" href="wines/${p.id}.html" aria-label="${t('shop.detailsFor', 'View details for {name}', { name: `${p.name} ${p.vintage}` })}">${t('shop.details', 'View details')} <span class="details-arrow" aria-hidden="true">→</span></a>
         </div>
       </article>`;
   }
@@ -97,8 +100,8 @@
     cart.splice(idx, 1);
     saveCart();
     updateCartUI();
-    toast(`${byId(id).name} removed`, {
-      label: 'Undo',
+    toast(t('cart.removed', '{name} removed', { name: byId(id).name }), {
+      label: t('cart.undo', 'Undo'),
       onClick: () => {
         if (!cart.some((i) => i.id === id)) {
           cart.splice(Math.min(idx, cart.length), 0, removed);
@@ -124,24 +127,24 @@
 
     const itemsEl = document.getElementById('cart-items');
     if (!cart.length) {
-      itemsEl.innerHTML = '<p class="cart-empty">Your cart is empty.</p>';
+      itemsEl.innerHTML = `<p class="cart-empty">${t('cart.empty', 'Your cart is empty.')}</p>`;
     } else {
       itemsEl.innerHTML = cart.map((i) => {
         const p = byId(i.id);
         return `
           <div class="cart-item">
-            <div class="cart-item-thumb" style="background-image:url('${ASSET_ROOT}${p.image}')"></div>
+            <div class="cart-item-thumb" style="background-image:url('${ASSET_ROOT}${bottleImage(p)}')"></div>
             <div>
               <div class="cart-item-name">${p.name} ${p.vintage}</div>
-              <div class="cart-item-price">${money(parseFloat(p.price))} each</div>
+              <div class="cart-item-price">${t('cart.each', '{price} each', { price: money(parseFloat(p.price)) })}</div>
             </div>
             <div class="cart-item-right">
               <div class="qty">
-                <button data-dec="${p.id}" aria-label="Decrease" ${i.qty <= 1 ? 'disabled' : ''}>−</button>
+                <button data-dec="${p.id}" aria-label="${t('cart.decrease', 'Decrease')}" ${i.qty <= 1 ? 'disabled' : ''}>−</button>
                 <span>${i.qty}</span>
-                <button data-inc="${p.id}" aria-label="Increase">+</button>
+                <button data-inc="${p.id}" aria-label="${t('cart.increase', 'Increase')}">+</button>
               </div>
-              <button class="cart-item-remove" data-remove="${p.id}">Remove</button>
+              <button class="cart-item-remove" data-remove="${p.id}">${t('cart.remove', 'Remove')}</button>
             </div>
           </div>`;
       }).join('');
@@ -150,6 +153,10 @@
     document.getElementById('cart-subtotal-value').textContent = money(cartSubtotal());
     const checkoutBtn = document.getElementById('checkout-btn');
     checkoutBtn.disabled = cart.length === 0;
+    if (DEMO_MODE) {
+      checkoutBtn.textContent = t('checkout.email', 'Email us this order');
+      document.getElementById('cart-note').textContent = t('checkout.note', 'Online checkout is coming soon. For now, email us your order and we’ll arrange payment and delivery.');
+    }
   }
 
   function openCart() {
@@ -185,10 +192,27 @@
   function checkout() {
     if (!cart.length) return;
     if (DEMO_MODE) {
-      toast('Online checkout is coming soon.');
+      emailOrder();
       return;
     }
     shopifyCheckout();
+  }
+
+  // Until a store is connected, checkout hands the cart to the team by email
+  function emailOrder() {
+    const body = [
+      'I’d like to order:',
+      ...cart.map((i) => {
+        const p = byId(i.id);
+        return `${i.qty} × ${p.name} ${p.vintage} (${money(parseFloat(p.price))} each)`;
+      }),
+      `Subtotal: ${money(cartSubtotal())}`,
+      '',
+      'Name:',
+      'Delivery address:',
+      'Phone:',
+    ].join('\n');
+    window.location.href = `mailto:info@sunnysidevines.com?subject=${encodeURIComponent('Wine order')}&body=${encodeURIComponent(body)}`;
   }
 
   function shopifyCheckout() {
@@ -202,7 +226,7 @@
       return;
     }
     btn.disabled = true;
-    btn.textContent = 'Redirecting…';
+    btn.textContent = t('checkout.redirecting', 'Redirecting…');
 
     const client = ShopifyBuy.buildClient({
       domain: SHOPIFY.domain,
@@ -213,14 +237,23 @@
       .then((c) => client.checkout.addLineItems(c.id, lineItems))
       .then((c) => { window.location.href = c.webUrl; })
       .catch(() => {
-        toast('Sorry, checkout could not be reached.');
+        toast(t('checkout.error', 'Sorry, checkout could not be reached.'));
         btn.disabled = false;
-        btn.textContent = 'Checkout';
+        btn.textContent = t('cart.checkout', 'Checkout');
       });
   }
 
   /* ── Wire up ─────────────────────────────────────────────────────────── */
   function init() {
+    if (DEMO_MODE) {
+      // this script owns the button's label from here on (see updateCartUI)
+      const checkoutBtn = document.getElementById('checkout-btn');
+      checkoutBtn.removeAttribute('data-i18n');
+      const note = document.createElement('p');
+      note.className = 'cart-note';
+      note.id = 'cart-note';
+      checkoutBtn.before(note);
+    }
     updateCartUI();
 
     // Add-to-cart works anywhere the button appears (shop grid, wine pages)
@@ -229,11 +262,11 @@
       if (!btn) return;
       addToCart(btn.dataset.add);
       btn.classList.add('added');
-      btn.textContent = 'Added ✓';
-      toast('Added to cart');
+      btn.textContent = t('cart.added', 'Added ✓');
+      toast(t('cart.addedToast', 'Added to cart'));
       setTimeout(() => {
         btn.classList.remove('added');
-        btn.textContent = 'Add to cart';
+        btn.textContent = t('cart.add', 'Add to cart');
       }, 1200);
     });
 
@@ -267,32 +300,11 @@
     document.getElementById('cart-overlay').addEventListener('click', closeCart);
     document.getElementById('checkout-btn').addEventListener('click', checkout);
 
-    // Scroll reveals - the same quiet fades the homepage uses
-    document.documentElement.classList.add('js-shop');
-
-    // Page-load entrance (shop title, item page media/body) - the hero's
-    // blur/rise cascade, minus anime.js. The stagger is driven from JS
-    // (two setTimeouts) rather than CSS transition-delay: a class added
-    // during the delay window doesn't reliably animate from its pre-delay
-    // value in this environment, so the second element gets its own
-    // later-firing setTimeout instead. A macrotask (not rAF) guarantees a
-    // real paint of the hidden state happens before .is-in triggers the
-    // transition - back-to-back rAFs can otherwise collapse into one frame
-    // with no paint in between, so the "from" state never shows.
-    const enterEls = document.querySelectorAll('.enter:not([data-enter-delay])');
-    const enterDelayedEls = document.querySelectorAll('.enter[data-enter-delay="1"]');
-    if (enterEls.length) setTimeout(() => enterEls.forEach((el) => el.classList.add('is-in')), 50);
-    if (enterDelayedEls.length) setTimeout(() => enterDelayedEls.forEach((el) => el.classList.add('is-in')), 200);
-
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        io.unobserve(e.target);
-        e.target.classList.add('is-in');
-      }),
-      { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
-    );
-    document.querySelectorAll('.reveal-fade').forEach((el) => io.observe(el));
+    // Language switch: re-render everything this script drew
+    document.addEventListener('sv:lang', () => {
+      if (grid) renderProducts();
+      updateCartUI();
+    });
 
     // Mobile menu (shared nav markup with the homepage)
     const toggle = document.getElementById('navToggle');
