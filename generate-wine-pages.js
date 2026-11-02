@@ -20,7 +20,7 @@ const vm = require('vm');
 // the wine details block, shared with the quick-look modal on trade.html
 const WineDetail = require('./js/wine-detail.js');
 
-const SITE_ORIGIN = 'https://sunnyside-vines.vercel.app'; // update when a custom domain lands
+const SITE_ORIGIN = 'https://www.sunnysidevines.com';
 
 const root = __dirname;
 const config = fs.readFileSync(path.join(root, 'shop-config.js'), 'utf8');

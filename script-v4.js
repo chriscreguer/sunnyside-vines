@@ -118,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
           body: new FormData(form),
         });
         if (!res.ok) throw new Error(res.status);
+        // conversion for GA4 / Google Ads
+        if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'contact' });
         btn.textContent = t('contact.thanks', 'Thanks, we\'ll be in touch');
         form.reset();
       } catch {

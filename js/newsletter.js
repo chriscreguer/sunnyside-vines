@@ -50,6 +50,7 @@ document.querySelectorAll('[data-newsletter]').forEach((form) => {
       });
       if (!google && !res.ok) throw new Error(res.status);
       form.reset();
+      if (typeof gtag === 'function') gtag('event', 'sign_up', { method: 'newsletter' });
       done(tr('newsletter.subscribed', 'You’re subscribed'));
     } catch {
       done(tr('newsletter.retry', 'Try again'));

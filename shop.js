@@ -14,6 +14,9 @@
   const PRODUCER_ORDER = ['penafalcon', 'convento', 'losangeles'];
 
   const byId = (id) => PRODUCTS.find((p) => p.id === id);
+  // GA4 ecommerce events (also importable into Google Ads as conversions)
+  const track = (name, params) => { if (typeof gtag === 'function') gtag('event', name, params); };
+  const gaItem = (p, quantity) => ({ item_id: p.id, item_name: `${p.name} ${p.vintage}`, item_brand: PRODUCERS[p.producer].name, price: parseFloat(p.price), quantity });
   const money = (n) => '$' + n.toFixed(2);
   // English / Spanish (js/i18n.js); falls back to English if it isn't loaded
   const t = (key, en, vars) => (window.SVI18N ? SVI18N.t(key, en, vars) : en);
@@ -85,6 +88,8 @@
     else cart.push({ id, qty: 1 });
     saveCart();
     updateCartUI();
+    const p = byId(id);
+    track('add_to_cart', { currency: 'USD', value: parseFloat(p.price), items: [gaItem(p, 1)] });
   }
   function setQty(id, delta) {
     const line = cart.find((i) => i.id === id);
@@ -191,6 +196,7 @@
   /* ── Checkout ────────────────────────────────────────────────────────── */
   function checkout() {
     if (!cart.length) return;
+    track('begin_checkout', { currency: 'USD', value: cartSubtotal(), items: cart.map((i) => gaItem(byId(i.id), i.qty)) });
     if (DEMO_MODE) {
       emailOrder();
       return;

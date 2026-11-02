@@ -356,6 +356,14 @@
 
   function sent() {
     const items = chosen();
+    // the main conversion, for GA4 / Google Ads
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', {
+        form_name: 'trade_request',
+        first_order: firstBox.checked,
+        items: items.map((l) => ({ item_id: l.p.id, item_name: wineName(l.p), quantity: l.qty, item_variant: l.unit })),
+      });
+    }
     document.getElementById('order-sent-list').innerHTML = items
       .map((l) => `<li><span class="summary-qty">${l.qty} ${unitLabel(l)}</span> <span>${wineName(l.p)}</span></li>`)
       .join('');

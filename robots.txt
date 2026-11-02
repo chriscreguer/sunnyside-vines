@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /api/
+Disallow: /concepts/
+Disallow: /index-v1.html
+Disallow: /index-v2.html
+Disallow: /index-v3.html
+Disallow: /index-v4.html
+Disallow: /penafalcon-v2.html
+
+Sitemap: https://www.sunnysidevines.com/sitemap.xml
