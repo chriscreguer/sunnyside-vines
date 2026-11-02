@@ -2,6 +2,8 @@
   'use strict';
 
   const storageKey = 'sunnyside-vines-age-confirmed-v2';
+  // A "yes" is remembered on this browser for this long; a "no" only for the visit.
+  const REMEMBER_DAYS = 30;
   // Minimum retail purchase ages for wine. Unknown locations stay at 21.
   const ages = {
     US: 21, CA: 19, GB: 18, AU: 18, NZ: 18,
@@ -13,6 +15,8 @@
   let saved;
   try {
     saved = JSON.parse(sessionStorage.getItem(storageKey));
+    const kept = JSON.parse(localStorage.getItem(storageKey));
+    if (!saved && kept?.status === 'confirmed' && kept.until > Date.now()) saved = kept;
   } catch (_) {
     // Storage can be disabled; those visitors confirm on each page.
   }
@@ -51,6 +55,11 @@
   function remember(status) {
     try {
       sessionStorage.setItem(storageKey, JSON.stringify({ status, age }));
+      if (status === 'confirmed') {
+        localStorage.setItem(storageKey, JSON.stringify({ status, age, until: Date.now() + REMEMBER_DAYS * 864e5 }));
+      } else {
+        localStorage.removeItem(storageKey);
+      }
     } catch (_) {
       // The visitor can still use this page if storage is unavailable.
     }
