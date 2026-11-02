@@ -1,8 +1,9 @@
 """Make the transparent, tightly trimmed bottle cutouts the site shows.
 
 Reads every wine image listed in shop-config.js and writes two sizes:
-  img/bottles/small/<name>.png  640px tall - shop cards, homepage lineup
-  img/bottles/large/<name>.png  900px tall - wine pages, trade quick look
+  img/bottles/small/<name>.webp  640px tall - shop cards, homepage lineup
+  img/bottles/large/<name>.webp  900px tall - wine pages, trade quick look
+(each also as .png, which the Shopify product import uses)
 (bottleImage() in shop-config.js picks between them.)
 Re-run after adding or replacing a bottle photo:  python3 make-shelf-cutouts.py
 Needs Pillow and numpy.
@@ -42,4 +43,6 @@ for src in imgs:
         os.makedirs(f'img/bottles/{size}', exist_ok=True)
         dst=f'img/bottles/{size}/'+os.path.splitext(os.path.basename(src))[0]+'.png'
         out.save(dst,optimize=True)
-        print(dst, out.size, f'{os.path.getsize(dst)//1024}KB')
+        # WebP for the site (a fraction of the size); the PNG stays for Shopify imports
+        out.save(dst[:-4]+'.webp','WEBP',quality=82,method=6)
+        print(dst, out.size, f'{os.path.getsize(dst)//1024}KB png, {os.path.getsize(dst[:-4]+".webp")//1024}KB webp')

@@ -44,7 +44,7 @@ const PRODUCERS = {
     blurb:
       'A family winery in Peñafiel producing bold, expressive Tempranillo: organic ' +
       'vineyards, meticulous hand-selection, and long barrel aging over limestone soils.',
-    image: 'img/roseto_family_vineyard_landscape.jpeg',
+    image: 'img/opt/roseto_family_vineyard_landscape.webp',
     anchor: 'producer-penafalcon',
     es: {
       region: "Ribera del Duero, España",
@@ -57,7 +57,7 @@ const PRODUCERS = {
     blurb:
       'Zero-intervention, single-vineyard wines from grower Michael Cooper. Each label ' +
       'carries a Romantic-period painting, chosen to express the spirit of natural winemaking.',
-    image: 'img/IMG_1605.png',
+    image: 'img/opt/IMG_1605.webp',
     anchor: 'producer-angeles',
     es: {
       region: "Campo de Borja, España",
@@ -70,7 +70,7 @@ const PRODUCERS = {
     blurb:
       'Tinta del País grown at over 900 metres in Peñafiel. Founded in 2002, the estate ' +
       'crafts elegant, balsamic-tinged reds from old vines and French oak.',
-    image: 'img/vineyard_1.png',
+    image: 'img/opt/vineyard_1.webp',
     anchor: 'producer-convento',
     es: {
       region: "Ribera del Duero, España",
@@ -428,7 +428,8 @@ const PRODUCTS = [
 /* The bottle as shown on the site: a transparent, tightly trimmed cutout of
    `image`, made by make-shelf-cutouts.py (re-run it after changing a photo).
    'small' (640px tall) for cards and the homepage lineup, 'large' (900px)
-   for the wine pages. `image` itself stays the source photo. */
-function bottleImage(p, size = 'small') {
-  return `img/bottles/${size}/` + p.image.split('/').pop().replace(/\.\w+$/, '.png');
+   for the wine pages; WebP by default, 'png' for places that need it (the
+   Shopify import). `image` itself stays the source photo. */
+function bottleImage(p, size = 'small', ext = 'webp') {
+  return `img/bottles/${size}/` + p.image.split('/').pop().replace(/\.\w+$/, '.' + ext);
 }

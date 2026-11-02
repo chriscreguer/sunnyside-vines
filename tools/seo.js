@@ -3,7 +3,8 @@
    ----------------------------------------------------------------------------
    Writes a marked block of meta tags (description, canonical address, Open
    Graph / Twitter share tags) into each top-level page, right after its
-   <title>, and regenerates sitemap.xml and robots.txt at the site root.
+   <title> - plus, on the homepage, the business details Google reads - and
+   regenerates sitemap.xml and robots.txt at the site root.
    The wine pages get their own tags from generate-wine-pages.js.
 
    Run after editing a page's copy below, or after adding a wine:
@@ -45,6 +46,20 @@ const PAGES = {
   },
 };
 
+// who we are, for search engines (homepage only)
+const ORGANIZATION = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Sunnyside Vines',
+  url: `${SITE}/`,
+  logo: `${SITE}/img/favicon/android-chrome-512x512.png`,
+  description: 'New York importer of small-production Spanish wines from family estates in Ribera del Duero and Campo de Borja.',
+  email: 'info@sunnysidevines.com',
+  telephone: '+1-929-738-9424',
+  address: { '@type': 'PostalAddress', addressLocality: 'New York', addressRegion: 'NY', addressCountry: 'US' },
+  areaServed: 'New York',
+};
+
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const START = '<!-- seo (tools/seo.js) -->';
 const END = '<!-- /seo -->';
@@ -74,6 +89,7 @@ for (const [file, page] of Object.entries(PAGES)) {
     `<meta property="og:image:width" content="1200">`,
     `<meta property="og:image:height" content="630">`,
     `<meta name="twitter:card" content="summary_large_image">`,
+    ...(file === 'index.html' ? [`<script type="application/ld+json">${JSON.stringify(ORGANIZATION)}</script>`] : []),
     END,
   ].map((l) => '    ' + l).join('\n');
 

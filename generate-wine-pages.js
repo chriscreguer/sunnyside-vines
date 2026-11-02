@@ -73,7 +73,7 @@ function pageHTML(p) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: `${p.name} ${p.vintage}`,
-    image: imageURL,
+    image: `${SITE_ORIGIN}/${encodeURI(bottleImage(p, 'large', 'png'))}`, // the clean cutout for search results
     description: p.note,
     brand: { '@type': 'Brand', name: meta.name },
     offers: {

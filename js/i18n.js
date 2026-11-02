@@ -195,6 +195,12 @@
     'age.leave': 'Salir del sitio',
 
     // Text pages
+    'title.404': 'Página no encontrada · Sunnyside Vines',
+    '404.title': 'Esta página no existe',
+    '404.copy': 'Puede que el enlace sea antiguo o que el vino ya no esté. Prueba con una de estas opciones.',
+    '404.shop': 'Comprar vinos',
+    '404.trade': 'Pedidos profesionales',
+    '404.home': 'Volver al inicio →',
     'faq.title': 'Preguntas frecuentes',
     'faq.sub': 'Pedidos, cuentas profesionales y los propios vinos.',
     'terms.title': 'Términos y condiciones',

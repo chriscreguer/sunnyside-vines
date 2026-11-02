@@ -1048,3 +1048,13 @@ body:has(.wine-modal[open]) { overflow: hidden; }
   .wine-modal .wine-detail { grid-template-columns: 1fr; gap: 20px; }
   .wine-modal .detail-media img { height: 240px; }
 }
+
+/* ── Page not found (404.html, built by tools/make-404.py) ─────────────────── */
+.notfound { min-height: 62vh; display: flex; align-items: center; }
+.notfound .shop-title { font-size: clamp(34px, 4.4vw, 52px); }
+.notfound-copy { margin-top: 14px; font-size: 17px; line-height: 1.55; color: var(--ink-soft); max-width: 46ch; }
+.notfound-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; margin-top: 30px; }
+.btn.ghost-dark { background: transparent; color: var(--ink); border: 1px solid var(--ink-line); }
+.btn.ghost-dark:hover { background: rgba(42, 26, 18, 0.06); }
+.notfound-home { font-size: 15px; font-weight: 600; color: var(--terra-deep); }
+.notfound-home:hover { color: var(--terra); }

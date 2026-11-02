@@ -68,7 +68,7 @@ const rows = PRODUCTS.map((p) => {
     'Variant Taxable': 'TRUE',
     'Variant Barcode': s.upc,
     'Variant Weight Unit': 'g',
-    'Image Src': `${SITE}/${bottleImage(p, 'large')}`,
+    'Image Src': `${SITE}/${bottleImage(p, 'large', 'png')}`,
     'Image Position': 1,
     'Image Alt Text': `${title}, ${producer.name}`,
     'Gift Card': 'FALSE',
