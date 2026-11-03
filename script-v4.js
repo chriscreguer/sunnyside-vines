@@ -178,7 +178,9 @@ function buildMotion() {
   const [missionBlock] = claim('.mission-statement.reveal');
   const missionCopy = missionBlock && missionBlock.querySelector('p');
   if (missionCopy) {
-    onView(missionBlock, () => {
+    onView(missionBlock, async () => {
+      // Split only once the web font is in, so the lines match what's shown
+      try { await document.fonts.ready; } catch (_) { /* older browsers */ }
       // Lines are assembled from word spans, so words must be split too - and
       // unlike words, lines need a layout pass before they exist. Reading
       // splitter.lines synchronously hands anime an empty target list.
@@ -196,6 +198,9 @@ function buildMotion() {
           duration: 700,
           delay: stagger(70),
           ease: 'out(3)',
+          // back to plain text afterwards: frozen line wrappers break apart if
+          // the layout changes later (text-size settings, zoom, rotation)
+          onComplete: () => splitter.revert(),
         });
       };
       requestAnimationFrame(rise);
