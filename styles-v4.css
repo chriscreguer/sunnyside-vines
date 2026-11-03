@@ -397,12 +397,21 @@ h1, h2, h3, h4, .lede {
   align-items: start;
   padding: 18px 16px;
   margin: 0 -16px;
-  border-bottom: 1px solid rgba(42, 26, 18, 0.16);
-  border-radius: 10px;
+  border-radius: 10px; /* rounds the hover tint only - the divider is the ::after below */
   scroll-margin-top: 120px;
   transition: background 0.3s var(--ease);
 }
-.atlas-entry:last-child { border-bottom: none; }
+/* straight divider, inset to the text so the row's rounded corners never bend it */
+.atlas-entry::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 0;
+  height: 1px;
+  background: rgba(42, 26, 18, 0.16);
+}
+.atlas-entry:last-child::after { display: none; }
 .atlas-entry:focus-visible { outline: 2px solid var(--terra); outline-offset: -2px; }
 /* hover only tints the row and fills the number - nothing changes size */
 .atlas-entry.is-active { background: rgba(237, 198, 162, 0.22); }
