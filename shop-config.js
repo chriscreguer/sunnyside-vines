@@ -70,7 +70,7 @@ const PRODUCERS = {
     blurb:
       'Tinta del País grown at over 900 metres in Peñafiel. Founded in 2002, the estate ' +
       'crafts elegant, balsamic-tinged reds from old vines and French oak.',
-    image: 'img/opt/vineyard_1.webp',
+    image: 'img/opt/convento-oreja.webp',
     anchor: 'producer-convento',
     es: {
       region: "Ribera del Duero, España",

@@ -4,6 +4,88 @@ const { animate, stagger, text, svg, utils, createTimeline, createSpring } = ani
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* Split el into its rendered lines, each in a clipping wrapper, for a
+   line-by-line rise. Lines are read from the live layout with words as plain
+   inline spans, so they keep text-wrap: balance (anime's splitter makes words
+   inline-block, which Chrome doesn't balance, so its lines differed from the
+   final text and a word jumped down when the split was reverted).
+   Returns { rows, revert } or null if the layout can't be measured. */
+function splitBalancedLines(el) {
+  const original = el.innerHTML;
+  const words = [];
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) textNodes.push(n);
+  // pieces break at spaces and after hyphens ("family-" | "run"), the two
+  // places a line can wrap; each remembers whether a space came before it
+  const spaced = new WeakMap();
+  let pendingSpace = false;
+  textNodes.forEach((node) => {
+    const frag = document.createDocumentFragment();
+    node.data.split(/(\s+)/).forEach((part) => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) { frag.append(part); pendingSpace = true; return; }
+      part.match(/[^-]+-*|-+/g).forEach((piece) => {
+        const span = document.createElement('span');
+        span.textContent = piece;
+        spaced.set(span, pendingSpace);
+        pendingSpace = false;
+        words.push(span);
+        frag.append(span);
+      });
+    });
+    node.replaceWith(frag);
+  });
+
+  // group pieces by the line they sit on, keeping any inline wrappers (<em>)
+  const rows = [];
+  let top = null;
+  for (const word of words) {
+    const rects = word.getClientRects();
+    // a piece broken across two lines can't be rebuilt faithfully: skip the
+    // animation and leave the plain text, rather than let it jump at the end
+    if (rects.length !== 1 || !rects[0].height) { el.innerHTML = original; return null; }
+    const rect = rects[0];
+    if (top === null || rect.top - top > rect.height / 2) { rows.push([]); top = rect.top; }
+    const chain = [];
+    for (let p = word.parentElement; p && p !== el; p = p.parentElement) chain.unshift(p);
+    rows[rows.length - 1].push({ text: word.textContent, chain, space: spaced.get(word) });
+  }
+
+  const label = el.textContent.replace(/\s+/g, ' ').trim();
+  el.textContent = '';
+  el.setAttribute('aria-label', label);
+  const inners = rows.map((row) => {
+    const clip = document.createElement('span');
+    clip.style.cssText = 'display:block;overflow:clip';
+    const inner = document.createElement('span');
+    inner.style.display = 'block';
+    inner.setAttribute('aria-hidden', 'true');
+    // rebuild the words, reopening <em> etc. as a shallow copy on each line
+    let open = [];          // [{ src, node }] for the wrappers currently open
+    row.forEach(({ text: word, chain, space }, i) => {
+      let keep = 0;
+      while (keep < open.length && open[keep].src === chain[keep]) keep++;
+      open = open.slice(0, keep);
+      if (i > 0 && space) (open.length ? open[open.length - 1].node : inner).append(' ');
+      for (let d = keep; d < chain.length; d++) {
+        const node = chain[d].cloneNode(false);
+        (open.length ? open[open.length - 1].node : inner).append(node);
+        open.push({ src: chain[d], node });
+      }
+      (open.length ? open[open.length - 1].node : inner).append(word);
+    });
+    clip.append(inner);
+    el.append(clip);
+    return inner;
+  });
+
+  return {
+    rows: inners,
+    revert: () => { el.innerHTML = original; el.removeAttribute('aria-label'); },
+  };
+}
+
 /* Run fn once, when el first scrolls into view. */
 const onView = (el, fn, threshold = 0.25) => {
   if (!el) return;
@@ -181,29 +263,18 @@ function buildMotion() {
     onView(missionBlock, async () => {
       // Split only once the web font is in, so the lines match what's shown
       try { await document.fonts.ready; } catch (_) { /* older browsers */ }
-      // Lines are assembled from word spans, so words must be split too - and
-      // unlike words, lines need a layout pass before they exist. Reading
-      // splitter.lines synchronously hands anime an empty target list.
-      const splitter = text.split(missionCopy, { lines: { wrap: 'clip' }, words: true, chars: false });
-      let tries = 0;
-      const rise = () => {
-        const lines = splitter.lines;
-        if (!lines || !lines.length) {
-          if (tries++ < 10) return requestAnimationFrame(rise);
-          return utils.set(missionBlock, { opacity: 1 });   // never leave the copy hidden
-        }
-        utils.set(missionBlock, { opacity: 1 });
-        animate(lines, {
-          y: ['110%', '0%'],
-          duration: 700,
-          delay: stagger(70),
-          ease: 'out(3)',
-          // back to plain text afterwards: frozen line wrappers break apart if
-          // the layout changes later (text-size settings, zoom, rotation)
-          onComplete: () => splitter.revert(),
-        });
-      };
-      requestAnimationFrame(rise);
+      const lines = splitBalancedLines(missionCopy);
+      utils.set(missionBlock, { opacity: 1 });
+      if (!lines) return;   // couldn't measure: the plain text is already showing
+      animate(lines.rows, {
+        y: ['110%', '0%'],
+        duration: 700,
+        delay: stagger(70),
+        ease: 'out(3)',
+        // back to plain text afterwards: frozen line wrappers break apart if
+        // the layout changes later (text-size settings, zoom, rotation)
+        onComplete: lines.revert,
+      });
     }, 0.35);
   }
 
