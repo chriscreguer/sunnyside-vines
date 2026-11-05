@@ -1060,3 +1060,8 @@ body:has(.wine-modal[open]) { overflow: hidden; }
 .btn.ghost-dark:hover { background: rgba(42, 26, 18, 0.06); }
 .notfound-home { font-size: 15px; font-weight: 600; color: var(--terra-deep); }
 .notfound-home:hover { color: var(--terra); }
+
+/* ── Flat look: no shadows except on panels that slide over the page ──── */
+.detail-media img { filter: none; }
+.order-paper { box-shadow: none; }
+.cart-toggle { box-shadow: 0 0 0 1px rgba(42, 26, 18, 0.1); }

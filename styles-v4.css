@@ -810,3 +810,13 @@ h1, h2, h3, h4, .lede {
 }
 .lang-toggle button:hover { color: var(--ink); }
 .lang-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+
+/* ── Flat look: no shadows except on panels that slide over the page ──── */
+.hero-actions .btn.primary,
+.fan-card,
+.story-img { box-shadow: none; }
+.lineup-bottle img,
+.atlas-detail-disc { filter: none; }
+/* nav too: a hairline instead of a halo */
+.nav-mark img { filter: none; }
+.nav-links, .nav-toggle, .lang-toggle { box-shadow: 0 0 0 1px rgba(42, 26, 18, 0.1); }

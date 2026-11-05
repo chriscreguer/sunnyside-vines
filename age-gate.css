@@ -90,7 +90,7 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
 :where(#age-gate) .age-gate-exit {
   background: var(--ink, #2a1a12);
   color: var(--white, #fffdfb);
-  box-shadow: 0 18px 32px -24px rgba(42, 26, 18, 0.85);
+  box-shadow: none;
 }
 
 :where(#age-gate) .age-gate-actions .btn.ghost {
