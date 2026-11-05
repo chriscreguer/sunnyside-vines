@@ -77,10 +77,10 @@
 }
 
 .producer-region {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
   color: var(--terra);
 }
 
@@ -96,34 +96,31 @@
 .wine-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 24px;
+  gap: 40px 26px;
 }
 
+/* no card box: the bottle sits on a tinted panel, the text sits on the page */
 .wine-card {
   display: flex;
   flex-direction: column;
-  background: var(--white);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-soft);
-  transition: box-shadow 0.08s ease;
-}
-
-/* hover: a quiet terra ring - nothing moves */
-.wine-card:hover {
-  box-shadow: var(--shadow-soft), 0 0 0 1.5px rgba(187, 90, 44, 0.45);
+  color: inherit;
+  text-decoration: none;
 }
 
 .wine-media {
   position: relative;
-  height: 300px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 290px;
   padding: 20px 24px;
-  background: linear-gradient(160deg, #fff, #f0e7dd);
+  border-radius: 3px;
+  background: #efe5da;
+  transition: background 0.2s ease;
 }
+/* hover: the panel warms - nothing moves */
+.wine-card:hover .wine-media { background: #ead9c8; }
 
 /* The current catalog supplies full bottle photographs for every estate. */
 .wine-media img {
@@ -140,7 +137,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 22px 22px 24px;
+  padding: 16px 2px 0;
 }
 
 .wine-name {
@@ -161,13 +158,13 @@
 }
 
 .wine-meta {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin: 10px 0 14px;
-  line-height: 1.6;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin: 3px 0 8px;
+  line-height: 1.5;
 }
 
 .wine-note {
@@ -183,6 +180,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(42, 26, 18, 0.18);
 }
 
 .wine-price {
@@ -208,6 +207,15 @@
 .add-btn:hover { background: var(--terra-deep); transform: translateY(-2px); }
 .add-btn:active { transform: scale(0.96); }
 .add-btn.added { background: #3f6b3a; }
+/* on the grid cards the button is an outline, so the bottles stay the focus */
+.wine-card .add-btn {
+  padding: 8px 16px;
+  background: none;
+  color: var(--terra-deep);
+  border: 1.5px solid rgba(187, 90, 44, 0.55);
+}
+.wine-card .add-btn:hover { background: var(--terra); border-color: var(--terra); color: var(--white); transform: none; }
+.wine-card .add-btn.added { background: #3f6b3a; border-color: #3f6b3a; color: var(--white); }
 
 .ficha-link {
   display: inline-block;
@@ -233,12 +241,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: 16px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
+  margin-top: 12px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
   transition: color 0.2s ease;
 }
 .details-arrow { transition: transform 0.2s var(--ease); }
@@ -540,25 +545,23 @@
 }
 .detail-specs {
   margin: 0 0 24px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(42, 26, 18, 0.14);
 }
 .detail-row {
   display: grid;
   grid-template-columns: 110px 1fr;
   gap: 14px;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(42, 26, 18, 0.14);
 }
+/* plain grey labels - no spaced-out capitals */
 .detail-row dt {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding-top: 2px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink-soft);
 }
 .detail-row dd {
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--ink);
 }
@@ -598,9 +601,8 @@
   margin: 0;
   width: 100%;
   aspect-ratio: 16 / 10;
-  border-radius: 10px;
+  border-radius: 3px;
   overflow: hidden;
-  box-shadow: 0 14px 24px -18px rgba(42, 26, 18, 0.5);
 }
 .producer-note-img img { width: 100%; height: 100%; object-fit: cover; }
 .producer-note-name {
@@ -674,7 +676,7 @@
 @media (max-width: 640px) {
   .shop-main { padding-top: 140px; }
   .shop-main.wine-page-main { padding-top: 116px; }
-  .wine-grid { grid-template-columns: 1fr; gap: 22px; }
+  .wine-grid { grid-template-columns: 1fr; gap: 36px; }
   .cart-toggle { padding: 13px 15px; }
   .cart-toggle .cart-label { display: none; }
   .cart-drawer { width: 100%; max-width: 100vw; }

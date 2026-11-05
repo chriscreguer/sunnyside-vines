@@ -57,7 +57,7 @@ const PRODUCERS = {
     blurb:
       'Zero-intervention, single-vineyard wines from grower Michael Cooper. Each label ' +
       'carries a Romantic-period painting, chosen to express the spirit of natural winemaking.',
-    image: 'img/opt/IMG_1605.webp',
+    image: 'img/opt/cooper-vines.webp',
     anchor: 'producer-angeles',
     es: {
       region: "Campo de Borja, España",
