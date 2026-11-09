@@ -49,7 +49,7 @@
           <header class="producer-group-header">
             <div>
               <div class="producer-title">
-                <span class="producer-name">${meta.name}</span>
+                <h2 class="producer-name">${meta.name}</h2>
                 <span class="producer-region">${loc(meta, 'region')}</span>
               </div>
               <p class="producer-blurb">${loc(meta, 'blurb')}</p>
@@ -165,12 +165,20 @@
   }
 
   function openCart() {
+    const drawer = document.getElementById('cart-drawer');
     document.getElementById('cart-overlay').classList.add('open');
-    document.getElementById('cart-drawer').classList.add('open');
+    drawer.classList.add('open');
+    drawer.inert = false;
+    document.getElementById('cart-close').focus();
   }
   function closeCart() {
+    const drawer = document.getElementById('cart-drawer');
+    if (!drawer.classList.contains('open')) return;
+    const hadFocus = drawer.contains(document.activeElement);
     document.getElementById('cart-overlay').classList.remove('open');
-    document.getElementById('cart-drawer').classList.remove('open');
+    drawer.classList.remove('open');
+    drawer.inert = true;
+    if (hadFocus) document.getElementById('cart-toggle').focus();
   }
 
   let toastTimer;
@@ -301,6 +309,7 @@
       else if (rem) removeFromCart(rem.dataset.remove);
     });
 
+    document.getElementById('cart-drawer').inert = true;
     document.getElementById('cart-toggle').addEventListener('click', openCart);
     document.getElementById('cart-close').addEventListener('click', closeCart);
     document.getElementById('cart-overlay').addEventListener('click', closeCart);

@@ -44,6 +44,10 @@ const PAGES = {
     path: '/privacy.html',
     description: 'What information Sunnyside Vines collects, why, and the choices you have.',
   },
+  'accessibility.html': {
+    path: '/accessibility.html',
+    description: 'How Sunnyside Vines makes its website accessible, and how to tell us about a problem.',
+  },
 };
 
 // who we are, for search engines (homepage only)

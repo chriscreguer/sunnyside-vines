@@ -81,7 +81,7 @@
   font-style: italic;
   font-weight: 500;
   font-size: 16px;
-  color: var(--terra);
+  color: var(--terra-deep);
 }
 
 .producer-blurb {
@@ -154,7 +154,7 @@
   font-family: 'Fraunces', serif;
   font-style: italic;
   font-weight: 500;
-  color: var(--terra);
+  color: var(--terra-deep);
 }
 
 .wine-meta {
@@ -905,7 +905,7 @@
 .order-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 36px; }
 .order-fields .span-2 { grid-column: 1 / -1; }
 .order-fields label { display: block; font-size: 13px; color: var(--ink-soft); }
-.order-fields .optional { opacity: 0.7; }
+.order-fields .optional { color: var(--ink-soft); }
 .order-fields input {
   width: 100%;
   padding: 6px 0 8px;
@@ -918,7 +918,7 @@
   color: var(--ink);
   transition: border-color 0.15s ease;
 }
-.order-fields input:focus { outline: none; border-color: var(--terra); }
+.order-fields input:focus { outline: none; border-color: var(--terra); box-shadow: 0 2px 0 0 var(--terra); }
 .order-fields input:user-invalid { border-color: #b4412a; }
 .first-order { margin-top: 26px; }
 .check { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--ink); cursor: pointer; }

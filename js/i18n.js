@@ -22,6 +22,7 @@
     'title.faq': 'Preguntas frecuentes · Sunnyside Vines',
     'title.terms': 'Términos y condiciones · Sunnyside Vines',
     'title.privacy': 'Política de privacidad · Sunnyside Vines',
+    'title.accessibility': 'Accesibilidad · Sunnyside Vines',
 
     // Navigation
     'nav.producers': 'Productores',
@@ -139,6 +140,7 @@
     'footer.rights': '© 2026 Sunnyside Vines. Todos los derechos reservados.',
     'footer.terms': 'Términos y condiciones',
     'footer.privacy': 'Política de privacidad',
+    'footer.accessibility': 'Accesibilidad',
     'newsletter.thanks': 'Gracias',
     'newsletter.subscribed': 'Suscripción confirmada',
     'newsletter.retry': 'Inténtalo de nuevo',
@@ -209,6 +211,9 @@
     'terms.sub': 'Las condiciones que se aplican cuando usas este sitio o nos haces un pedido.',
     'privacy.title': 'Política de privacidad',
     'privacy.sub': 'Qué datos recogemos, por qué y qué opciones tienes.',
+    'accessibility.title': 'Accesibilidad',
+    'accessibility.sub': 'Queremos que todo el mundo pueda usar este sitio.',
+    'skip': 'Saltar al contenido',
   };
 
   let lang = null;
@@ -294,8 +299,8 @@
     group.setAttribute('aria-label', 'Language');
     group.dataset.i18nAttr = 'aria-label:lang.group';
     group.innerHTML =
-      '<button type="button" data-lang="en" lang="en" aria-label="English">EN</button>' +
-      '<button type="button" data-lang="es" lang="es" aria-label="Español">ES</button>';
+      '<button type="button" data-lang="en" lang="en" aria-label="EN, English">EN</button>' +
+      '<button type="button" data-lang="es" lang="es" aria-label="ES, Español">ES</button>';
     group.addEventListener('click', (e) => {
       const b = e.target.closest('[data-lang]');
       if (b) setLang(b.dataset.lang);

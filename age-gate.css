@@ -78,7 +78,7 @@ html:not([data-age-verified]) body > :not(#age-gate):not(.age-gate-noscript) {
   padding: 15px 26px;
   border: none;
   border-radius: 50px;
-  background: var(--terra, #bb5a2c);
+  background: var(--terra, #b75729);
   color: var(--white, #fffdfb);
   font: 600 15px/1.4 'Hanken Grotesk', sans-serif;
   text-decoration: none;

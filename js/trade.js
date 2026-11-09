@@ -73,7 +73,7 @@
       if (!wines.length) return '';
       return `
         <div class="sheet-group">
-          <h3 class="sheet-producer">${PRODUCERS[key].name} <span>${loc(PRODUCERS[key], 'region')}</span></h3>
+          <h2 class="sheet-producer">${PRODUCERS[key].name} <span>${loc(PRODUCERS[key], 'region')}</span></h2>
           ${wines.map(rowHTML).join('')}
         </div>`;
     }).join('');
