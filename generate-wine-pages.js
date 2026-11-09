@@ -58,7 +58,7 @@ function pageHTML(p) {
                 <div class="wine-grid">
                     ${otherWines.map((o) => `<a class="wine-card producer-${o.producer}" href="${o.id}.html">
                         <div class="wine-media fit-${o.fit} producer-${o.producer}">
-                            <img src="../${esc(bottleImage(o))}" alt="${esc(`${o.name} ${o.vintage}`)}" loading="lazy">
+                            <img src="../${esc(bottleImage(o))}" alt="" loading="lazy">
                         </div>
                         <div class="wine-body">
                             <h3 class="wine-name">${esc(o.name)} <span class="wine-vintage">${esc(o.vintage)}</span></h3>
@@ -149,7 +149,7 @@ ${jsonld}
                 <a href="../index.html#contact" data-i18n="nav.contact">Contact</a>
                 <a href="../shop.html" class="cta" data-i18n="nav.shop">Shop</a>
             </div>
-            <button class="cart-toggle" id="cart-toggle" aria-label="Open cart" data-i18n-attr="aria-label:cart.open">
+            <button class="cart-toggle" id="cart-toggle" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <circle cx="9.5" cy="20" r="1.4" fill="currentColor"/>
                     <circle cx="18" cy="20" r="1.4" fill="currentColor"/>

@@ -15,6 +15,11 @@ document.querySelectorAll('[data-newsletter]').forEach((form) => {
   trap.setAttribute('aria-hidden', 'true');
   trap.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0';
   form.appendChild(trap);
+  // Screen readers hear the outcome here (the button text changes while it's disabled)
+  const status = document.createElement('p');
+  status.className = 'sr-only';
+  status.setAttribute('role', 'status');
+  form.appendChild(status);
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -23,6 +28,7 @@ document.querySelectorAll('[data-newsletter]').forEach((form) => {
     const email = input.value.trim();
     const done = (label) => {
       btn.textContent = label;
+      status.textContent = label;
       btn.disabled = true;
       setTimeout(() => { btn.textContent = tr('footer.subscribe', 'Subscribe'); btn.disabled = false; }, 3000);
     };

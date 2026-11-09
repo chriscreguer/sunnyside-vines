@@ -69,12 +69,12 @@
           <img src="${ASSET_ROOT}${bottleImage(p)}" alt="${p.name} ${p.vintage}" loading="lazy">
         </div>
         <div class="wine-body">
-          <h3 class="wine-name">${p.name} <span class="wine-vintage">${p.vintage}</span></h3>
+          <h3 class="wine-name" id="name-${p.id}">${p.name} <span class="wine-vintage">${p.vintage}</span></h3>
           <p class="wine-meta">${loc(p, 'meta')}</p>
           <p class="wine-note">${loc(p, 'note')}</p>
           <div class="wine-foot">
             <span class="wine-price">${money(parseFloat(p.price))}</span>
-            <button class="add-btn" data-add="${p.id}">${t('cart.add', 'Add to cart')}</button>
+            <button class="add-btn" data-add="${p.id}" aria-describedby="name-${p.id}">${t('cart.add', 'Add to cart')}</button>
           </div>
           <a class="details-hint" href="wines/${p.id}.html" aria-label="${t('shop.detailsFor', 'View details for {name}', { name: `${p.name} ${p.vintage}` })}">${t('shop.details', 'View details')} <span class="details-arrow" aria-hidden="true">→</span></a>
         </div>
@@ -129,6 +129,8 @@
     const badge = document.getElementById('cart-count');
     badge.textContent = count;
     badge.classList.toggle('hidden', count === 0);
+    // the "Cart" word is hidden on phones, so the name is set here (and includes the count)
+    document.getElementById('cart-toggle').setAttribute('aria-label', count ? `${t('cart.label', 'Cart')} ${count}` : t('cart.label', 'Cart'));
 
     const itemsEl = document.getElementById('cart-items');
     if (!cart.length) {
@@ -145,11 +147,11 @@
             </div>
             <div class="cart-item-right">
               <div class="qty">
-                <button data-dec="${p.id}" aria-label="${t('cart.decrease', 'Decrease')}" ${i.qty <= 1 ? 'disabled' : ''}>−</button>
-                <span>${i.qty}</span>
-                <button data-inc="${p.id}" aria-label="${t('cart.increase', 'Increase')}">+</button>
+                <button data-dec="${p.id}" aria-label="${t('cart.decrease', 'Decrease')}, ${p.name} ${p.vintage}" ${i.qty <= 1 ? 'disabled' : ''}>−</button>
+                <span aria-label="${t('cart.qty', 'Quantity {qty}', { qty: i.qty })}">${i.qty}</span>
+                <button data-inc="${p.id}" aria-label="${t('cart.increase', 'Increase')}, ${p.name} ${p.vintage}">+</button>
               </div>
-              <button class="cart-item-remove" data-remove="${p.id}">${t('cart.remove', 'Remove')}</button>
+              <button class="cart-item-remove" data-remove="${p.id}" aria-label="${t('cart.remove', 'Remove')}, ${p.name} ${p.vintage}">${t('cart.remove', 'Remove')}</button>
             </div>
           </div>`;
       }).join('');
@@ -179,6 +181,20 @@
     drawer.classList.remove('open');
     drawer.inert = true;
     if (hadFocus) document.getElementById('cart-toggle').focus();
+  }
+
+  // Screen-reader announcement that isn't shown on screen
+  function announce(msg) {
+    let el = document.getElementById('sr-status');
+    if (!el) {
+      el = document.createElement('p');
+      el.id = 'sr-status';
+      el.className = 'sr-only';
+      el.setAttribute('role', 'status');
+      document.body.append(el);
+    }
+    el.textContent = '';
+    setTimeout(() => { el.textContent = msg; }, 50);
   }
 
   let toastTimer;
@@ -304,12 +320,29 @@
       const inc = e.target.closest('[data-inc]');
       const dec = e.target.closest('[data-dec]');
       const rem = e.target.closest('[data-remove]');
-      if (inc) setQty(inc.dataset.inc, 1);
-      else if (dec) setQty(dec.dataset.dec, -1);
-      else if (rem) removeFromCart(rem.dataset.remove);
+      const list = document.getElementById('cart-items');
+      if (inc || dec) {
+        const id = (inc || dec).dataset.inc || (inc || dec).dataset.dec;
+        setQty(id, inc ? 1 : -1);
+        const line = cart.find((i) => i.id === id);
+        const same = list.querySelector(inc ? `[data-inc="${id}"]` : `[data-dec="${id}"]`);
+        (same && !same.disabled ? same : list.querySelector(`[data-inc="${id}"]`)).focus();
+        announce(t('cart.qtyOf', '{name}: quantity {qty}', { name: `${byId(id).name} ${byId(id).vintage}`, qty: line.qty }));
+      } else if (rem) {
+        const rows = [...list.querySelectorAll('[data-remove]')];
+        const at = rows.indexOf(rem);
+        removeFromCart(rem.dataset.remove);
+        const left = list.querySelectorAll('[data-remove]');
+        (left[Math.min(at, left.length - 1)] || document.getElementById('cart-close')).focus();
+      }
     });
 
-    document.getElementById('cart-drawer').inert = true;
+    const drawer = document.getElementById('cart-drawer');
+    drawer.inert = true;
+    drawer.setAttribute('role', 'dialog');
+    drawer.setAttribute('aria-modal', 'true');
+    const toastEl = document.getElementById('toast');
+    if (toastEl) toastEl.setAttribute('role', 'status');
     document.getElementById('cart-toggle').addEventListener('click', openCart);
     document.getElementById('cart-close').addEventListener('click', closeCart);
     document.getElementById('cart-overlay').addEventListener('click', closeCart);
@@ -325,14 +358,18 @@
     const toggle = document.getElementById('navToggle');
     const links = document.getElementById('navLinks');
     if (toggle && links) {
+      toggle.setAttribute('aria-controls', 'navLinks');
+      toggle.setAttribute('aria-expanded', 'false');
       toggle.addEventListener('click', () => {
         toggle.classList.toggle('open');
         links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(links.classList.contains('open')));
       });
       links.querySelectorAll('a').forEach((a) =>
         a.addEventListener('click', () => {
           toggle.classList.remove('open');
           links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
         })
       );
     }

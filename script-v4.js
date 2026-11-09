@@ -107,14 +107,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
   if (toggle && links) {
+    toggle.setAttribute('aria-controls', 'navLinks');
+    toggle.setAttribute('aria-expanded', 'false');
     toggle.addEventListener('click', () => {
       toggle.classList.toggle('open');
       links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(links.classList.contains('open')));
     });
     links.querySelectorAll('a').forEach((a) =>
       a.addEventListener('click', () => {
         toggle.classList.remove('open');
         links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
       })
     );
   }
@@ -147,6 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
     targets.forEach((el) => {
       el.addEventListener('mouseenter', () => setActive(el.dataset.estate));
       el.addEventListener('mouseleave', () => setActive(null));
+      // Focus listeners make SVG nodes tab stops in Chrome, so only the legend
+      // entries get them; focusing an entry still lights up its pin.
+      if (el instanceof SVGElement) return;
       el.addEventListener('focusin', () => setActive(el.dataset.estate));
       el.addEventListener('focusout', () => setActive(null));
     });
@@ -185,6 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Contact form (no backend yet) */
   const form = document.getElementById('contactForm');
   if (form) {
+    // Screen readers hear the outcome here (the button text changes while it's disabled)
+    const status = document.createElement('p');
+    status.className = 'sr-only';
+    status.setAttribute('role', 'status');
+    form.append(status);
     // Posts to Formspree, which emails the message on
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -203,9 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // conversion for GA4 / Google Ads
         if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'contact' });
         btn.textContent = t('contact.thanks', 'Thanks, we\'ll be in touch');
+        status.textContent = btn.textContent;
         form.reset();
       } catch {
         btn.textContent = t('contact.failed', 'Couldn\'t send. Email info@sunnysidevines.com');
+        status.textContent = btn.textContent;
         wait = 6000;
       }
       setTimeout(() => {

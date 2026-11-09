@@ -162,6 +162,8 @@
     'cart.decrease': 'Quitar uno',
     'cart.increase': 'Añadir uno',
     'cart.remove': 'Eliminar',
+    'cart.qty': 'Cantidad {qty}',
+    'cart.qtyOf': '{name}: cantidad {qty}',
     'cart.removed': '{name} eliminado',
     'cart.undo': 'Deshacer',
     'cart.add': 'Añadir al carrito',

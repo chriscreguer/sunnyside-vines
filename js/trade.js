@@ -53,8 +53,9 @@
     const line = lines[p.id] || { qty: 0, unit: 'cases' };
     const price = TRADE.showPrices && p.wholesale
       ? `<span class="sheet-price">${money(p.wholesale)}<small>/${t('trade.btl', 'btl')}</small></span>` : '';
+    // "cs" / "btl" on screen; screen readers also hear the full word
     const unit = (u, en) =>
-      `<button type="button" data-unit="${u}" aria-pressed="${line.unit === u}">${t('trade.' + u + 'Short', en)}</button>`;
+      `<button type="button" data-unit="${u}" aria-pressed="${line.unit === u}" aria-label="${t('trade.' + u + 'Short', en)}, ${u === 'cases' ? t('trade.cases', 'cases') : t('trade.bottles', 'bottles')}">${t('trade.' + u + 'Short', en)}</button>`;
     return `
       <div class="sheet-row${line.qty ? ' is-on' : ''}" data-row="${p.id}">
         <a class="sheet-name" href="wines/${p.id}.html">${p.name} <span class="sheet-vintage">${p.vintage}</span></a>
@@ -63,7 +64,7 @@
         <input class="sheet-qty" type="number" min="0" max="999" step="1" inputmode="numeric" value="${line.qty || ''}" placeholder="–"
           aria-label="${t('trade.qtyFor', 'Quantity of {name}', { name: wineName(p) })}">
         <span class="unit" role="group" aria-label="${t('trade.unit', 'Unit')}">${unit('cases', 'cs')}${unit('bottles', 'btl')}</span>
-        <span class="sheet-meta">${loc(p, 'meta')}${p.ficha ? ` · <a href="${encodeURI(p.ficha)}" target="_blank" rel="noopener">${t('trade.specSheet', 'Spec sheet')}</a>` : ''}</span>
+        <span class="sheet-meta">${loc(p, 'meta')}${p.ficha ? ` · <a href="${encodeURI(p.ficha)}" target="_blank" rel="noopener" aria-label="${t('trade.specSheet', 'Spec sheet')}, ${p.name} ${p.vintage} (PDF)">${t('trade.specSheet', 'Spec sheet')}</a>` : ''}</span>
       </div>`;
   }
 
@@ -416,9 +417,12 @@
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
   if (toggle && links) {
+    toggle.setAttribute('aria-controls', 'navLinks');
+    toggle.setAttribute('aria-expanded', 'false');
     toggle.addEventListener('click', () => {
       toggle.classList.toggle('open');
       links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(links.classList.contains('open')));
     });
   }
 })();
