@@ -5,8 +5,11 @@
    See SHOPIFY-SETUP.md for the full walkthrough.
 
    1. Create a Shopify store and add each wine below as a product.
-   2. Enable the Storefront API and paste your domain + token into SHOPIFY.
+   2. Create a Headless storefront and paste its public Storefront API token into SHOPIFY.
    3. For each wine, paste its Shopify `productId` and `variantId`.
+
+   The public Storefront API token is intended for browser use. Never put a
+   private Storefront API token or an Admin API token in this file.
 
    While SHOPIFY.domain or SHOPIFY.storefrontAccessToken is empty, the page runs
    in DEMO MODE: the cart works locally, and the checkout button emails the
@@ -15,9 +18,9 @@
 
 const SHOPIFY = {
   // e.g. 'sunnyside-vines.myshopify.com'  (leave blank to stay in demo mode)
-  domain: '',
+  domain: 'sunnysidevines.myshopify.com',
   // Storefront API access token (leave blank to stay in demo mode)
-  storefrontAccessToken: '',
+  storefrontAccessToken: '8801f08174589bf2f6bc9da61da7c042',
 };
 
 /* Trade orders (trade.html). Each order is posted to `formEndpoint`
@@ -33,6 +36,23 @@ const TRADE = {
   cutoffHourET: 11,
   // days deliveries go out, 0 = Sunday ... 6 = Saturday
   deliveryDays: [1, 2, 3, 4, 5],
+};
+
+/* Event page (tasting/index.html, sunnysidevines.com/tasting). The QR code
+   on the post-tasting sheet points here and never changes: for each new
+   event, change the wines below (in the order they were poured) and the code.
+   `discountCode` must exist in Shopify (Discounts); it is applied
+   automatically at checkout for anyone who opened this page. Leave it '' for
+   no code. Case sizes come from each wine's `caseSize` (default 6). */
+const TASTING = {
+  title: 'The wines you tasted',
+  sub: 'In the order you tried them. Order by the bottle or the case, and mix wines from both estates in one order.',
+  discountCode: 'EGON5',
+  discountLabel: '5% off',
+  groups: [
+    { producer: 'convento', host: 'Belén Vaquero', wines: ['convento-roble-2025', 'convento-crianza-2022', 'convento-memoria-reserva-2022'] },
+    { producer: 'penafalcon', host: 'David Marcos', wines: ['penafalcon-10-meses-2021', 'penafalcon-tinto-de-autor-2004', 'penafalcon-gran-reserva-2007'] },
+  ],
 };
 
 /* Producer blurbs shown above each group of wines. `es` holds the Spanish copy
@@ -105,7 +125,7 @@ const PRODUCTS = [
     image: "img/catalog-2026/penafalcon-gran-reserva-2007.png",
     fit: "bottle",
     ficha: "docs/catalog-2026/penafalcon-gran-reserva-2007.pdf",
-    shopify: { productId: '', variantId: '' },
+    shopify: { productId: 'gid://shopify/Product/15460442832998', variantId: 'gid://shopify/ProductVariant/67899984871526' },
     es: {
       meta: "Tempranillo",
       note: "Sesenta meses en roble francés y americano. Fruta roja y negra en compota, café tostado y madera tostada, con un paladar amplio y aterciopelado y taninos maduros.",
@@ -137,7 +157,7 @@ const PRODUCTS = [
     image: "img/catalog-2026/penafalcon-14-anos-2003.jpeg",
     fit: "bottle",
     ficha: "docs/catalog-2026/penafalcon-14-anos-2003.pdf",
-    shopify: { productId: '', variantId: '' },
+    shopify: { productId: 'gid://shopify/Product/15460442898534', variantId: 'gid://shopify/ProductVariant/67899984937062' },
     es: {
       meta: "Tempranillo",
       note: "Un Tempranillo de larga crianza de viñedos pedregosos y de altura en Peñafiel. Cereza oscura, fruta madura y vainilla, con un paladar aterciopelado y estructurado.",
@@ -169,7 +189,7 @@ const PRODUCTS = [
     image: "img/catalog-2026/penafalcon-tinto-de-autor-2004.jpeg",
     fit: "bottle",
     ficha: "docs/catalog-2026/penafalcon-tinto-de-autor-2004.pdf",
-    shopify: { productId: '', variantId: '' },
+    shopify: { productId: 'gid://shopify/Product/15460442964070', variantId: 'gid://shopify/ProductVariant/67899985002598' },
     es: {
       meta: "Tempranillo",
       note: "Treinta y seis meses en roble francés y americano. Compota de fruta roja y negra madura, especias y madera tostada, con estructura firme y un final largo y fresco.",
@@ -203,7 +223,7 @@ const PRODUCTS = [
     image: "img/catalog-2026/penafalcon-10-meses-2021.jpeg",
     fit: "bottle",
     ficha: "docs/catalog-2026/penafalcon-10-meses-2021.pdf",
-    shopify: { productId: '', variantId: '' },
+    shopify: { productId: 'gid://shopify/Product/15460443029606', variantId: 'gid://shopify/ProductVariant/67899985100902' },
     es: {
       meta: "Tempranillo",
       note: "Diez meses en roble francés y americano. Rojo cereza intenso, con fruta roja y negra en compota, un paladar redondo y un final largo.",
@@ -238,7 +258,7 @@ const PRODUCTS = [
     image: "img/catalog-2026/los-angeles-romeroso.jpeg",
     fit: "bottle",
     ficha: "docs/catalog-2026/los-angeles-romeroso-2021.pdf",
-    shopify: { productId: '', variantId: '' },
+    shopify: { productId: 'gid://shopify/Product/15460443095142', variantId: 'gid://shopify/ProductVariant/67899985199206' },
     es: {
       meta: "Garnacha",
       note: "Garnacha de viñas viejas, vendimiada a mano y de fermentación espontánea. Mora, cereza negra y pimienta blanca, con acidez vibrante y final mineral.",
@@ -270,7 +290,7 @@ const PRODUCTS = [
     image: "img/catalog-2026/los-angeles-cruz-alta.jpeg",
     fit: "bottle",
     ficha: "docs/catalog-2026/los-angeles-cruz-alta-2025.pdf",
-    shopify: { productId: '', variantId: '' },
+    shopify: { productId: 'gid://shopify/Product/15460443127910', variantId: 'gid://shopify/ProductVariant/67899985297510' },
     es: {
       meta: "Garnacha",
       note: "Una Garnacha natural de viñas viejas de secano. Mora, cereza negra y pimienta blanca, con acidez viva y una columna mineral.",
@@ -304,7 +324,7 @@ const PRODUCTS = [
     image: "img/catalog-2026/los-angeles-las-suertes.png",
     fit: "bottle",
     ficha: "docs/catalog-2026/los-angeles-las-suertes.pdf",
-    shopify: { productId: '', variantId: '' },
+    shopify: { productId: 'gid://shopify/Product/15460443193446', variantId: 'gid://shopify/ProductVariant/67899985363046' },
     es: {
       meta: "Moscatel · Vino naranja",
       note: "Moscatel de Alejandría con maceración con pieles, de viñas de altura. Ámbar, seco y fresco, con lichi, membrillo, albaricoque y naranja amarga.",
@@ -342,7 +362,7 @@ const PRODUCTS = [
     image: "img/catalog-2026/convento-memoria-reserva-2022.png",
     fit: "bottle",
     ficha: "docs/catalog-2026/convento-memoria-reserva-2022.pdf",
-    shopify: { productId: '', variantId: '' },
+    shopify: { productId: 'gid://shopify/Product/15460443226214', variantId: 'gid://shopify/ProductVariant/67899985395814' },
     es: {
       meta: "Tempranillo",
       note: "Tempranillo de altura con trece meses en roble francés. Fruta negra, especias dulces, café y cacao, con un paladar suave y aterciopelado. Solo 5.400 botellas.",
@@ -366,6 +386,7 @@ const PRODUCTS = [
     badge: '',
     note: "Twelve months in French oak. Red and black berries, pastry, gentle spice and balsamic notes, with soft, rounded tannins and a velvety finish.",
     price: '33.99',
+    caseSize: 12,
     tasting: "A blend of 98% Tempranillo and 2% Cabernet Sauvignon from Mélida and Langayo in the Comarca de Peñafiel. Fermented in temperature-controlled stainless steel and matured for twelve months in medium- and low-toast French oak; bottled in May 2024. Cherry-red, clean and crystalline, with blueberry, raspberry and blackberry, pastry aromas, light spice and balsamic touches. Soft, rounded tannins balance the acidity in a broad, velvety and persistent palate.",
     details: [
       ["Grapes", "98% Tempranillo, 2% Cabernet Sauvignon"],
@@ -377,7 +398,7 @@ const PRODUCTS = [
     image: "img/catalog-2026/convento-crianza-2022.jpeg",
     fit: "bottle",
     ficha: "docs/catalog-2026/convento-crianza-2022.pdf",
-    shopify: { productId: '', variantId: '' },
+    shopify: { productId: 'gid://shopify/Product/15460443258982', variantId: 'gid://shopify/ProductVariant/67899985428582' },
     es: {
       meta: "Tempranillo · Cabernet Sauvignon",
       note: "Doce meses en roble francés. Frutos rojos y negros, pastelería, especias suaves y notas balsámicas, con taninos suaves y redondos y un final aterciopelado.",
@@ -400,6 +421,7 @@ const PRODUCTS = [
     badge: 'Everyday',
     note: "Tempranillo aged three months in French and American oak. Cherry-red, with red and black berries, pastry, light spice and soft, rounded tannins.",
     price: '22.99',
+    caseSize: 12,
     tasting: "Tempranillo fermented in temperature-controlled stainless steel and aged for three months in equal parts French and American oak. Cherry-red, clean and crystalline. Blueberry, raspberry and blackberry meet pastry aromas, light spice and balsamic notes. Soft, rounded tannins bring a broad, velvety texture, balanced acidity and a persistent finish.",
     details: [
       ["Grape", "100% Tempranillo (Tinto del País)"],
@@ -410,7 +432,7 @@ const PRODUCTS = [
     image: "img/catalog-2026/convento-roble-2025.jpeg",
     fit: "bottle",
     ficha: "docs/catalog-2026/convento-roble-2025.pdf",
-    shopify: { productId: '', variantId: '' },
+    shopify: { productId: 'gid://shopify/Product/15460443291750', variantId: 'gid://shopify/ProductVariant/67899985461350' },
     es: {
       meta: "Tempranillo",
       note: "Tempranillo con tres meses en roble francés y americano. Rojo cereza, con frutos rojos y negros, pastelería, especias suaves y taninos suaves y redondos.",

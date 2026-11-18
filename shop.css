@@ -1065,3 +1065,103 @@ body:has(.wine-modal[open]) { overflow: hidden; }
 .detail-media img { filter: none; }
 .order-paper { box-shadow: none; }
 .cart-toggle { box-shadow: 0 0 0 1px rgba(42, 26, 18, 0.1); }
+
+/* ── Case buttons ─────────────────────────────────────────────────────────── */
+/* "Add a case of 12 · $275.88": a quiet text button under a wine's price */
+.case-btn {
+  align-self: flex-start;
+  margin-top: 10px;
+  padding: 0 0 2px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(187, 90, 44, 0.45);
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--terra-deep);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.case-btn:hover { color: var(--terra); border-color: var(--terra); }
+.case-btn.added { color: #3f6b3a; border-color: #3f6b3a; }
+.detail-foot + .case-btn { display: block; margin-left: auto; margin-top: 12px; }
+
+.add-btn-quiet {
+  background: none;
+  color: var(--terra-deep);
+  border: 1.5px solid rgba(187, 90, 44, 0.55);
+}
+.add-btn-quiet:hover { background: var(--terra); border-color: var(--terra); color: var(--white); }
+.add-btn-quiet.added { background: #3f6b3a; border-color: #3f6b3a; color: var(--white); }
+
+/* ── Case progress in the cart (bottles of any wine count toward a case) ─── */
+.case-progress { margin-bottom: 18px; }
+.case-progress[hidden] { display: none; }
+.case-progress-label { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.case-progress-label.is-full { color: #3f6b3a; }
+.case-progress-bar { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.case-progress-bar span { display: block; height: 100%; background: var(--terra); transition: width 0.3s ease; }
+.case-progress-label.is-full + .case-progress-bar span { background: #3f6b3a; }
+.case-progress-hint { font-size: 12px; color: var(--ink-soft); margin-top: 6px; }
+.case-progress-code { font-size: 12px; color: var(--terra-deep); font-weight: 600; margin-top: 4px; }
+
+/* ── Tasting page (tasting/index.html) ────────────────────────────────────── */
+.tasting-main .wrap { width: min(860px, 92vw); }
+.tasting-code {
+  margin-top: 18px;
+  display: inline-block;
+  padding: 10px 16px;
+  font-size: 14px;
+  background: rgba(237, 198, 162, 0.35);
+  border-radius: 3px;
+  color: var(--ink);
+}
+.tasting-code[hidden] { display: none; }
+.tasting-jump { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 22px; }
+.tasting-jump a {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px;
+}
+.tasting-jump a:hover { color: var(--terra); border-color: var(--terra); }
+
+.tasting-group { margin-bottom: clamp(48px, 6vw, 72px); scroll-margin-top: 110px; }
+.tasting-group-head { padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+.tasting-host { font-size: 14px; color: var(--ink-soft); margin-top: 4px; }
+.tasting-list { list-style: none; margin: 0; padding: 0; }
+.tasting-row {
+  display: grid;
+  grid-template-columns: 64px 120px 1fr;
+  gap: 22px;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.tasting-num {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--ink);
+}
+.tasting-media {
+  display: flex; align-items: center; justify-content: center;
+  height: 180px; padding: 12px; box-sizing: border-box;
+  background: #efe5da; border-radius: 3px;
+}
+.tasting-media img { height: 100%; width: auto; max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.tasting-body .wine-name a { color: inherit; text-decoration: none; }
+.tasting-body .wine-name a:hover { color: var(--terra-deep); }
+.tasting-body .wine-note { margin: 6px 0 10px; }
+.tasting-prices { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 15px; font-weight: 600; color: var(--terra-deep); margin-bottom: 14px; }
+.tasting-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.tasting-actions .add-btn { padding: 11px 18px; }
+.tasting-more { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 14px; color: var(--ink-soft); }
+.tasting-more a { color: var(--terra-deep); }
+
+@media (max-width: 600px) {
+  .tasting-row { grid-template-columns: 84px 1fr; gap: 6px 16px; align-items: start; }
+  .tasting-num { grid-column: 1 / -1; font-size: 34px; }
+  .tasting-media { height: 150px; padding: 8px; }
+  .tasting-actions .add-btn { flex: 1 1 auto; }
+}

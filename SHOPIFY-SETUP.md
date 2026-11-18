@@ -1,89 +1,67 @@
-# Connecting the Shop to Shopify
+# Connecting the shop to Shopify
 
-The shop page (`shop.html`) is fully built and works right now in **demo mode**:
-you can browse wines, add to cart, and open the cart drawer. The only thing that
-isn't live yet is real payment — because there's no Shopify store connected.
+The shop page already has a local cart. When connected, it creates a Shopify cart and sends the customer to Shopify's hosted checkout. The checkout handoff uses Shopify's current Storefront Cart API; the older Checkout API used by the previous setup has been shut down.
 
-When you're ready to take real orders, follow these steps. You only ever edit
-**one file**: `shop-config.js`.
+## 1. Create a Headless storefront
 
----
+In Shopify admin, install/open the **Headless** sales channel, then create a storefront for Sunnyside Vines. In that storefront's API permissions, allow cart read/write access. The site needs a **public Storefront API access token** because its request runs in the customer's browser.
 
-## 1. Create a Shopify store
+Copy the storefront's public token and your store's `.myshopify.com` domain. Do not use a private Storefront API token or an Admin API token in the website.
 
-1. Go to <https://www.shopify.com> and start a store (any plan that includes the
-   **Storefront API** — all paid plans do; the Starter/"Buy Button" plan also works).
-2. Set your store currency to **USD** (or whatever you price in).
+## 2. Add and publish the wines
 
-## 2. Add each wine as a product
+You can create products in Shopify, or generate an import file from this site's catalog:
 
-In Shopify admin → **Products → Add product**, create one product per wine. Use
-the same names as in `shop-config.js` so they're easy to match:
-
-| Producer         | Products |
-|------------------|----------|
-| Bodega Peñafalcón | Gran Reserva 2007 · 14 Años 2003 · Tinto de Autor 2004 · 10 Meses en Barrica 2021 |
-| Los Ángeles       | Romeroso 2021 · Cruz Alta 2025 · Las Suertes (Blanco) |
-| Convento Oreja    | Selección de Familia 2020 · Crianza 2022 · Roble 2025 |
-
-For each product, set the **price** and upload an image (you can reuse the images
-in `img/shop/`). Set inventory / shipping as you like.
-
-## 3. Turn on the Storefront API and get a token
-
-1. Shopify admin → **Settings → Apps and sales channels → Develop apps**.
-2. **Create an app** (e.g. "Sunnyside Website"), open it, go to
-   **Configuration → Storefront API** and enable it with these scopes:
-   `unauthenticated_read_product_listings`, `unauthenticated_write_checkouts`,
-   `unauthenticated_read_checkouts`.
-3. **Install** the app, then under **API credentials** copy the
-   **Storefront API access token**.
-
-## 4. Get each product's variant ID
-
-Every product has at least one **variant**. The shop needs the variant ID in
-Storefront (GID) form, which looks like:
-
+```sh
+node tools/make-shopify-csv.js
 ```
+
+Import `tools/shopify-products.csv` from Shopify admin → **Products → Import**. The import marks products as drafts, so review them, set inventory and shipping details, and publish the products to the Headless sales channel before selling them.
+
+The prices shown on the website come from `shop-config.js`; keep them in sync with each Shopify variant's price. Shopify's checkout uses the Shopify price.
+
+## 3. Add the Shopify variant IDs
+
+For every wine that can be added to the website cart, get its Shopify variant ID. Open the variant in Shopify admin and use the numeric variant ID from its URL, wrapped in Storefront GID form:
+
+```text
 gid://shopify/ProductVariant/1234567890
 ```
 
-Easiest way to find it: open the product in admin, click the variant, and read the
-number at the end of the URL
-(`.../variants/1234567890`) — then wrap it as
-`gid://shopify/ProductVariant/1234567890`.
+In `shop-config.js`, add that value to the matching product's `shopify.variantId`. The `productId` field can stay blank; checkout uses the variant ID.
 
-(You can leave `productId` blank; only `variantId` is required for checkout.)
+## 4. Connect the site
 
-## 5. Fill in `shop-config.js`
-
-At the top of the file:
+At the top of `shop-config.js`, fill in:
 
 ```js
 const SHOPIFY = {
   domain: 'your-store.myshopify.com',
-  storefrontAccessToken: 'your-storefront-access-token',
+  storefrontAccessToken: 'your-public-storefront-access-token',
 };
 ```
 
-Then, for each wine in the `PRODUCTS` array, paste its variant ID:
+Save and deploy the site. If either setting is blank, the shop remains in demo mode and checkout opens an email order. If a cart contains a wine without a variant ID, checkout names the missing wine instead of silently dropping it.
 
-```js
-shopify: { productId: '', variantId: 'gid://shopify/ProductVariant/1234567890' },
-```
+## 5. Place a test order
 
-That's it. As soon as `domain` and `storefrontAccessToken` are set, demo mode
-turns off automatically and the **Checkout** button sends customers to Shopify's
-secure, hosted checkout with their cart pre-filled.
+Use Shopify's test payment setup and check that checkout has the right wines, prices, shipping, and taxes. Before accepting live orders, finish the store's inventory, shipping, tax, and applicable alcohol-sales settings in Shopify.
 
----
+The site sends cart lines through Shopify's Storefront Cart API and redirects to the cart's `checkoutUrl`. Its API version is set in `shop.js` (`2026-10`).
 
-## Notes
+## Tasting events
 
-- **Prices** shown on the cards come from the `price` field in `shop-config.js`
-  (currently demo placeholders). Update them to match Shopify so the site and
-  checkout agree. The card price is display-only; Shopify charges its own price.
-- **Nothing else needs to change** — no code edits, no rebuild. The site is a
-  static set of files; just re-upload `shop-config.js`.
-- To test before going live, use Shopify's **test mode** (Bogus Gateway) under
-  Settings → Payments.
+`sunnysidevines.com/tasting` (`tasting/index.html`) lists the wines poured at the latest tasting, in pour order, with "Add a case" and "Add a bottle" buttons. The QR code for it is `tools/qr/tasting-qr.svg` (vector, for print) and `tools/qr/tasting-qr.png`; the code never changes, so reuse it on every sheet.
+
+For each new event, edit `TASTING` in `shop-config.js`: the producers, hosts and wines (in pour order), plus the discount code. Create the code in Shopify admin → Discounts first. The page remembers the code and checkout applies it automatically. Case sizes come from each wine's `caseSize` (default 6).
+
+Every bottle counts toward a case whatever the wine, so customers can mix producers. The cart shows how many bottles are left until a full case of 6 or 12.
+
+## Selling in person (Shopify POS)
+
+The products already live in Shopify, so POS needs no new catalog:
+
+1. Shopify admin → Sales channels → add **Point of Sale**; publish the wines to it.
+2. Install the Shopify POS app on the phone or iPad used at events and sign in with a staff account.
+3. Take cards with Tap to Pay on iPhone (no hardware) or a Shopify Tap & Chip reader.
+4. Set the event location for sales tax, and check IDs at the table.

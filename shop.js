@@ -14,10 +14,16 @@
   const PRODUCER_ORDER = ['penafalcon', 'convento', 'losangeles'];
 
   const byId = (id) => PRODUCTS.find((p) => p.id === id);
+  // bottles per case for a wine (shop-config.js `caseSize`, default 6)
+  const caseSize = (p) => p.caseSize || 6;
+  // A tasting's discount code (shop-config.js TASTING), remembered once the
+  // visitor opens the tasting page and applied at Shopify checkout
+  const DISCOUNT_KEY = 'sv_discount';
+  const savedDiscount = () => { try { return localStorage.getItem(DISCOUNT_KEY) || ''; } catch (e) { return ''; } };
   // GA4 ecommerce events (also importable into Google Ads as conversions)
   const track = (name, params) => { if (typeof gtag === 'function') gtag('event', name, params); };
   const gaItem = (p, quantity) => ({ item_id: p.id, item_name: `${p.name} ${p.vintage}`, item_brand: PRODUCERS[p.producer].name, price: parseFloat(p.price), quantity });
-  const money = (n) => '$' + n.toFixed(2);
+  const money = (n) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   // English / Spanish (js/i18n.js); falls back to English if it isn't loaded
   const t = (key, en, vars) => (window.SVI18N ? SVI18N.t(key, en, vars) : en);
   const loc = (obj, field) => (window.SVI18N ? SVI18N.loc(obj, field) : obj[field]);
@@ -76,20 +82,79 @@
             <span class="wine-price">${money(parseFloat(p.price))}</span>
             <button class="add-btn" data-add="${p.id}" aria-describedby="name-${p.id}">${t('cart.add', 'Add to cart')}</button>
           </div>
+          ${caseBtnHTML(p)}
           <a class="details-hint" href="wines/${p.id}.html" aria-label="${t('shop.detailsFor', 'View details for {name}', { name: `${p.name} ${p.vintage}` })}">${t('shop.details', 'View details')} <span class="details-arrow" aria-hidden="true">→</span></a>
         </div>
       </article>`;
   }
 
+  // "Add a case of 12 · $275.88" - adds a full case in one tap
+  function caseBtnHTML(p) {
+    const n = caseSize(p);
+    return `<button class="case-btn" data-add="${p.id}" data-qty="${n}" aria-describedby="name-${p.id}">${caseLabel(p)}</button>`;
+  }
+  function caseLabel(p) {
+    const n = caseSize(p);
+    return t('cart.addCase', 'Add a case of {n} · {price}', { n, price: money(parseFloat(p.price) * n) });
+  }
+
+  /* ── Tasting page (tasting/index.html) ───────────────────────────────── */
+  function renderTasting() {
+    const root = document.getElementById('tasting-groups');
+    document.getElementById('tasting-title').textContent = TASTING.title;
+    document.getElementById('tasting-sub').textContent = TASTING.sub;
+    const codeEl = document.getElementById('tasting-code');
+    codeEl.hidden = !TASTING.discountCode || DEMO_MODE;
+    codeEl.innerHTML = t('tasting.code', 'Your code <strong>{code}</strong> ({label}) is applied automatically at checkout.', { code: TASTING.discountCode, label: TASTING.discountLabel || t('tasting.discount', 'discount') });
+    document.getElementById('tasting-jump').innerHTML = TASTING.groups
+      .map((g) => `<a href="#${g.producer}">${PRODUCERS[g.producer].name}</a>`).join('');
+    root.innerHTML = TASTING.groups.map((g) => {
+      const meta = PRODUCERS[g.producer];
+      return `
+        <section class="tasting-group" id="${g.producer}">
+          <header class="tasting-group-head">
+            <h2 class="producer-name">${meta.name}</h2>
+            <p class="tasting-host">${g.host ? `${g.host} · ` : ''}${loc(meta, 'region')}</p>
+          </header>
+          <ol class="tasting-list">
+            ${g.wines.map((id, i) => tastingRowHTML(byId(id), i + 1)).join('')}
+          </ol>
+        </section>`;
+    }).join('');
+  }
+
+  function tastingRowHTML(p, num) {
+    const n = caseSize(p);
+    return `
+      <li class="tasting-row producer-${p.producer}">
+        <span class="tasting-num" aria-hidden="true">${String(num).padStart(2, '0')}</span>
+        <a class="tasting-media fit-${p.fit}" href="${ASSET_ROOT}wines/${p.id}.html" tabindex="-1" aria-hidden="true">
+          <img src="${ASSET_ROOT}${bottleImage(p)}" alt="" loading="lazy">
+        </a>
+        <div class="tasting-body">
+          <h3 class="wine-name" id="name-${p.id}"><a href="${ASSET_ROOT}wines/${p.id}.html">${p.name} <span class="wine-vintage">${p.vintage}</span></a></h3>
+          <p class="wine-note">${loc(p, 'note')}</p>
+          <p class="tasting-prices">
+            <span>${t('tasting.perBottle', '{price} / bottle', { price: money(parseFloat(p.price)) })}</span>
+            <span>${t('tasting.perCase', '{price} / case of {n}', { price: money(parseFloat(p.price) * n), n })}</span>
+          </p>
+          <div class="tasting-actions">
+            <button class="add-btn" data-add="${p.id}" data-qty="${n}" aria-describedby="name-${p.id}">${t('cart.addCaseShort', 'Add a case of {n}', { n })}</button>
+            <button class="add-btn add-btn-quiet" data-add="${p.id}" aria-describedby="name-${p.id}">${t('cart.addBottle', 'Add a bottle')}</button>
+          </div>
+        </div>
+      </li>`;
+  }
+
   /* ── Cart mutations ──────────────────────────────────────────────────── */
-  function addToCart(id) {
+  function addToCart(id, qty = 1) {
     const line = cart.find((i) => i.id === id);
-    if (line) line.qty += 1;
-    else cart.push({ id, qty: 1 });
+    if (line) line.qty += qty;
+    else cart.push({ id, qty });
     saveCart();
     updateCartUI();
     const p = byId(id);
-    track('add_to_cart', { currency: 'USD', value: parseFloat(p.price), items: [gaItem(p, 1)] });
+    track('add_to_cart', { currency: 'USD', value: parseFloat(p.price) * qty, items: [gaItem(p, qty)] });
   }
   function setQty(id, delta) {
     const line = cart.find((i) => i.id === id);
@@ -158,12 +223,41 @@
     }
 
     document.getElementById('cart-subtotal-value').textContent = money(cartSubtotal());
+    renderCaseProgress(count);
     const checkoutBtn = document.getElementById('checkout-btn');
     checkoutBtn.disabled = cart.length === 0;
     if (DEMO_MODE) {
       checkoutBtn.textContent = t('checkout.email', 'Email us this order');
       document.getElementById('cart-note').textContent = t('checkout.note', 'Online checkout is coming soon. For now, email us your order and we’ll arrange payment and delivery.');
     }
+  }
+
+  // Bottles count toward a case whichever wines they are, so customers can
+  // build a mixed case across producers. Shown above the subtotal.
+  function renderCaseProgress(count) {
+    let el = document.getElementById('case-progress');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'case-progress';
+      el.className = 'case-progress';
+      document.querySelector('.cart-foot').prepend(el);
+    }
+    if (!count) { el.hidden = true; return; }
+    el.hidden = false;
+    const target = count <= 6 ? 6 : count <= 12 ? 12 : Math.ceil(count / 12) * 12;
+    const full = count === target;
+    const cases = target / (target === 6 ? 6 : 12);
+    const label = full
+      ? (target === 6
+        ? t('case.full6', 'A full case of 6')
+        : cases === 1 ? t('case.full12', 'A full case of 12') : t('case.fullN', '{cases} full cases of 12', { cases }))
+      : t('case.toGo', '{count} of {target} bottles: add {left} more for a full case', { count, target, left: target - count });
+    const code = savedDiscount();
+    el.innerHTML = `
+      <p class="case-progress-label${full ? ' is-full' : ''}">${full ? '✓ ' : ''}${label}</p>
+      <div class="case-progress-bar" aria-hidden="true"><span style="width:${Math.round((count / target) * 100)}%"></span></div>
+      <p class="case-progress-hint">${t('case.mix', 'Mix any wines to make up a case.')}</p>
+      ${code && !DEMO_MODE ? `<p class="case-progress-code">${t('case.code', 'Code {code} applied at checkout', { code })}${typeof TASTING !== 'undefined' && TASTING.discountCode === code && TASTING.discountLabel ? ` (${TASTING.discountLabel})` : ''}</p>` : ''}`;
   }
 
   function openCart() {
@@ -245,32 +339,65 @@
     window.location.href = `mailto:info@sunnysidevines.com?subject=${encodeURIComponent('Wine order')}&body=${encodeURIComponent(body)}`;
   }
 
-  function shopifyCheckout() {
+  async function shopifyCheckout() {
     const btn = document.getElementById('checkout-btn');
-    const lineItems = cart
-      .map((i) => ({ variantId: byId(i.id).shopify.variantId, quantity: i.qty }))
-      .filter((li) => li.variantId);
+    const missing = cart.filter((i) => !byId(i.id)?.shopify?.variantId);
 
-    if (!lineItems.length) {
-      toast('No Shopify variant IDs configured yet.');
+    if (missing.length) {
+      const names = missing.map((i) => `${byId(i.id).name} ${byId(i.id).vintage}`).join(', ');
+      toast(`Add Shopify variant IDs for: ${names}.`);
       return;
     }
+
+    const lines = cart.map((i) => ({
+      merchandiseId: byId(i.id).shopify.variantId,
+      quantity: i.qty,
+    }));
+
     btn.disabled = true;
     btn.textContent = t('checkout.redirecting', 'Redirecting…');
 
-    const client = ShopifyBuy.buildClient({
-      domain: SHOPIFY.domain,
-      storefrontAccessToken: SHOPIFY.storefrontAccessToken,
-    });
-    client.checkout
-      .create()
-      .then((c) => client.checkout.addLineItems(c.id, lineItems))
-      .then((c) => { window.location.href = c.webUrl; })
-      .catch(() => {
-        toast(t('checkout.error', 'Sorry, checkout could not be reached.'));
-        btn.disabled = false;
-        btn.textContent = t('cart.checkout', 'Checkout');
+    const mutation = `
+      mutation CartCreate($input: CartInput!) {
+        cartCreate(input: $input) {
+          cart { checkoutUrl }
+          userErrors { field message }
+        }
+      }
+    `;
+
+    try {
+      const response = await fetch(`https://${SHOPIFY.domain}/api/2026-10/graphql.json`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': SHOPIFY.storefrontAccessToken,
+        },
+        body: JSON.stringify({
+          query: mutation,
+          variables: { input: savedDiscount() ? { lines, discountCodes: [savedDiscount()] } : { lines } },
+        }),
       });
+      const payload = await response.json();
+      const apiErrors = (payload.errors || []).map((error) => error.message);
+      if (!response.ok || apiErrors.length) {
+        throw new Error(apiErrors.join('; ') || `Shopify returned ${response.status}`);
+      }
+
+      const result = payload.data?.cartCreate;
+      const userErrors = result?.userErrors || [];
+      if (userErrors.length) {
+        throw new Error(userErrors.map((error) => error.message).join('; '));
+      }
+      if (!result?.cart?.checkoutUrl) throw new Error('Shopify did not return a checkout URL.');
+
+      window.location.assign(result.cart.checkoutUrl);
+    } catch (error) {
+      console.error('Shopify checkout failed:', error);
+      toast(t('checkout.error', 'Sorry, checkout could not be reached.'));
+      btn.disabled = false;
+      btn.textContent = t('cart.checkout', 'Checkout');
+    }
   }
 
   /* ── Wire up ─────────────────────────────────────────────────────────── */
@@ -290,13 +417,18 @@
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-add]');
       if (!btn) return;
-      addToCart(btn.dataset.add);
+      const qty = parseInt(btn.dataset.qty, 10) || 1;
+      addToCart(btn.dataset.add, qty);
+      if (!btn.classList.contains('added')) btn.dataset.label = btn.textContent;
       btn.classList.add('added');
       btn.textContent = t('cart.added', 'Added ✓');
-      toast(t('cart.addedToast', 'Added to cart'));
-      setTimeout(() => {
+      toast(qty > 1
+        ? t('cart.addedCaseToast', '{qty} bottles added to cart', { qty })
+        : t('cart.addedToast', 'Added to cart'));
+      clearTimeout(btn._reset);
+      btn._reset = setTimeout(() => {
         btn.classList.remove('added');
-        btn.textContent = t('cart.add', 'Add to cart');
+        btn.textContent = btn.dataset.label;
       }, 1200);
     });
 
@@ -310,6 +442,26 @@
         if (card) window.location.href = `wines/${card.dataset.details}.html`;
       });
     }
+
+    // Tasting page: list the event's wines and remember its discount code
+    const tastingRoot = document.getElementById('tasting-groups');
+    if (tastingRoot && typeof TASTING !== 'undefined') {
+      try {
+        if (TASTING.discountCode) localStorage.setItem(DISCOUNT_KEY, TASTING.discountCode);
+        else localStorage.removeItem(DISCOUNT_KEY);
+      } catch (e) { /* private mode: no code carried, checkout still works */ }
+      renderTasting();
+      updateCartUI();
+    }
+
+    // Wine pages (wines/*.html): a case button under the price
+    const detailAdd = document.querySelector('.detail-foot [data-add]');
+    const placeCaseBtn = () => {
+      if (!detailAdd) return;
+      document.querySelector('.detail-foot + .case-btn')?.remove();
+      document.querySelector('.detail-foot').insertAdjacentHTML('afterend', caseBtnHTML(byId(detailAdd.dataset.add)));
+    };
+    placeCaseBtn();
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeCart();
@@ -351,6 +503,8 @@
     // Language switch: re-render everything this script drew
     document.addEventListener('sv:lang', () => {
       if (grid) renderProducts();
+      if (tastingRoot && typeof TASTING !== 'undefined') renderTasting();
+      placeCaseBtn();
       updateCartUI();
     });
 
