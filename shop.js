@@ -87,30 +87,29 @@
       </article>`;
   }
 
-  // Quantity picker: 1 bottle / 6 / 12, then an Add button that says how
-  // many and what they cost. Used on the shop grid and tasting page; odd
-  // amounts are set with the cart's + / −.
+  // Quantity picker, the usual wine-shop pattern: − 1 + stepper beside Add
+  // to cart, and an "Add a case" shortcut under it (the wine's caseSize).
+  // Used on the shop grid and the tasting page.
   function qtyPickHTML(p) {
+    const name = `${p.name} ${p.vintage}`;
     return `
       <div class="qty-pick" data-pick="${p.id}">
-        <div class="qty-seg" role="group" aria-label="${t('cart.howMany', 'How many bottles')}">
-          ${[1, 6, 12].map((n) => `<button type="button" data-preset="${n}" aria-pressed="${n === 1}">${n === 1 ? t('cart.oneBottle', '1 bottle') : n}</button>`).join('')}
+        <div class="qty-pick-row">
+          <div class="qty qty-lg">
+            <button type="button" data-step="-1" aria-label="${t('cart.decrease', 'Decrease')}, ${name}" disabled>−</button>
+            <span class="qty-val" aria-live="polite">1</span>
+            <button type="button" data-step="1" aria-label="${t('cart.increase', 'Increase')}, ${name}">+</button>
+          </div>
+          <button class="add-btn" data-add="${p.id}" data-qty="1" aria-describedby="name-${p.id}">${t('cart.add', 'Add to cart')}</button>
         </div>
-        <button class="add-btn" data-add="${p.id}" data-qty="1" aria-describedby="name-${p.id}">${addLabel(p, 1)}</button>
+        ${caseBtnHTML(p)}
       </div>`;
   }
-  function addLabel(p, n) {
-    return n === 1
-      ? t('cart.addOne', 'Add 1 · {price}', { price: money(parseFloat(p.price)) })
-      : t('cart.addN', 'Add {n} · {price}', { n, price: money(parseFloat(p.price) * n) });
-  }
   function setPick(pick, n) {
-    n = parseInt(n, 10) || 1;
-    const p = byId(pick.dataset.pick);
-    pick.querySelectorAll('[data-preset]').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.preset === n)));
-    const add = pick.querySelector('[data-add]');
-    add.dataset.qty = n;
-    if (!add.classList.contains('added')) add.textContent = addLabel(p, n);
+    n = Math.max(1, Math.min(240, parseInt(n, 10) || 1));
+    pick.querySelector('.qty-val').textContent = n;
+    pick.querySelector('[data-step="-1"]').disabled = n <= 1;
+    pick.querySelector('.qty-pick-row [data-add]').dataset.qty = n;
   }
 
   // "Add a case of 12 · $275.88" - adds a full case in one tap
@@ -451,16 +450,18 @@
       const pick = btn.closest('.qty-pick');
       btn._reset = setTimeout(() => {
         btn.classList.remove('added');
-        // a picker goes back to 1 bottle; other buttons keep their label
+        btn.textContent = btn.dataset.label;
+        // the stepper goes back to 1 bottle
         if (pick) setPick(pick, 1);
-        else btn.textContent = btn.dataset.label;
       }, 1200);
     });
 
-    // Quantity pickers: 1 bottle / 6 / 12
+    // Quantity pickers: − / + stepper
     document.addEventListener('click', (e) => {
-      const preset = e.target.closest('.qty-pick [data-preset]');
-      if (preset) setPick(preset.closest('.qty-pick'), preset.dataset.preset);
+      const step = e.target.closest('.qty-pick [data-step]');
+      if (!step) return;
+      const pick = step.closest('.qty-pick');
+      setPick(pick, parseInt(pick.querySelector('.qty-val').textContent, 10) + parseInt(step.dataset.step, 10));
     });
 
     // Product grid (shop.html only) - cards link through to wines/<id>.html

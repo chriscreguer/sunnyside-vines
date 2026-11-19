@@ -1166,18 +1166,13 @@ body:has(.wine-modal[open]) { overflow: hidden; }
   .tasting-actions .add-btn { flex: 1 1 auto; }
 }
 
-/* ── Quantity picker (shop grid + tasting page): 1 bottle / 6 / 12 + Add ── */
-.qty-pick { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
-.qty-seg { display: grid; grid-template-columns: 1.4fr 1fr 1fr; border: 1px solid var(--ink-line); border-radius: 50px; overflow: hidden; }
-.qty-seg button {
-  height: 38px; border: none; background: none; cursor: pointer;
-  font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 14px; font-weight: 600; color: var(--ink);
-  transition: background 0.15s ease, color 0.15s ease;
-}
-.qty-seg button + button { border-left: 1px solid var(--ink-line); }
-.qty-seg button:hover { background: rgba(42, 26, 18, 0.05); }
-.qty-seg button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
-.qty-pick .add-btn { width: 100%; }
-.wine-card .qty-pick .add-btn { padding: 10px 16px; }
+/* ── Quantity picker (shop grid + tasting page): − 1 + | Add to cart,
+      with "Add a case of N" under it ──────────────────────────────────── */
+.qty-pick { display: flex; flex-direction: column; margin-top: 12px; }
+.qty-pick-row { display: flex; align-items: center; gap: 10px; }
+.qty-lg { flex: none; }
+.qty-lg button { width: 36px; height: 40px; font-size: 18px; }
+.qty-lg .qty-val { min-width: 26px; font-size: 15px; }
+.qty-pick-row .add-btn { flex: 1; height: 40px; padding: 0 16px; }
+.qty-pick .case-btn { margin-top: 12px; }
 .tasting-body .qty-pick { max-width: 360px; }
-.tasting-body .qty-pick .add-btn { padding: 12px 18px; }
