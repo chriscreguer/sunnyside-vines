@@ -87,21 +87,14 @@
       </article>`;
   }
 
-  // Quantity picker: − 1 + stepper, 6 / 12 shortcuts, and an Add button that
-  // says how many and what they cost. Used on the shop grid and tasting page.
+  // Quantity picker: 1 bottle / 6 / 12, then an Add button that says how
+  // many and what they cost. Used on the shop grid and tasting page; odd
+  // amounts are set with the cart's + / −.
   function qtyPickHTML(p) {
-    const name = `${p.name} ${p.vintage}`;
     return `
       <div class="qty-pick" data-pick="${p.id}">
-        <div class="qty-pick-row">
-          <div class="qty qty-lg">
-            <button type="button" data-step="-1" aria-label="${t('cart.decrease', 'Decrease')}, ${name}" disabled>−</button>
-            <input type="number" inputmode="numeric" min="1" max="240" value="1" aria-label="${t('cart.qtyFor', 'Bottles of {name}', { name })}">
-            <button type="button" data-step="1" aria-label="${t('cart.increase', 'Increase')}, ${name}">+</button>
-          </div>
-          <div class="qty-presets" role="group" aria-label="${t('cart.quick', 'Quick pick')}">
-            ${[6, 12].map((n) => `<button type="button" data-preset="${n}" aria-pressed="false">${n}</button>`).join('')}
-          </div>
+        <div class="qty-seg" role="group" aria-label="${t('cart.howMany', 'How many bottles')}">
+          ${[1, 6, 12].map((n) => `<button type="button" data-preset="${n}" aria-pressed="${n === 1}">${n === 1 ? t('cart.oneBottle', '1 bottle') : n}</button>`).join('')}
         </div>
         <button class="add-btn" data-add="${p.id}" data-qty="1" aria-describedby="name-${p.id}">${addLabel(p, 1)}</button>
       </div>`;
@@ -112,10 +105,8 @@
       : t('cart.addN', 'Add {n} · {price}', { n, price: money(parseFloat(p.price) * n) });
   }
   function setPick(pick, n) {
-    n = Math.max(1, Math.min(240, parseInt(n, 10) || 1));
+    n = parseInt(n, 10) || 1;
     const p = byId(pick.dataset.pick);
-    pick.querySelector('input').value = n;
-    pick.querySelector('[data-step="-1"]').disabled = n <= 1;
     pick.querySelectorAll('[data-preset]').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.preset === n)));
     const add = pick.querySelector('[data-add]');
     add.dataset.qty = n;
@@ -466,23 +457,10 @@
       }, 1200);
     });
 
-    // Quantity pickers: stepper, 6 / 12 shortcuts, typed numbers
+    // Quantity pickers: 1 bottle / 6 / 12
     document.addEventListener('click', (e) => {
-      const pick = e.target.closest('.qty-pick');
-      if (!pick) return;
-      const step = e.target.closest('[data-step]');
-      const preset = e.target.closest('[data-preset]');
-      const cur = parseInt(pick.querySelector('input').value, 10) || 1;
-      if (step) setPick(pick, cur + parseInt(step.dataset.step, 10));
-      else if (preset) setPick(pick, preset.dataset.preset);
-    });
-    document.addEventListener('input', (e) => {
-      const pick = e.target.closest('.qty-pick');
-      if (pick && e.target.value !== '') setPick(pick, e.target.value);
-    });
-    document.addEventListener('change', (e) => {
-      const pick = e.target.closest('.qty-pick');
-      if (pick) setPick(pick, e.target.value);
+      const preset = e.target.closest('.qty-pick [data-preset]');
+      if (preset) setPick(preset.closest('.qty-pick'), preset.dataset.preset);
     });
 
     // Product grid (shop.html only) - cards link through to wines/<id>.html

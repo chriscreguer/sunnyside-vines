@@ -177,6 +177,8 @@
     'cart.addN': 'Añadir {n} · {price}',
     'cart.qtyFor': 'Botellas de {name}',
     'cart.quick': 'Selección rápida',
+    'cart.howMany': 'Cuántas botellas',
+    'cart.oneBottle': '1 botella',
     'case.full6': 'Una caja completa de 6',
     'case.full12': 'Una caja completa de 12',
     'case.fullN': '{cases} cajas completas de 12',
