@@ -45,8 +45,8 @@ const TRADE = {
    automatically at checkout for anyone who opened this page. Leave it '' for
    no code. Case sizes come from each wine's `caseSize` (default 6). */
 const TASTING = {
-  title: 'The wines you tasted',
-  sub: 'In the order you tried them. Order by the bottle or the case, and mix wines from both estates in one order.',
+  title: 'Thank you for tasting with us',
+  sub: 'Order by the bottle or by the case. Mix any of these wines to make up a case.',
   discountCode: 'EGON5',
   discountLabel: '5% off',
   groups: [
