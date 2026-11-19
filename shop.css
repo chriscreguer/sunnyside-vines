@@ -1165,3 +1165,31 @@ body:has(.wine-modal[open]) { overflow: hidden; }
   .tasting-media { height: 150px; padding: 8px; }
   .tasting-actions .add-btn { flex: 1 1 auto; }
 }
+
+/* ── Quantity picker (shop grid + tasting page) ──────────────────────────── */
+.qty-pick { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.qty-pick-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.qty-lg button { width: 38px; height: 38px; font-size: 18px; }
+.qty-lg input {
+  width: 44px; height: 38px; padding: 0; border: none; background: none;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 15px; font-weight: 600;
+  text-align: center; color: var(--ink); -moz-appearance: textfield; appearance: textfield;
+}
+.qty-lg input::-webkit-outer-spin-button,
+.qty-lg input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.qty-lg input:focus-visible { outline: 2px solid var(--terra); outline-offset: -2px; }
+.qty-presets { display: flex; gap: 6px; }
+.qty-presets button {
+  min-width: 44px; height: 38px; padding: 0 12px; border-radius: 50px;
+  border: 1px solid var(--line); background: none; cursor: pointer;
+  font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 14px; font-weight: 600; color: var(--ink);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.qty-presets button:hover { border-color: var(--terra); color: var(--terra-deep); }
+.qty-presets button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--white); }
+.qty-pick .add-btn { width: 100%; }
+/* the shop cards keep their outline button style; full width under the picker */
+.wine-card .qty-pick .add-btn { padding: 10px 16px; }
+.tasting-body .qty-pick { max-width: 420px; }
+.tasting-body .qty-pick .add-btn { padding: 12px 18px; }
+.tasting-body .qty-pick-row { justify-content: flex-start; }
