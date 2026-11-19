@@ -51,7 +51,7 @@ const TASTING = {
   discountLabel: '5% off',
   groups: [
     { producer: 'convento', host: 'Belén Vaquero', wines: ['convento-roble-2025', 'convento-crianza-2022', 'convento-memoria-reserva-2022'] },
-    { producer: 'penafalcon', host: 'David Marcos', wines: ['penafalcon-10-meses-2021', 'penafalcon-tinto-de-autor-2004', 'penafalcon-gran-reserva-2007'] },
+    { producer: 'penafalcon', host: 'David Marcos', wines: ['penafalcon-10-meses-2021', 'penafalcon-tinto-de-autor-2004', 'penafalcon-gran-reserva-2007', 'penafalcon-14-anos-2003'] },
   ],
 };
 
