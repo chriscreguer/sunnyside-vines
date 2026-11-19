@@ -1176,3 +1176,10 @@ body:has(.wine-modal[open]) { overflow: hidden; }
 .qty-pick-row .add-btn { flex: 1; height: 40px; padding: 0 16px; }
 .qty-pick .case-btn { margin-top: 12px; }
 .tasting-body .qty-pick { max-width: 360px; }
+
+/* Ordering UI: Add to cart is the only orange; prices and the case link stay ink */
+.tasting-prices { color: var(--ink); font-weight: 600; }
+.tasting-prices span + span { color: var(--ink-soft); font-weight: 500; }
+.case-btn { color: var(--ink); border-bottom-color: var(--ink-line); font-weight: 500; }
+.case-btn:hover { color: var(--ink); border-color: var(--ink); }
+.case-progress-code { color: var(--ink-soft); }
